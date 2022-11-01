@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SistemaCentroEstetica" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SistemaCentroEstetica" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SistemaCentroEstetica" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/Categoria.h" />
+		<Unit filename="include/CategoriasArchivo.h" />
+		<Unit filename="include/Cliente.h" />
+		<Unit filename="include/ClientesArchivo.h" />
+		<Unit filename="include/CompraInsumos.h" />
+		<Unit filename="include/ComprasInsumosArchivo.h" />
+		<Unit filename="include/Empleado.h" />
+		<Unit filename="include/EmpleadosArchivo.h" />
+		<Unit filename="include/Fecha.h" />
+		<Unit filename="include/GastoGeneral.h" />
+		<Unit filename="include/GastosGeneralesArchivo.h" />
+		<Unit filename="include/Menus.h" />
+		<Unit filename="include/PagoEmpleado.h" />
+		<Unit filename="include/PagosEmpleadosArchivo.h" />
+		<Unit filename="include/Persona.h" />
+		<Unit filename="include/Proveedor.h" />
+		<Unit filename="include/ProveedoresArchivo.h" />
+		<Unit filename="include/Servicio.h" />
+		<Unit filename="include/ServiciosArchivo.h" />
+		<Unit filename="include/Transaccion.h" />
+		<Unit filename="include/Venta.h" />
+		<Unit filename="include/VentasArchivo.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Categoria.cpp" />
+		<Unit filename="src/CategoriasArchivo.cpp" />
+		<Unit filename="src/Cliente.cpp" />
+		<Unit filename="src/ClientesArchivo.cpp" />
+		<Unit filename="src/CompraInsumos.cpp" />
+		<Unit filename="src/ComprasInsumosArchivo.cpp" />
+		<Unit filename="src/Empleado.cpp" />
+		<Unit filename="src/EmpleadosArchivo.cpp" />
+		<Unit filename="src/Fecha.cpp" />
+		<Unit filename="src/GastoGeneral.cpp" />
+		<Unit filename="src/GastosGeneralesArchivo.cpp" />
+		<Unit filename="src/Menus.cpp" />
+		<Unit filename="src/PagoEmpleado.cpp" />
+		<Unit filename="src/PagosEmpleadosArchivo.cpp" />
+		<Unit filename="src/Persona.cpp" />
+		<Unit filename="src/Proveedor.cpp" />
+		<Unit filename="src/ProveedoresArchivo.cpp" />
+		<Unit filename="src/Servicio.cpp" />
+		<Unit filename="src/ServiciosArchivo.cpp" />
+		<Unit filename="src/Transaccion.cpp" />
+		<Unit filename="src/Venta.cpp" />
+		<Unit filename="src/VentasArchivo.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

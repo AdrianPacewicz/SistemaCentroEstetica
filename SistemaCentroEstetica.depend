@@ -1,0 +1,294 @@
+# depslib dependency file v1.0
+1666807264 source:c:\users\joha\desktop\sistemacentroestetica\main.cpp
+	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
+	"rlutil.h"
+	"Menus.h"
+
+1666800209 source:c:\users\joha\desktop\sistemacentroestetica\src\categoria.cpp
+	<iostream>
+	"Categoria.h"
+
+1666800145 c:\users\joha\desktop\sistemacentroestetica\include\categoria.h
+
+1666800216 source:c:\users\joha\desktop\sistemacentroestetica\src\cliente.cpp
+	<iostream>
+	"Cliente.h"
+
+1666799739 c:\users\joha\desktop\sistemacentroestetica\include\cliente.h
+	"Persona.h"
+
+1666665782 c:\users\joha\desktop\sistemacentroestetica\include\persona.h
+
+1666661151 source:c:\users\joha\desktop\sistemacentroestetica\src\fecha.cpp
+	"Fecha.h"
+	<ctime>
+
+1666661256 c:\users\joha\desktop\sistemacentroestetica\include\fecha.h
+	<string>
+
+1666800966 source:c:\users\joha\desktop\sistemacentroestetica\src\comprainsumos.cpp
+	<iostream>
+	"CompraInsumos.h"
+
+1666801149 c:\users\joha\desktop\sistemacentroestetica\include\comprainsumos.h
+	<string>
+	"Transaccion.h"
+
+1666665784 c:\users\joha\desktop\sistemacentroestetica\include\transaccion.h
+	"Fecha.h"
+
+1666801009 source:c:\users\joha\desktop\sistemacentroestetica\src\empleado.cpp
+	<iostream>
+	"Empleado.h"
+
+1666801004 c:\users\joha\desktop\sistemacentroestetica\include\empleado.h
+	"Persona.h"
+
+1666801013 source:c:\users\joha\desktop\sistemacentroestetica\src\gastogeneral.cpp
+	<iostream>
+	"GastoGeneral.h"
+
+1666799944 c:\users\joha\desktop\sistemacentroestetica\include\gastogeneral.h
+	"Transaccion.h"
+
+1666801016 source:c:\users\joha\desktop\sistemacentroestetica\src\pagoempleado.cpp
+	<iostream>
+	"PagoEmpleado.h"
+
+1666665200 c:\users\joha\desktop\sistemacentroestetica\include\pagoempleado.h
+	"Transaccion.h"
+
+1666801019 source:c:\users\joha\desktop\sistemacentroestetica\src\proveedor.cpp
+	<iostream>
+	"Proveedor.h"
+
+1666655712 c:\users\joha\desktop\sistemacentroestetica\include\proveedor.h
+
+1666801022 source:c:\users\joha\desktop\sistemacentroestetica\src\servicio.cpp
+	<iostream>
+	"Servicio.h"
+
+1666660379 c:\users\joha\desktop\sistemacentroestetica\include\servicio.h
+
+1666801025 source:c:\users\joha\desktop\sistemacentroestetica\src\transaccion.cpp
+	<iostream>
+	"Transaccion.h"
+
+1666801027 source:c:\users\joha\desktop\sistemacentroestetica\src\venta.cpp
+	<iostream>
+	"Venta.h"
+
+1666799778 c:\users\joha\desktop\sistemacentroestetica\include\venta.h
+	"Transaccion.h"
+
+1656691212 c:\users\joha\desktop\sistemacentroestetica\include\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1666807253 c:\users\joha\desktop\sistemacentroestetica\include\menus.h
+
+1666807331 source:c:\users\joha\desktop\sistemacentroestetica\src\menus.cpp
+	<iostream>
+	"rlutil.h"
+	"Menus.h"
+
+1667312318 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\main.cpp
+	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
+	"rlutil.h"
+	"Menus.h"
+
+1656691212 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1667312277 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menus.h
+
+1667312230 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\categoria.cpp
+	<iostream>
+	<cstring>
+	"Categoria.h"
+
+1667312188 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\categoria.h
+	<string>
+
+1667311514 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\cliente.cpp
+	<iostream>
+	"Cliente.h"
+
+1667311514 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\cliente.h
+	"Persona.h"
+
+1667311682 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\persona.h
+	<string>
+
+1667311681 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\comprainsumos.cpp
+	<iostream>
+	<cstring>
+	"CompraInsumos.h"
+
+1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\comprainsumos.h
+	<string>
+	"Transaccion.h"
+
+1667311682 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\transaccion.h
+	"Fecha.h"
+
+1667191776 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\fecha.h
+	<string>
+
+1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\empleado.cpp
+	<iostream>
+	"Empleado.h"
+
+1667311682 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\empleado.h
+	"Persona.h"
+
+1667191776 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\fecha.cpp
+	"Fecha.h"
+	<ctime>
+
+1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\gastogeneral.cpp
+	<iostream>
+	<cstring>
+	"GastoGeneral.h"
+
+1667311682 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\gastogeneral.h
+	<string>
+	"Transaccion.h"
+
+1667312492 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menus.cpp
+	<iostream>
+	<fstream>
+	"rlutil.h"
+	"Menus.h"
+	"CategoriasArchivo.h"
+
+1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\pagoempleado.cpp
+	<iostream>
+	<cstring>
+	"PagoEmpleado.h"
+
+1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\pagoempleado.h
+	<string>
+	"Transaccion.h"
+
+1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedor.cpp
+	<iostream>
+	<cstring>
+	"Proveedor.h"
+
+1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedor.h
+	<string>
+
+1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\servicio.cpp
+	<iostream>
+	<cstring>
+	"Servicio.h"
+
+1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\servicio.h
+	<string>
+
+1667311681 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\transaccion.cpp
+	<iostream>
+	"Transaccion.h"
+
+1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\venta.cpp
+	<iostream>
+	<cstring>
+	"Venta.h"
+
+1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\venta.h
+	"Transaccion.h"
+	<string>
+
+1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\persona.cpp
+	<iostream>
+	<cstring>
+	"Persona.h"
+
+1667312244 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\categoriasarchivo.cpp
+	"CategoriasArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+
+1667310773 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\categoriasarchivo.h
+	"Categoria.h"
+
+1667179269 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\empleadosarchivo.cpp
+	"EmpleadosArchivo.h"
+
+1667179269 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\empleadosarchivo.h
+	"Empleado.h"
+
+1667187251 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\clientesarchivo.cpp
+	"ClientesArchivo.h"
+
+1667187251 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\clientesarchivo.h
+	"Cliente.h"
+
+1667188040 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\comprasinsumosarchivo.cpp
+	"ComprasInsumosArchivo.h"
+
+1667188004 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\comprasinsumosarchivo.h
+	"CompraInsumos.h"
+
+1667188306 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\gastosgeneralesarchivo.cpp
+	"GastosGeneralesArchivo.h"
+
+1667188306 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\gastosgeneralesarchivo.h
+	"GastoGeneral.h"
+
+1667188609 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\pagosempleadosarchivo.cpp
+	"PagosEmpleadosArchivo.h"
+
+1667188751 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\pagosempleadosarchivo.h
+	"PagoEmpleado.h"
+	<string>
+
+1667189128 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedoresarchivo.cpp
+	"ProveedoresArchivo.h"
+
+1667189128 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedoresarchivo.h
+	"Proveedor.h"
+
+1667189328 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\serviciosarchivo.cpp
+	"ServiciosArchivo.h"
+
+1667189328 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\serviciosarchivo.h
+	"Servicio.h"
+
+1667189761 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\ventasarchivo.cpp
+	"VentasArchivo.h"
+
+1667189761 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\ventasarchivo.h
+	"Venta.h"
+
