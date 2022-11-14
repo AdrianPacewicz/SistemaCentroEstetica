@@ -58,5 +58,7 @@ void Persona::cargar(){
 }
 
 string Persona::toString(){
-
+    string persona;
+    persona = to_string(dni) + "\t- " + nombre + " " + apellido + "\t[tel. " + to_string(telefono) + "]\t[mail: " + email + "]";
+    return persona;
 }

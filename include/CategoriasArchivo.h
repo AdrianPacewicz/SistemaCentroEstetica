@@ -10,11 +10,12 @@ public:
     bool guardar(Categoria categoria);
     bool guardar(Categoria categoria, int nroRegistro);
     int getCantidad();
+    int getCantidadActivos();
     int buscar(int codigo);
 
     bool importarCSV();
     bool exportarCSV();
-    bool eliminarCategoriasArchivo();
+    bool eliminarArchivoDAT();
 };
 
 #endif // CATEGORIASARCHIVO_H

@@ -10,7 +10,12 @@ public:
     bool guardar(Cliente cliente);
     bool guardar(Cliente cliente, int nroRegistro);
     int getCantidad();
+    int getCantidadActivos();
     int buscar(int dni);
+
+    bool importarCSV();
+    bool exportarCSV();
+    bool eliminarArchivoDAT();
 };
 
 #endif // CLIENTESARCHIVO_H

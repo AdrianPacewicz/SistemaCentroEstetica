@@ -39,5 +39,7 @@ void CompraInsumos::cargar(){
 
 }
 string CompraInsumos::toString(){
-
+    string compraInsumos;
+    compraInsumos = to_string(id) + "\t" + fecha.toString() + " " + to_string(cuilProveedor) + "\t - " + detalle + "\t- " + to_string(cantidad) + "\t" + to_string(precioUnitario) + "\t" + to_string(importe);
+    return compraInsumos;
 }

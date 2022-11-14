@@ -11,7 +11,12 @@ class PagosEmpleadosArchivo
     bool guardar(PagoEmpleado pagoEmpleado);
     bool guardar(PagoEmpleado pagoEmpleado, int nroRegistro);
     int getCantidad();
+    int getCantidadActivos();
     int buscar(int id);
+
+    bool importarCSV();
+    bool exportarCSV();
+    bool eliminarArchivoDAT();
 };
 
 #endif // PAGOSEMPLEADOSARCHIVO_H

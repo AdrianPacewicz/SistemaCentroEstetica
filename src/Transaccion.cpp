@@ -38,5 +38,7 @@ void Transaccion::cargar(){
 }
 
 string Transaccion::toString(){
-
+    string transaccion;
+    transaccion = to_string(id) + "\t" + fecha.toString() + " - " + to_string(importe);
+    return transaccion;
 }

@@ -1,94 +1,107 @@
 #include "CategoriasArchivo.h"
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <sstream>
-#include <stdio.h>
+#include <iostream> // cout
+#include <fstream>  // fstream importar CSV
+#include <vector>   // vector importar CSV
+#include <sstream>  // stringstream importar CSV
+#include <stdio.h>  // remove .dat
 
 Categoria CategoriasArchivo::leer(int nroRegistro)
 {
-  Categoria categoria;
-  FILE* p;
-  p = fopen("categorias.dat", "rb");
-  if (p == NULL)
-  {
+    Categoria categoria;
+    FILE* p;
+    p = fopen("categorias.dat", "rb");
+    if (p == NULL)
+    {
+        return categoria;
+    }
+    fseek(p, nroRegistro * sizeof(Categoria), SEEK_SET);
+    fread(&categoria, sizeof(Categoria), 1, p);
+    fclose(p);
     return categoria;
-  }
-  fseek(p, nroRegistro * sizeof(Categoria), SEEK_SET);
-  fread(&categoria, sizeof(Categoria), 1, p);
-  fclose(p);
-  return categoria;
 }
 
 bool CategoriasArchivo::leerTodos(Categoria categorias[], int cantidad)
 {
-  FILE* p;
-  p = fopen("categorias.dat", "rb");
-  if (p == NULL)
-  {
-    return false;
-  }
-  fread(categorias, sizeof(Categoria), cantidad, p);
-  fclose(p);
-  return true;
+    FILE* p;
+    p = fopen("categorias.dat", "rb");
+    if (p == NULL)
+    {
+        return false;
+    }
+    fread(categorias, sizeof(Categoria), cantidad, p);
+    fclose(p);
+    return true;
 }
 
 bool CategoriasArchivo::guardar(Categoria categoria)
 {
-  FILE* p = fopen("categorias.dat", "ab");
-  if (p == NULL)
-  {
-    return false;
-  }
-  bool ok = fwrite(&categoria, sizeof(Categoria), 1, p);
-  fclose(p);
-  return ok;
+    FILE* p = fopen("categorias.dat", "ab");
+    if (p == NULL)
+    {
+        return false;
+    }
+    bool ok = fwrite(&categoria, sizeof(Categoria), 1, p);
+    fclose(p);
+    return ok;
 }
 
 bool CategoriasArchivo::guardar(Categoria categoria, int nroRegistro)
 {
-  FILE* p = fopen("categorias.dat", "rb+");
-  if (p == NULL)
-  {
-    return false;
-  }
-  fseek(p, nroRegistro * sizeof(Categoria), SEEK_SET);
-  bool ok = fwrite(&categoria, sizeof(Categoria), 1, p);
-  fclose(p);
-  return ok;
+    FILE* p = fopen("categorias.dat", "rb+");
+    if (p == NULL)
+    {
+        return false;
+    }
+    fseek(p, nroRegistro * sizeof(Categoria), SEEK_SET);
+    bool ok = fwrite(&categoria, sizeof(Categoria), 1, p);
+    fclose(p);
+    return ok;
 }
 
 int CategoriasArchivo::getCantidad()
 {
-  FILE* p = fopen("categorias.dat", "rb");
-  if (p == NULL)
-  {
-    return 0;
-  }
-  fseek(p, 0, SEEK_END);
-  int cant = ftell(p) / sizeof(Categoria);
-  fclose(p);
-  return cant;
+    FILE* p = fopen("categorias.dat", "rb");
+    if (p == NULL)
+    {
+        return 0;
+    }
+    fseek(p, 0, SEEK_END);
+    int cant = ftell(p) / sizeof(Categoria);
+    fclose(p);
+    return cant;
+}
+
+int CategoriasArchivo::getCantidadActivos()
+{
+    Categoria obj;
+    int cant = getCantidad();
+    int cantActivos=0;
+    for(int i=0; i<cant; i++){
+        obj = leer(i);
+        if(obj.getEstado())
+            cantActivos++;
+    }
+    return cantActivos;
 }
 
 int CategoriasArchivo::buscar(int codigo)
 {
-  int cant = getCantidad();
-  Categoria categoria;
-  for (int i = 0; i < cant; i++)
-  {
-    categoria = leer(i);
-    if (categoria.getCodigo() == codigo)
+    int cant = getCantidad();
+    Categoria categoria;
+    for (int i = 0; i < cant; i++)
     {
-      return i;
+        categoria = leer(i);
+        if (categoria.getCodigo() == codigo)
+        {
+            return i;
+        }
     }
-  }
-  return -1;
+    return -1;
 }
 
 bool CategoriasArchivo::importarCSV(){
     system("cls");
-    string nomArchivo = "Categorias.csv";
+    string nomArchivo = "categorias.csv";
     int cantRegistros=0, cantCampos=3;
     Categoria categoria;
 
@@ -118,7 +131,7 @@ bool CategoriasArchivo::importarCSV(){
 
     cantRegistros = contenido.size();
 
-    if (!eliminarCategoriasArchivo()){
+    if (!eliminarArchivoDAT()){
         cout<<"Error al eliminar el archivo .DAT!"<<endl;
         return false;
     }
@@ -152,7 +165,7 @@ bool CategoriasArchivo::exportarCSV(){
     int cantidadCategorias = getCantidad();
     Categoria* vecCategorias = new Categoria[cantidadCategorias];
     ofstream archivoCSV;
-    archivoCSV.open("Categorias.csv");
+    archivoCSV.open("categorias.csv");
     if(!archivoCSV.is_open()){
         cout<<"No se pudo abrir el archivo CSV."<<endl;
         delete vecCategorias;
@@ -166,14 +179,16 @@ bool CategoriasArchivo::exportarCSV(){
         return false;
     }
     for(int i=0; i<cantidadCategorias; i++){
-        archivoCSV << vecCategorias[i].getCodigo() << ";" << vecCategorias[i].getNombre() << ";" << vecCategorias[i].getEstado() << endl;
+        archivoCSV  << vecCategorias[i].getCodigo() << ";"
+                    << vecCategorias[i].getNombre() << ";"
+                    << vecCategorias[i].getEstado() << endl;
     }
     archivoCSV.close();
     delete vecCategorias;
     return true;
 }
 
-bool CategoriasArchivo::eliminarCategoriasArchivo(){
+bool CategoriasArchivo::eliminarArchivoDAT(){
     int eliminado;
     eliminado = remove("categorias.dat");
     if(eliminado!=0)
