@@ -4,6 +4,7 @@
 
 class ProveedoresArchivo
 {
+public:
     Proveedor leer(int nroRegistro);
     bool leerTodos(Proveedor proveedores[], int cantidad);
     bool guardar(Proveedor proveedor);

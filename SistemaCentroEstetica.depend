@@ -124,20 +124,22 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1668362740 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menus.h
+1668691702 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menus.h
 	"Interfaz.h"
 
-1667312230 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\categoria.cpp
+1668643708 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\categoria.cpp
 	<iostream>
 	<cstring>
 	"Categoria.h"
+	"rlutil.h"
 
-1667312188 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\categoria.h
+1668643708 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\categoria.h
 	<string>
 
-1667330665 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\cliente.cpp
+1668711658 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\cliente.cpp
 	<iostream>
 	"Cliente.h"
+	"rlutil.h"
 
 1667311514 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\cliente.h
 	"Persona.h"
@@ -145,10 +147,11 @@
 1667311682 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\persona.h
 	<string>
 
-1667330957 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\comprainsumos.cpp
+1668632721 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\comprainsumos.cpp
 	<iostream>
 	<cstring>
 	"CompraInsumos.h"
+	"rlutil.h"
 
 1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\comprainsumos.h
 	<string>
@@ -171,26 +174,34 @@
 	"Fecha.h"
 	<ctime>
 
-1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\gastogeneral.cpp
+1668632721 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\gastogeneral.cpp
 	<iostream>
 	<cstring>
 	"GastoGeneral.h"
+	"rlutil.h"
 
 1667311682 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\gastogeneral.h
 	<string>
 	"Transaccion.h"
 
-1668360543 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menus.cpp
+1668711658 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menus.cpp
 	<iostream>
 	<fstream>
 	"rlutil.h"
 	"Menus.h"
 	"CategoriasArchivo.h"
+	"VentasArchivo.h"
+	"Funciones.h"
+	"GastosGeneralesArchivo.h"
+	"ComprasInsumosArchivo.h"
+	"PagosEmpleadosArchivo.h"
+	"ClientesArchivo.h"
 
-1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\pagoempleado.cpp
+1668632807 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\pagoempleado.cpp
 	<iostream>
 	<cstring>
 	"PagoEmpleado.h"
+	"rlutil.h"
 
 1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\pagoempleado.h
 	<string>
@@ -216,134 +227,152 @@
 	<iostream>
 	"Transaccion.h"
 
-1667311682 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\venta.cpp
+1668632721 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\venta.cpp
 	<iostream>
 	<cstring>
 	"Venta.h"
+	<ctime>
+	"rlutil.h"
 
 1667311681 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\venta.h
 	"Transaccion.h"
 	<string>
 
-1667330665 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\persona.cpp
+1668648322 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\persona.cpp
 	<iostream>
 	<cstring>
 	"Persona.h"
 
-1668384461 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\categoriasarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\categoriasarchivo.cpp
 	"CategoriasArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
 1668384448 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\categoriasarchivo.h
 	"Categoria.h"
 
-1668384456 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\empleadosarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\empleadosarchivo.cpp
 	"EmpleadosArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
 1668384443 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\empleadosarchivo.h
 	"Empleado.h"
 
-1668384458 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\clientesarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\clientesarchivo.cpp
 	"ClientesArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
 1668384446 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\clientesarchivo.h
 	"Cliente.h"
 
-1668384457 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\comprasinsumosarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\comprasinsumosarchivo.cpp
 	"ComprasInsumosArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
-1668384444 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\comprasinsumosarchivo.h
+1668627313 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\comprasinsumosarchivo.h
 	"CompraInsumos.h"
 
-1668384454 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\gastosgeneralesarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\gastosgeneralesarchivo.cpp
 	"GastosGeneralesArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
-1668384441 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\gastosgeneralesarchivo.h
+1668627313 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\gastosgeneralesarchivo.h
 	"GastoGeneral.h"
 
-1668384453 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\pagosempleadosarchivo.cpp
+1668692399 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\pagosempleadosarchivo.cpp
 	"PagosEmpleadosArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
-1668384440 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\pagosempleadosarchivo.h
+1668627313 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\pagosempleadosarchivo.h
 	"PagoEmpleado.h"
 	<string>
 
-1668384452 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedoresarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedoresarchivo.cpp
 	"ProveedoresArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
-1668384438 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedoresarchivo.h
+1668627313 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedoresarchivo.h
 	"Proveedor.h"
 
-1668384450 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\serviciosarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\serviciosarchivo.cpp
 	"ServiciosArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
-1668384435 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\serviciosarchivo.h
+1668627313 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\serviciosarchivo.h
 	"Servicio.h"
 
-1668384449 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\ventasarchivo.cpp
+1668692388 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\ventasarchivo.cpp
 	"VentasArchivo.h"
 	<iostream>
 	<fstream>
 	<vector>
 	<sstream>
 	<stdio.h>
+	<sys/stat.h>
 
-1668384435 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\ventasarchivo.h
+1668627313 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\ventasarchivo.h
 	"Venta.h"
 
-1668389346 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\funciones.cpp
+1668691518 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\funciones.cpp
 	"Funciones.h"
 	"rlutil.h"
 	"CategoriasArchivo.h"
+	"ClientesArchivo.h"
+	"ComprasInsumosArchivo.h"
 	"EmpleadosArchivo.h"
+	"GastosGeneralesArchivo.h"
+	"PagosEmpleadosArchivo.h"
+	"ProveedoresArchivo.h"
+	"ServiciosArchivo.h"
+	"VentasArchivo.h"
 
-1668389438 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\funciones.h
+1668652870 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\funciones.h
 
-1668389150 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\interfaz.cpp
+1668555850 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\interfaz.cpp
 	"Interfaz.h"
 	<iostream>
 	"rlutil.h"
 	"Windows.h"
 
-1668389302 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\interfaz.h
+1668555770 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\interfaz.h
 	<string>
 

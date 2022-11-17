@@ -4,6 +4,7 @@
 
 class ServiciosArchivo
 {
+public:
     Servicio leer(int nroRegistro);
     bool leerTodos(Servicio servicios[], int cantidad);
     bool guardar(Servicio servicio);

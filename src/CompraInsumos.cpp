@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "CompraInsumos.h"
+#include "rlutil.h"
 
 int CompraInsumos::getProv(){
     return cuilProveedor;
@@ -36,7 +37,51 @@ void CompraInsumos::setPrecioU(float _precioU){
 }
 
 void CompraInsumos::cargar(){
+    Fecha f;
 
+    /*
+    int id;
+    Fecha fecha;
+    float importe;
+    bool estado;
+
+    int cuilProveedor;
+    char detalle[100];
+    int cantidad;
+    float precioUnitario;
+    */
+
+    int valor;
+    float importe;
+    string det;
+    // TODO: Validaciones
+    cout<<"  Anio: ";
+    cin>>valor;
+    f.setAnio(valor);
+    cout<<"  Mes: ";
+    cin>>valor;
+    f.setMes(valor);
+    cout<<"  Dia: ";
+    cin>>valor;
+    f.setDia(valor);
+    setFecha(f);
+    cout<<"  CUIL/CUIT Proveedor: ";
+    cin>>valor;
+    setProv(valor);
+    cout<<"  Detalle: ";
+    cin.ignore();
+    getline(cin, det);
+    setDetalle(det);
+    cout<<"  Cantidad: ";
+    cin>>valor;
+    setCantidad(valor);
+    cout<<"  Precio unitario: ";
+    cin>>importe;
+    setPrecioU(importe);
+    importe=getPrecioU()*getCantidad();
+    setImporte(importe);
+    cout<<"  Cargado con exito."<<endl;
+    rlutil::anykey();
 }
 string CompraInsumos::toString(){
     string compraInsumos;

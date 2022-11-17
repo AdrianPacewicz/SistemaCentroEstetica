@@ -4,6 +4,7 @@
 
 class ComprasInsumosArchivo
 {
+public:
     CompraInsumos leer(int nroRegistro);
     bool leerTodos(CompraInsumos comprasInsumos[], int cantidad);
     bool guardar(CompraInsumos compraInsumos);

@@ -5,10 +5,18 @@
 
 using namespace std;
 
-int Interfaz::getAlto(){return alto;}
-int Interfaz::getAncho(){return ancho;}
+int Interfaz::getAlto(){
+    setAlto(rlutil::trows());
+    return alto;
+    }
+int Interfaz::getAncho(){
+    setAncho(rlutil::tcols());
+    return ancho;
+    }
+int Interfaz::getFilaActual(){return filaActual;}
 void Interfaz::setAlto(int a){alto=a;}
 void Interfaz::setAncho(int a){ancho=a;}
+void Interfaz::setFilaActual(int f){filaActual=f;}
 
 void Interfaz::maximizarVentana(){
     ShowWindow( GetConsoleWindow() , SW_MAXIMIZE);
@@ -101,21 +109,33 @@ void Interfaz::dibujarMarco(int color=1){
 }
 
 // Metodo que borra el texto de toda una linea en la pantalla
-void Interfaz::borrarLinea(int y){
+void Interfaz::borrarLinea(int y, bool bordes=false){
     int ancho;
     ancho = rlutil::tcols();
-    rlutil::locate(3,y);
-    for(int i = 3; i < ancho-1; i++){
-        cout << " ";
+    if(!bordes){
+        rlutil::locate(3,y);
+        for(int i = 3; i < ancho-1; i++){
+            cout << " ";
+        }
+    }
+    else{
+        rlutil::locate(1,y);
+        for(int i = 1; i <= ancho; i++){
+            cout << " ";
+        }
     }
 }
 
 // Metodo que recibe dos filas (opcionales) y borra todas las filas intermedias
-void Interfaz::limpiarPantalla(int desde=5, int hasta=0){
-    if (hasta==0)
-        hasta=rlutil::trows()-4;
+void Interfaz::limpiarPantalla(int desde=5, int hasta=0, bool bordes=false){
+    if (hasta==0){
+        if(bordes)
+            hasta=rlutil::trows()-4;
+        else
+            hasta=rlutil::trows();
+    }
     for(int i=desde; i<=hasta; i++){
-        borrarLinea(i);
+        borrarLinea(i,bordes);
     }
 }
 

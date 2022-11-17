@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "Categoria.h"
+#include "rlutil.h"
 
 int Categoria::getCodigo(){
     return codigo;
@@ -28,11 +29,23 @@ void Categoria::setEstado(bool _estado){
 }
 
 void Categoria::cargar(){
-    // ToDo
+    /*
+    --int codigo;
+    char nombre[50];
+    bool estado;
+    */
+
+    string nombre;
+    // TODO: Validaciones
+    cout<<"  Nombre de categoria: ";
+    getline(cin, nombre);
+    setNombre(nombre);
+    cout<<"  Cargado con exito. (Codigo: "<<codigo<<")"<<endl;
+    rlutil::anykey();
 }
 
 string Categoria::toString(){
     string categoria;
-    categoria = to_string(codigo) + ": " + nombre;
+    categoria = to_string(codigo) + "\t|\t" + nombre;
     return categoria;
 }

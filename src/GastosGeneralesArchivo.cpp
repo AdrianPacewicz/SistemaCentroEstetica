@@ -4,6 +4,7 @@
 #include <vector>   // vector importar CSV
 #include <sstream>  // stringstream importar CSV
 #include <stdio.h>  // remove .dat
+#include <sys/stat.h> // stat verificar que existe archivo antes de eliminar
 
 GastoGeneral GastosGeneralesArchivo::leer(int nroRegistro)
 {
@@ -223,8 +224,15 @@ bool GastosGeneralesArchivo::exportarCSV(){
 }
 
 bool GastosGeneralesArchivo::eliminarArchivoDAT(){
+    bool existe=false;
     int eliminado;
-    eliminado = remove("gastosGenerales.dat");
+    struct stat buffer;
+    existe = (stat ("gastosGenerales.dat", &buffer) == 0);
+    if (!existe)
+        eliminado=0;
+    else{
+        eliminado = remove("gastosGenerales.dat");
+    }
     if(eliminado!=0)
         return false;
     return true;

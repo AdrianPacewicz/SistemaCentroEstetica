@@ -6,6 +6,7 @@ using namespace std;
 
 class PagosEmpleadosArchivo
 {
+public:
     PagoEmpleado leer(int nroRegistro);
     bool leerTodos(PagoEmpleado pagosEmpleados[], int cantidad);
     bool guardar(PagoEmpleado pagoEmpleado);

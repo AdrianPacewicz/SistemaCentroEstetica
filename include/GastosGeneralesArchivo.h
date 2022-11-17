@@ -4,6 +4,7 @@
 
 class GastosGeneralesArchivo
 {
+public:
     GastoGeneral leer(int nroRegistro);
     bool leerTodos(GastoGeneral gastosGenerales[], int cantidad);
     bool guardar(GastoGeneral gastoGeneral);
