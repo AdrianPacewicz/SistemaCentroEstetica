@@ -124,7 +124,7 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1668691702 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menus.h
+1674599692 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menus.h
 	"Interfaz.h"
 
 1668643708 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\categoria.cpp
@@ -184,14 +184,14 @@
 	<string>
 	"Transaccion.h"
 
-1668711658 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menus.cpp
+1674569129 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menus.cpp
 	<iostream>
 	<fstream>
 	"rlutil.h"
 	"Menus.h"
+	"Funciones.h"
 	"CategoriasArchivo.h"
 	"VentasArchivo.h"
-	"Funciones.h"
 	"GastosGeneralesArchivo.h"
 	"ComprasInsumosArchivo.h"
 	"PagosEmpleadosArchivo.h"
@@ -375,4 +375,11 @@
 
 1668555770 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\interfaz.h
 	<string>
+
+1674599895 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menu.cpp
+	"Menu.h"
+	"rlutil.h"
+
+1674599692 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menu.h
+	"Interfaz.h"
 

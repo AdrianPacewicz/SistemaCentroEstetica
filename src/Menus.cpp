@@ -5,9 +5,9 @@ using namespace std;
 
 #include "rlutil.h"
 #include "Menus.h"
+#include "Funciones.h"
 #include "CategoriasArchivo.h"
 #include "VentasArchivo.h"
-#include "Funciones.h"
 #include "GastosGeneralesArchivo.h"
 #include "ComprasInsumosArchivo.h"
 #include "PagosEmpleadosArchivo.h"
