@@ -1,6 +1,19 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
 #ifndef MENU_H
 #define MENU_H
 #include "Interfaz.h"
+#include "rlutil.h"
+#include "Funciones.h"
+#include "CategoriasArchivo.h"
+#include "VentasArchivo.h"
+#include "GastosGeneralesArchivo.h"
+#include "ComprasInsumosArchivo.h"
+#include "PagosEmpleadosArchivo.h"
+#include "ClientesArchivo.h"
 
 class Menu
 {
@@ -52,6 +65,9 @@ public:
         void menuProveedores();
         void menuServicios();
     void consultas();
+        void nuevaConsEmpleado();
+        void nuevaConsCliente();
+
     void reportes();
     void backupRestauracionDeArchivos();
         void menuImportarExportar(int opcion);
