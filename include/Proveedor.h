@@ -10,7 +10,7 @@ class Proveedor
         int cuil;
         char razonSocial[50];
         int codCategoria;
-        int telefono;
+        char telefono[50];
         char email[50];
         bool estado;
 
@@ -18,14 +18,14 @@ class Proveedor
         int getCuil();
         string getRazonS();
         int getCodCategoria();
-        int getTelefono();
+        string getTelefono();
         string getEmail();
         bool getEstado();
 
         void setCuil(int _cuil);
         void setRazonSocial(string _razonSocial);
         void setCodCategoria(int _codCategoria);
-        void setTelefono(int _telefono);
+        void setTelefono(string _telefono);
         void setEmail(string _email);
         void setEstado(bool _estado);
 

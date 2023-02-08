@@ -189,3 +189,13 @@ int Interfaz::pedirOpcionNumerica(){
     else
         return pedirOpcionNumerica();
 }
+
+void Interfaz::siguienteLinea(){
+    filaActual++;
+    rlutil::locate(5,filaActual);
+}
+
+void Interfaz::siguienteLinea(int col){
+    filaActual++;
+    rlutil::locate(col,filaActual);
+}

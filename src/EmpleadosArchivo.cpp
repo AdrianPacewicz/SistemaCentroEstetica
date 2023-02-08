@@ -165,7 +165,7 @@ bool EmpleadosArchivo::importarCSV(){
                         empleado.setApellido(contenido[i][j]);
                         break;
                     case 3:
-                        empleado.setTelefono(stoi(contenido[i][j]));
+                        empleado.setTelefono(contenido[i][j]);
                         break;
                     case 4:
                         empleado.setEmail(contenido[i][j]);
@@ -210,7 +210,7 @@ bool EmpleadosArchivo::exportarCSV(){
         int dni;
         char nombre[50];
         char apellido[50];
-        int telefono;
+        char telefono[50];
         char email[50];
         bool estado;
 

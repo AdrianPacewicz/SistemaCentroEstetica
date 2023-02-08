@@ -15,8 +15,9 @@ int Proveedor::getCodCategoria(){
     return codCategoria;
 }
 
-int Proveedor::getTelefono(){
-    return telefono;
+string Proveedor::getTelefono(){
+    string t = telefono;
+    return t;
 }
 
 string Proveedor::getEmail(){
@@ -40,8 +41,8 @@ void Proveedor::setCodCategoria(int _codCategoria){
     codCategoria = _codCategoria;
 }
 
-void Proveedor::setTelefono(int _telefono){
-    telefono = _telefono;
+void Proveedor::setTelefono(string _telefono){
+    strcpy(telefono,_telefono.c_str());
 }
 
 void Proveedor::setEmail(string _email){

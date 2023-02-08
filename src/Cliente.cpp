@@ -11,22 +11,7 @@ void Cliente::cargar(){
     char email[50];
     bool estado;
     */
-    int entero;
-    string cadena;
-    // TODO: Validaciones
-    cout<<"  Nombre: ";
-    getline(cin, cadena);
-    setNombre(cadena);
-    cout<<"  Apellido: ";
-    getline(cin, cadena);
-    setApellido(cadena);
-    cout<<"  Telefono: ";
-    cin>>entero;
-    setTelefono(entero);
-    cout<<"  Email: ";
-    cin.ignore();
-    getline(cin, cadena);
-    setEmail(cadena);
+    Persona::cargar ();
     cout<<"  Cargado con exito."<<endl;
     rlutil::anykey();
 }

@@ -5,8 +5,8 @@
 class Empleado: public Persona
 {
     private:
-        float PorcentajeComision;
-        float SueldoFijo;
+        float porcentajeComision;
+        float sueldoFijo;
 
     public:
         float getPComision();

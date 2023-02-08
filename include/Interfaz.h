@@ -30,6 +30,8 @@ public:
     void cambiarMensaje(std::string texto, int color);
     char pedirOpcion();
     int pedirOpcionNumerica();
+    void siguienteLinea();
+    void siguienteLinea(int col);
 };
 
 #endif // INTERFAZ_H

@@ -14,6 +14,7 @@ using namespace std;
 #include "ComprasInsumosArchivo.h"
 #include "PagosEmpleadosArchivo.h"
 #include "ClientesArchivo.h"
+#include "EmpleadosArchivo.h"
 
 class Menu
 {
@@ -62,6 +63,10 @@ public:
             void cambiarEstadoCliente();
             void modificarCliente();
         void menuEmpleados();
+            void listarEmpleados();
+            void nuevoEmpleado();
+            void cambiarEstadoEmpleado();
+            void modificarEmpleado();
         void menuProveedores();
         void menuServicios();
     void consultas();

@@ -154,7 +154,7 @@ bool ClientesArchivo::importarCSV(){
                         cliente.setApellido(contenido[i][j]);
                         break;
                     case 3:
-                        cliente.setTelefono(stoi(contenido[i][j]));
+                        cliente.setTelefono(contenido[i][j]);
                         break;
                     case 4:
                         cliente.setEmail(contenido[i][j]);

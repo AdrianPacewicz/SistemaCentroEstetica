@@ -148,7 +148,7 @@ bool ProveedoresArchivo::importarCSV(){
                     int cuil;
                     char razonSocial[50];
                     int codCategoria;
-                    int telefono;
+                    char telefono[50];
                     char email[50];
                     bool estado;
                     */
@@ -162,7 +162,7 @@ bool ProveedoresArchivo::importarCSV(){
                         proveedor.setCodCategoria(stoi(contenido[i][j]));
                         break;
                     case 3:
-                        proveedor.setTelefono(stoi(contenido[i][j]));
+                        proveedor.setTelefono(contenido[i][j]);
                         break;
                     case 4:
                         proveedor.setEmail(contenido[i][j]);
@@ -201,7 +201,7 @@ bool ProveedoresArchivo::exportarCSV(){
         int cuil;
         char razonSocial[50];
         int codCategoria;
-        int telefono;
+        char telefono[50];
         char email[50];
         bool estado;
 

@@ -46,6 +46,6 @@ void Categoria::cargar(){
 
 string Categoria::toString(){
     string categoria;
-    categoria = to_string(codigo) + "\t|\t" + nombre;
+    categoria = to_string(codigo) + "\t| " + nombre;
     return categoria;
 }

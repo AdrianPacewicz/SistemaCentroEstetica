@@ -16,8 +16,9 @@ string Persona::getApellido(){
     return a;
 }
 
-int Persona::getTelefono(){
-    return telefono;
+string Persona::getTelefono(){
+    string t = telefono;
+    return t;
 }
 
 string Persona::getEmail(){
@@ -41,8 +42,8 @@ void Persona::setApellido(string _apell){
     strcpy(apellido,_apell.c_str());
 }
 
-void Persona::setTelefono(int _tel){
-    telefono=_tel;
+void Persona::setTelefono(string _tel){
+    strcpy(telefono,_tel.c_str());
 }
 
 void Persona::setEmail(string _email){
@@ -54,11 +55,24 @@ void Persona::setEstado(bool _est){
 }
 
 void Persona::cargar(){
-
+    string cadena;
+    // TODO: Validaciones
+    cout<<"  Nombre: ";
+    getline(cin, cadena);
+    setNombre(cadena);
+    cout<<"  Apellido: ";
+    getline(cin, cadena);
+    setApellido(cadena);
+    cout<<"  Telefono: ";
+    getline(cin, cadena);
+    setTelefono(cadena);
+    cout<<"  Email: ";
+    getline(cin, cadena);
+    setEmail(cadena);
 }
 
 string Persona::toString(){
     string persona;
-    persona = to_string(dni) + "\t|\t" + nombre + " " + apellido + "\t|\t" + to_string(telefono) + "\t|\t" + email;
+    persona = to_string(dni) + "\t|\t" + nombre + " " + apellido + "\t|\t" + telefono + "\t|\t" + email;
     return persona;
 }
