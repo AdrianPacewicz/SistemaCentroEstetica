@@ -11,7 +11,7 @@ public:
     bool guardar(Proveedor proveedor, int nroRegistro);
     int getCantidad();
     int getCantidadActivos();
-    int buscar(int cuil);
+    int buscar(string cuil);
 
     bool importarCSV();
     bool exportarCSV();

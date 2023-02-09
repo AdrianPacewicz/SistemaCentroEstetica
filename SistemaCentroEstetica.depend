@@ -395,7 +395,7 @@
 	"ClientesArchivo.h"
 	"EmpleadosArchivo.h"
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\categoria.cpp
+1675896525 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\categoria.cpp
 	<iostream>
 	<cstring>
 	"Categoria.h"
@@ -430,7 +430,7 @@
 1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\categoriasarchivo.h
 	"Categoria.h"
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\cliente.cpp
+1675901710 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\cliente.cpp
 	<iostream>
 	"Cliente.h"
 	"rlutil.h"
@@ -438,10 +438,10 @@
 1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\cliente.h
 	"Persona.h"
 
-1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\persona.h
+1675896525 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\persona.h
 	<string>
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\clientesarchivo.cpp
+1675896525 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\clientesarchivo.cpp
 	"ClientesArchivo.h"
 	<iostream>
 	<fstream>
@@ -481,14 +481,15 @@
 1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\comprasinsumosarchivo.h
 	"CompraInsumos.h"
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\empleado.cpp
+1675901737 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\empleado.cpp
 	<iostream>
 	"Empleado.h"
+	"rlutil.h"
 
-1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\empleado.h
+1675896525 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\empleado.h
 	"Persona.h"
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\empleadosarchivo.cpp
+1675896525 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\empleadosarchivo.cpp
 	"EmpleadosArchivo.h"
 	<iostream>
 	<fstream>
@@ -534,10 +535,10 @@
 	<string>
 	"Transaccion.h"
 
-1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\proveedoresarchivo.h
+1675913595 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\proveedoresarchivo.h
 	"Proveedor.h"
 
-1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\proveedor.h
+1675913432 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\proveedor.h
 	<string>
 
 1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\serviciosarchivo.h
@@ -568,13 +569,13 @@
 	<stdio.h>
 	<sys/stat.h>
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\interfaz.cpp
+1675896525 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\interfaz.cpp
 	"Interfaz.h"
 	<iostream>
 	"rlutil.h"
 	"Windows.h"
 
-1674604519 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\interfaz.h
+1675896525 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\interfaz.h
 	<string>
 
 1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\menus.cpp
@@ -608,17 +609,19 @@
 	<stdio.h>
 	<sys/stat.h>
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\persona.cpp
+1675896525 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\persona.cpp
 	<iostream>
 	<cstring>
 	"Persona.h"
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\proveedor.cpp
+1675915390 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\proveedor.cpp
 	<iostream>
 	<cstring>
 	"Proveedor.h"
+	"CategoriasArchivo.h"
+	"rlutil.h"
 
-1674604519 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\proveedoresarchivo.cpp
+1675913738 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\proveedoresarchivo.cpp
 	"ProveedoresArchivo.h"
 	<iostream>
 	<fstream>
@@ -661,13 +664,13 @@
 	<stdio.h>
 	<sys/stat.h>
 
-1674608680 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\main.cpp
+1675896525 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\main.cpp
 	"rlutil.h"
 	"Menus.h"
 	"Interfaz.h"
 	"Menu.h"
 
-1674609422 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\menu.h
+1675898217 c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\include\menu.h
 	<iostream>
 	<fstream>
 	"Interfaz.h"
@@ -679,8 +682,12 @@
 	"ComprasInsumosArchivo.h"
 	"PagosEmpleadosArchivo.h"
 	"ClientesArchivo.h"
+	"EmpleadosArchivo.h"
+	"ProveedoresArchivo.h"
+	"ServiciosArchivo.h"
 
-1674607404 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\menu.cpp
+1675913619 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\menu.cpp
 	"Menu.h"
 	"rlutil.h"
+	"Funciones.h"
 

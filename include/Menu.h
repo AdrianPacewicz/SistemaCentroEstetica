@@ -15,6 +15,8 @@ using namespace std;
 #include "PagosEmpleadosArchivo.h"
 #include "ClientesArchivo.h"
 #include "EmpleadosArchivo.h"
+#include "ProveedoresArchivo.h"
+#include "ServiciosArchivo.h"
 
 class Menu
 {
@@ -68,7 +70,15 @@ public:
             void cambiarEstadoEmpleado();
             void modificarEmpleado();
         void menuProveedores();
+            void listarProveedor();
+            void nuevoProveedor();
+            void cambiarEstadoProveedor();
+            void modificarProveedor();
         void menuServicios();
+            void listarServicio();
+            void nuevoServicio();
+            void cambiarEstadoServicio();
+            void modificarServicio();
     void consultas();
         void nuevaConsEmpleado();
         void nuevaConsCliente();

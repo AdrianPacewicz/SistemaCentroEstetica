@@ -85,7 +85,7 @@ int ProveedoresArchivo::getCantidadActivos()
     return cantActivos;
 }
 
-int ProveedoresArchivo::buscar(int cuil)
+int ProveedoresArchivo::buscar(string cuil)
 {
   int cant = getCantidad();
   Proveedor proveedor;
@@ -153,7 +153,7 @@ bool ProveedoresArchivo::importarCSV(){
                     bool estado;
                     */
                     case 0:
-                        proveedor.setCuil(stoi(contenido[i][j]));
+                        proveedor.setCuil(contenido[i][j]);
                         break;
                     case 1:
                         proveedor.setRazonSocial(contenido[i][j]);

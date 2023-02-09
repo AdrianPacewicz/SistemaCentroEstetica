@@ -728,14 +728,25 @@ void Menu::nuevaTransaccion(){
                 EmpleadosArchivo archivo;
                 Empleado obj;
                 obj.setEstado(true);
-                obj.setCodigo(archivo.getCantidad()+1);
                 system("cls");
                 interfaz.setFilaActual(8);
                 interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
                 interfaz.cambiarTitulo("FIRULI 3000 - NUEVO EMPLEADO");
                 rlutil::locate(1,interfaz.getFilaActual());
-                obj.cargar();
-                archivo.guardar(obj);
+                int existe;
+                int valor;
+                cout<<"  DNI: ";
+                cin>>valor;
+                cin.ignore();
+                if (archivo.buscar(valor)==-1){
+                    obj.setDni(valor);
+                    obj.cargar();
+                    archivo.guardar(obj);
+                }
+                else{
+                    cout<<"  ERROR: El registro ya existe.";
+                    rlutil::anykey();
+                }
             }
             void Menu::cambiarEstadoEmpleado(){
                 EmpleadosArchivo archivo;
@@ -796,13 +807,167 @@ void Menu::nuevaTransaccion(){
                 rlutil::anykey();
             }
         void Menu::menuProveedores(){
-            // TODO
+            char opc;
+            do{
+                system("cls");
+                interfaz.setFilaActual(7);
+                interfaz.dibujarMarco(rlutil::CYAN);
+                interfaz.cambiarTitulo("FIRULI 3000 - PROVEEDORES");
+                interfaz.siguienteLinea();
+                cout<<"[1] - Listar";
+                interfaz.siguienteLinea();
+                cout<<"[2] - Agregar";
+                interfaz.siguienteLinea();
+                cout<<"[0] - Volver";
+                opc = interfaz.pedirOpcion();
+                // Pregunta por la opcion elegida y se dirige al método correspondiente
+                switch(opc)
+                {
+                    case '1':
+                        listarProveedor();
+                        break;
+                    case '2':
+                        nuevoProveedor();
+                        break;
+                }
+            }
+            while(opc != '0');
         }
-            // TODO: submenus Proveedores
+            void Menu::listarProveedor(){
+                ProveedoresArchivo archivo;
+                int cantidadRegistros = archivo.getCantidad();
+                Proveedor *vec = new Proveedor[cantidadRegistros];
+                if(vec == NULL) return;
+                int cantidadPorPagina = 10;
+                int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+                int paginaActual = 1;
+                char opc;
+                archivo.leerTodos(vec, cantidadRegistros);
+
+                do {
+                    system("cls");
+                    interfaz.dibujarMarco(rlutil::CYAN);
+                    interfaz.setFilaActual(7);
+                    interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE PROVEEDORES");
+                    interfaz.siguienteLinea();
+                    if (cantidadRegistros==0){
+                        rlutil::setColor(ROJO);
+                        cout<<"No hay registros a listar.";
+                        interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                        rlutil::setColor(BLANCO);
+                        rlutil::anykey();
+                    }
+                    else{
+                        /*
+                        Atributos de proveedor:
+                        int cuil;
+                        char razonSocial[50];
+                        int codCategoria;
+                        char telefono[50];
+                        char email[50];
+                        bool estado;
+                        */
+                        int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                        int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                        cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout<<"Cuil\t|\tRazon Social\t|\tCod Categ\t|\tTel\t|\tEmail";
+                        interfaz.siguienteLinea();
+                        for (int i = indiceInicial; i < indiceFinal; i++) {
+                            if(vec[i].getEstado()){
+                                cout<< vec[i].toString();
+                                interfaz.siguienteLinea();
+                            }
+                            else{
+                                rlutil::setColor(ROJO);
+                                cout<< vec[i].toString();
+                                interfaz.siguienteLinea();
+                                rlutil::setColor(BLANCO);
+                            }
+                        }
+                        interfaz.siguienteLinea();
+                        cout << " [1] Anterior || [2] Siguiente || [3] Activar/Desactivar || [4] Modificar || [0] Volver";
+                        opc = interfaz.pedirOpcion();
+                        switch (opc) {
+                            case '1':
+                                paginaActual = max(1, paginaActual - 1);
+                                break;
+                            case '2':
+                                paginaActual = min(totalPaginas, paginaActual + 1);
+                                break;
+                            case '3':
+                                cambiarEstadoProveedor();
+                                archivo.leerTodos(vec, cantidadRegistros);
+                                break;
+                            case '4':
+                                modificarProveedor();
+                                archivo.leerTodos(vec, cantidadRegistros);
+                                break;
+                        }
+                    }
+                } while (opc != '0');
+                delete []vec;
+
+            }
+            void Menu::nuevoProveedor(){
+                ProveedoresArchivo archivo;
+                Proveedor obj;
+                obj.setEstado(true);
+                system("cls");
+                interfaz.setFilaActual(8);
+                interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
+                interfaz.cambiarTitulo("FIRULI 3000 - NUEVO PROVEEDOR");
+                rlutil::locate(1,interfaz.getFilaActual());
+                string valor;
+                cout<<"  CUIL: ";
+                cin>>valor;
+                cin.ignore();
+                if (archivo.buscar(valor)==-1){
+                    obj.setCuil(valor);
+                    if(obj.cargar())
+                    {
+                        archivo.guardar(obj);
+                    }
+                }
+                else{
+                    cout<<"  ERROR: El proveedor ya existe.";
+                }
+                rlutil::anykey();
+}
+            void Menu::cambiarEstadoProveedor(){}
+            void Menu::modificarProveedor(){}
         void Menu::menuServicios(){
-            // TODO
+             char opc;
+            do{
+                system("cls");
+                interfaz.setFilaActual(7);
+                interfaz.dibujarMarco(rlutil::CYAN);
+                interfaz.cambiarTitulo("FIRULI 3000 - EMPLEADOS");
+                interfaz.siguienteLinea();
+                cout<<"[1] - Listar";
+                interfaz.siguienteLinea();
+                cout<<"[2] - Agregar";
+                interfaz.siguienteLinea();
+                cout<<"[0] - Volver";
+                opc = interfaz.pedirOpcion();
+                // Pregunta por la opcion elegida y se dirige al método correspondiente
+                switch(opc)
+                {
+                    case '1':
+                        listarServicio();
+                        break;
+                    case '2':
+                        nuevoServicio();
+                        break;
+                }
+            }
+            while(opc != '0');
         }
-            // TODO: submenus Servicios
+            void Menu::listarServicio(){}
+            void Menu::nuevoServicio(){}
+            void Menu::cambiarEstadoServicio(){}
+            void Menu::modificarServicio(){}
 
     void Menu::consultas(){
         // TODO: Pensar consultas a agregar y programarlas

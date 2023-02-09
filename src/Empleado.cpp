@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Empleado.h"
+#include "rlutil.h"
 
 float Empleado::getPComision(){
     return porcentajeComision;
@@ -18,6 +19,22 @@ void Empleado::setSueldoF(float _SueldoF){
 }
 
 void Empleado::cargar(){
+    string cadena;
+    Persona::cargar ();
+    /*
+        float porcentajeComision;
+        float sueldoFijo;
+    */
+    // TODO: Validaciones
+    cout<<"  Porcentaje Comision: ";
+    getline(cin, cadena);
+    setPComision(stof(cadena));
+    cout<<"  Sueldo fijo: ";
+    getline(cin, cadena);
+    setSueldoF(stof(cadena));
+
+    cout<<"  Cargado con exito."<<endl;
+    rlutil::anykey();
 }
 
 string Empleado::toString(){

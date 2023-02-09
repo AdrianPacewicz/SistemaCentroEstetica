@@ -7,7 +7,7 @@ void Cliente::cargar(){
     int dni;
     char nombre[50];
     char apellido[50];
-    int telefono;
+    char telefono[50];
     char email[50];
     bool estado;
     */

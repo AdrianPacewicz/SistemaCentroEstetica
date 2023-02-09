@@ -7,7 +7,7 @@ using namespace std;
 class Proveedor
 {
     private:
-        int cuil;
+        char cuil[50];
         char razonSocial[50];
         int codCategoria;
         char telefono[50];
@@ -15,21 +15,21 @@ class Proveedor
         bool estado;
 
     public:
-        int getCuil();
+        string getCuil();
         string getRazonS();
         int getCodCategoria();
         string getTelefono();
         string getEmail();
         bool getEstado();
 
-        void setCuil(int _cuil);
+        void setCuil(string _cuil);
         void setRazonSocial(string _razonSocial);
         void setCodCategoria(int _codCategoria);
         void setTelefono(string _telefono);
         void setEmail(string _email);
         void setEstado(bool _estado);
 
-        void cargar();
+        bool cargar();
         string toString();
 
 };
