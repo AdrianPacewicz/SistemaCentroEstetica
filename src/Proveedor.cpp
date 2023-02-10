@@ -76,8 +76,8 @@ bool Proveedor::cargar(){
     if(archivo.buscar(stoi(cadena)) == -1)
     {
         cout<<"  ERROR: La categoria no existe.";
-        return false;
         rlutil::anykey();
+        return false;
     }
     else
     {
@@ -90,6 +90,8 @@ bool Proveedor::cargar(){
     cout<<"  Email: ";
     getline(cin, cadena);
     setEmail(cadena);
+    cout<<"  Cargado con exito. (Codigo(CUIL): "<<cuil<<")"<<endl;
+    rlutil::anykey();
 }
 
 string Proveedor::toString(){

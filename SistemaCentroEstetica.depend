@@ -137,7 +137,7 @@
 1674604519 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\categoria.h
 	<string>
 
-1675031415 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\cliente.cpp
+1675915850 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\cliente.cpp
 	<iostream>
 	"Cliente.h"
 	"rlutil.h"
@@ -164,9 +164,10 @@
 1674604519 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\fecha.h
 	<string>
 
-1675735965 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\empleado.cpp
+1675915850 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\empleado.cpp
 	<iostream>
 	"Empleado.h"
+	"rlutil.h"
 
 1675735965 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\empleado.h
 	"Persona.h"
@@ -208,20 +209,24 @@
 	<string>
 	"Transaccion.h"
 
-1675033429 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedor.cpp
+1675977662 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedor.cpp
 	<iostream>
 	<cstring>
 	"Proveedor.h"
+	"CategoriasArchivo.h"
+	"rlutil.h"
 
-1675033457 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedor.h
+1675915850 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedor.h
 	<string>
 
-1674604519 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\servicio.cpp
+1675977822 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\servicio.cpp
 	<iostream>
 	<cstring>
 	"Servicio.h"
+	"CategoriasArchivo.h"
+	"rlutil.h"
 
-1674604519 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\servicio.h
+1675977662 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\servicio.h
 	<string>
 
 1674604519 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\transaccion.cpp
@@ -317,7 +322,7 @@
 	"PagoEmpleado.h"
 	<string>
 
-1675033271 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedoresarchivo.cpp
+1675915850 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\proveedoresarchivo.cpp
 	"ProveedoresArchivo.h"
 	<iostream>
 	<fstream>
@@ -326,7 +331,7 @@
 	<stdio.h>
 	<sys/stat.h>
 
-1674604519 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedoresarchivo.h
+1675915850 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\proveedoresarchivo.h
 	"Proveedor.h"
 
 1674604519 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\serviciosarchivo.cpp
@@ -377,11 +382,12 @@
 1675014894 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\interfaz.h
 	<string>
 
-1675033271 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menu.cpp
+1675977899 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\src\menu.cpp
 	"Menu.h"
 	"rlutil.h"
+	"Funciones.h"
 
-1675736024 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menu.h
+1675915850 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\include\menu.h
 	<iostream>
 	<fstream>
 	"Interfaz.h"
@@ -394,6 +400,8 @@
 	"PagosEmpleadosArchivo.h"
 	"ClientesArchivo.h"
 	"EmpleadosArchivo.h"
+	"ProveedoresArchivo.h"
+	"ServiciosArchivo.h"
 
 1675896525 source:c:\users\joha\desktop\sistemacentroestetica\sistemacentroestetica\src\categoria.cpp
 	<iostream>

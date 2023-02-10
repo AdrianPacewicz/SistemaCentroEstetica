@@ -272,6 +272,7 @@ void Menu::nuevaTransaccion(){
                         rlutil::setColor(ROJO);
                         cout<<"No hay registros a listar.";
                         interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                        opc = '0';
                         rlutil::setColor(BLANCO);
                         rlutil::anykey();
                     }
@@ -442,6 +443,7 @@ void Menu::nuevaTransaccion(){
                         rlutil::setColor(ROJO);
                         cout<<"No hay registros a listar.";
                         interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                        opc = '0';
                         rlutil::setColor(BLANCO);
                         rlutil::anykey();
                     }
@@ -506,7 +508,6 @@ void Menu::nuevaTransaccion(){
                 interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
                 interfaz.cambiarTitulo("FIRULI 3000 - NUEVO CLIENTE");
                 rlutil::locate(1,interfaz.getFilaActual());
-                int existe;
                 int valor;
                 cout<<"  DNI: ";
                 cin>>valor;
@@ -665,6 +666,7 @@ void Menu::nuevaTransaccion(){
                         rlutil::setColor(ROJO);
                         cout<<"No hay registros a listar.";
                         interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                        opc = '0';
                         rlutil::setColor(BLANCO);
                         rlutil::anykey();
                     }
@@ -733,7 +735,6 @@ void Menu::nuevaTransaccion(){
                 interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
                 interfaz.cambiarTitulo("FIRULI 3000 - NUEVO EMPLEADO");
                 rlutil::locate(1,interfaz.getFilaActual());
-                int existe;
                 int valor;
                 cout<<"  DNI: ";
                 cin>>valor;
@@ -854,6 +855,7 @@ void Menu::nuevaTransaccion(){
                         rlutil::setColor(ROJO);
                         cout<<"No hay registros a listar.";
                         interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                        opc = '0';
                         rlutil::setColor(BLANCO);
                         rlutil::anykey();
                     }
@@ -908,7 +910,6 @@ void Menu::nuevaTransaccion(){
                     }
                 } while (opc != '0');
                 delete []vec;
-
             }
             void Menu::nuevoProveedor(){
                 ProveedoresArchivo archivo;
@@ -935,15 +936,107 @@ void Menu::nuevaTransaccion(){
                 }
                 rlutil::anykey();
 }
-            void Menu::cambiarEstadoProveedor(){}
-            void Menu::modificarProveedor(){}
+            void Menu::cambiarEstadoProveedor(){
+                ProveedoresArchivo archivo;
+                Proveedor obj;
+                string id;
+                interfaz.cambiarTitulo("FIRULI 3000 - BORRAR/REACTIVAR PROVEEDOR");
+                interfaz.siguienteLinea();
+                int indice=-1;
+                cout<<"Ingrese CUIL de proveedor a borrar/reactivar: ";
+                getline(cin,id);
+                indice = archivo.buscar(id);
+                if(indice>=0){
+                    obj = archivo.leer(indice);
+                    obj.setEstado(!obj.getEstado());
+                    archivo.guardar(obj,indice);
+                    if(!obj.getEstado()){
+                        interfaz.cambiarMensaje("Proveedor borrado exitosamente. Presione una tecla para continuar.",VERDECLARO);
+                    }
+                    else{
+                        interfaz.cambiarMensaje("Proveedor reactivado exitosamente. Presione una tecla para continuar.",VERDECLARO);
+                    }
+                }
+                else
+                {
+                    interfaz.cambiarMensaje("CUIL inexistente. Presione una tecla para continuar.",ROJO);
+                }
+                rlutil::anykey();
+            }
+            void Menu::modificarProveedor(){
+                ProveedoresArchivo archivo;
+                CategoriasArchivo _categorias;
+                Proveedor obj;
+                string id,cadena;
+                interfaz.cambiarTitulo("FIRULI 3000 - MODIFICAR PROVEEDOR");
+                interfaz.siguienteLinea();
+                int indice=-1;
+                cout<<"Ingrese CUIL de proveedor a modificar: ";
+                getline(cin,id);
+                indice = archivo.buscar(id);
+                if(indice>=0)
+                {
+                    obj = archivo.leer(indice);
+                    interfaz.siguienteLinea();
+                    cout<<"Ingrese los datos que desea modificar (deje en blanco los datos que desee mantener)";
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+
+                    // TODO: datos de proveedor
+                    /*
+                    char razonSocial[50];
+                    int codCategoria;
+                    char telefono[50];
+                    char email[50];
+                    bool estado;
+                    */
+                    cout<<"Razon social: ";
+                    getline(cin, cadena);
+                    if(cadena!=""){
+                       obj.setRazonSocial(cadena);
+                    }
+                    interfaz.siguienteLinea();
+                    cout<<"Codigo categoria: ";
+                    getline(cin, cadena);
+                    if(cadena!=""){
+                        if(_categorias.buscar(stoi(cadena)) == -1)
+                        {
+                            interfaz.cambiarMensaje("La categoria no existe. Presione una tecla para continuar.",ROJO);
+                            rlutil::anykey();
+                            return;
+                        }
+                        else
+                        {
+                            obj.setCodCategoria(stoi(cadena));
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout<<"Telefono: ";
+                    getline(cin,cadena);
+                    if(cadena!=""){
+                       obj.setTelefono(cadena);
+                    }
+                    interfaz.siguienteLinea();
+                    cout<<"Email: ";
+                    getline(cin,cadena);
+                    if(cadena!=""){
+                       obj.setEmail(cadena);
+                    }
+                    archivo.guardar(obj,indice);
+                    interfaz.cambiarMensaje("Proveedor modificado exitosamente. Presione una tecla para continuar.",VERDECLARO);
+                }
+                else {
+                    interfaz.cambiarMensaje("CUIL inexistente. Presione una tecla para continuar.",ROJO);
+                }
+                rlutil::anykey();
+            }
         void Menu::menuServicios(){
              char opc;
             do{
                 system("cls");
                 interfaz.setFilaActual(7);
                 interfaz.dibujarMarco(rlutil::CYAN);
-                interfaz.cambiarTitulo("FIRULI 3000 - EMPLEADOS");
+                interfaz.cambiarTitulo("FIRULI 3000 - SERVICIOS");
                 interfaz.siguienteLinea();
                 cout<<"[1] - Listar";
                 interfaz.siguienteLinea();
@@ -964,10 +1057,183 @@ void Menu::nuevaTransaccion(){
             }
             while(opc != '0');
         }
-            void Menu::listarServicio(){}
-            void Menu::nuevoServicio(){}
-            void Menu::cambiarEstadoServicio(){}
-            void Menu::modificarServicio(){}
+            void Menu::listarServicio(){
+                ServiciosArchivo archivo;
+                int cantidadRegistros = archivo.getCantidad();
+                Servicio *vec = new Servicio[cantidadRegistros];
+                if(vec == NULL) return;
+                int cantidadPorPagina = 10;
+                int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+                int paginaActual = 1;
+                char opc;
+                archivo.leerTodos(vec, cantidadRegistros);
+
+                do {
+                    system("cls");
+                    interfaz.dibujarMarco(rlutil::CYAN);
+                    interfaz.setFilaActual(7);
+                    interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE SERVICIOS");
+                    interfaz.siguienteLinea();
+                    if (cantidadRegistros==0){
+                        rlutil::setColor(ROJO);
+                        cout<<"No hay registros a listar.";
+                        interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                        opc = '0';
+                        rlutil::setColor(BLANCO);
+                        rlutil::anykey();
+                    }
+                    else{
+                        /*
+                        Atributos de servicio:
+                        int codigo;
+                        char nombre[50];
+                        float valor;
+                        int codCategoria;
+                        bool estado;
+                        */
+                        int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                        int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                        cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout<<"Codigo\t|\tNombre\t|\tValor\t|\tCod. Categoria";
+                        interfaz.siguienteLinea();
+                        for (int i = indiceInicial; i < indiceFinal; i++) {
+                            if(vec[i].getEstado()){
+                                cout<< vec[i].toString();
+                                interfaz.siguienteLinea();
+                            }
+                            else{
+                                rlutil::setColor(ROJO);
+                                cout<< vec[i].toString();
+                                interfaz.siguienteLinea();
+                                rlutil::setColor(BLANCO);
+                            }
+                        }
+                        interfaz.siguienteLinea();
+                        cout << " [1] Anterior || [2] Siguiente || [3] Activar/Desactivar || [4] Modificar || [0] Volver";
+                        opc = interfaz.pedirOpcion();
+                        switch (opc) {
+                            case '1':
+                                paginaActual = max(1, paginaActual - 1);
+                                break;
+                            case '2':
+                                paginaActual = min(totalPaginas, paginaActual + 1);
+                                break;
+                            case '3':
+                                cambiarEstadoServicio();
+                                archivo.leerTodos(vec, cantidadRegistros);
+                                break;
+                            case '4':
+                                modificarServicio();
+                                archivo.leerTodos(vec, cantidadRegistros);
+                                break;
+                        }
+                    }
+                } while (opc != '0');
+                delete []vec;
+            }
+            void Menu::nuevoServicio(){
+                ServiciosArchivo archivo;
+                Servicio obj;
+                obj.setEstado(true);
+                obj.setCodigo(archivo.getCantidad()+1);
+                system("cls");
+                interfaz.setFilaActual(8);
+                interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
+                interfaz.cambiarTitulo("FIRULI 3000 - NUEVO SERVICIO");
+                rlutil::locate(1,interfaz.getFilaActual());
+                obj.cargar();
+                archivo.guardar(obj);
+            }
+            void Menu::cambiarEstadoServicio(){
+                ServiciosArchivo archivo;
+                Servicio obj;
+                string id;
+                interfaz.cambiarTitulo("FIRULI 3000 - BORRAR/REACTIVAR SERVICIO");
+                interfaz.siguienteLinea();
+                int indice=-1;
+                cout<<"Ingrese codigo de servicio a borrar/reactivar: ";
+                getline(cin,id);
+                indice = archivo.buscar(stoi(id));
+                if(indice>=0){
+                    obj = archivo.leer(indice);
+                    obj.setEstado(!obj.getEstado());
+                    archivo.guardar(obj,indice);
+                    if(!obj.getEstado()){
+                        interfaz.cambiarMensaje("Servicio borrado exitosamente. Presione una tecla para continuar.",VERDECLARO);
+                    }
+                    else{
+                        interfaz.cambiarMensaje("Servicio reactivado exitosamente. Presione una tecla para continuar.",VERDECLARO);
+                    }
+                }
+                else
+                {
+                    interfaz.cambiarMensaje("Codigo inexistente. Presione una tecla para continuar.",ROJO);
+                }
+                rlutil::anykey();
+            }
+            void Menu::modificarServicio(){
+                ServiciosArchivo archivo;
+                CategoriasArchivo _categorias;
+                Servicio obj;
+                string id,cadena;
+                interfaz.cambiarTitulo("FIRULI 3000 - MODIFICAR SERVICIO");
+                interfaz.siguienteLinea();
+                int indice=-1;
+                cout<<"Ingrese codigo de servicio a modificar: ";
+                getline(cin,id);
+                indice = archivo.buscar(stoi(id));
+                if(indice>=0)
+                {
+                    obj = archivo.leer(indice);
+                    interfaz.siguienteLinea();
+                    cout<<"Ingrese los datos que desea modificar (deje en blanco los datos que desee mantener)";
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+
+                    // Atributos de servicio
+                    /*
+                    int codigo;
+                    char nombre[50];
+                    float valor;
+                    int codCategoria;
+                    bool estado;
+                    */
+                    cout<<"Nombre: ";
+                    getline(cin, cadena);
+                    if(cadena!=""){
+                       obj.setNombre(cadena);
+                    }
+                    interfaz.siguienteLinea();
+                    cout<<"Valor servicio: ";
+                    getline(cin, cadena);
+                    if(cadena!=""){
+                       obj.setValor(stof(cadena));
+                    }
+                    interfaz.siguienteLinea();
+                    cout<<"Codigo categoria: ";
+                    getline(cin, cadena);
+                    if(cadena!=""){
+                        if(_categorias.buscar(stoi(cadena)) == -1)
+                        {
+                            interfaz.cambiarMensaje("La categoria no existe. Presione una tecla para continuar.",ROJO);
+                            rlutil::anykey();
+                            return;
+                        }
+                        else
+                        {
+                            obj.setCodCategoria(stoi(cadena));
+                        }
+                    }
+                    archivo.guardar(obj,indice);
+                    interfaz.cambiarMensaje("Servicio modificado exitosamente. Presione una tecla para continuar.",VERDECLARO);
+                }
+                else {
+                    interfaz.cambiarMensaje("Codigo inexistente. Presione una tecla para continuar.",ROJO);
+                }
+                rlutil::anykey();
+            }
 
     void Menu::consultas(){
         // TODO: Pensar consultas a agregar y programarlas

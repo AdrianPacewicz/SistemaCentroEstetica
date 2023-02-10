@@ -25,7 +25,7 @@ class Servicio
         void setCodCategoria(int _codCateg);
         void setEstado(bool _estado);
 
-        void cargar();
+        bool cargar();
         string toString();
 
 };

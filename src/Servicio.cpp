@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include "Servicio.h"
+#include "CategoriasArchivo.h"
+#include "rlutil.h"
 
 int Servicio::getCodigo(){
     return codigo;
@@ -43,10 +45,46 @@ void Servicio::setEstado(bool _estado){
     estado= _estado;
 }
 
-void Servicio::cargar(){
-
+bool Servicio::cargar(){
+    string cadena;
+    CategoriasArchivo archivo;
+    /*
+    int codigo;
+    char nombre[50];
+    float valor;
+    int codCategoria;
+    bool estado;
+    */
+    do{
+        cout<<"  Nombre: ";
+        getline(cin, cadena);
+    }while(cadena == "");
+    setNombre(cadena);
+    cout<<"  Valor servicio: ";
+    getline(cin, cadena);
+    setValor(stof(cadena));
+    do
+    {
+        cout<<"  Codigo categoria: ";
+        getline(cin, cadena);
+    }
+    while(cadena == "");
+    if(archivo.buscar(stoi(cadena)) == -1)
+    {
+        cout<<"  ERROR: La categoria no existe.";
+        rlutil::anykey();
+        return false;
+    }
+    else
+    {
+        setCodCategoria(stoi(cadena));
+    }
+    cout<<"  Cargado con exito. (Codigo: "<<codigo<<")"<<endl;
+    rlutil::anykey();
 }
 
 string Servicio::toString(){
-
+    string servicio;
+    servicio = to_string(codigo) + "\t|\t" + nombre + "\t|\t" + to_string(valor) + "\t|\t" + to_string(codCategoria);
+    return servicio;
 }
