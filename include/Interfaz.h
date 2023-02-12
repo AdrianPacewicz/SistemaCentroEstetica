@@ -2,6 +2,7 @@
 #define INTERFAZ_H
 #include <string>
 
+using namespace std;
 
 class Interfaz {
 private:
@@ -24,6 +25,7 @@ public:
     void dibujarLineaVertical(int x, int color, int desde, int hasta);
     void dibujarMarco(int color);
     void borrarLinea(int y, bool bordes);
+    void borrarLineaActual(bool bordes);
     void limpiarPantalla(int desde, int hasta, bool bordes);
     void cambiarTitulo(std::string texto);
     void mostrarTextoCentrado(std::string texto, int y);

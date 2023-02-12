@@ -3,6 +3,8 @@
 
 #include "Transaccion.h"
 #include <string>
+#include "Interfaz.h"
+
 using namespace std;
 
 class Venta: public Transaccion
@@ -23,7 +25,7 @@ class Venta: public Transaccion
         void setCliente(int cliente);
         void setServicio(int servicio);
         void setObs(string _observacion);
-        void cargar();
+        bool cargar(Interfaz &interfaz);
         string toString();
 };
 

@@ -9,7 +9,9 @@
 #include "ProveedoresArchivo.h"
 #include "ServiciosArchivo.h"
 #include "VentasArchivo.h"
+#include <ctime>
 
+/*
 void mostrarEmpleados(int y=8, int pag=0, int cantPag=0){
     EmpleadosArchivo archivo;
     int opc=0;
@@ -58,6 +60,138 @@ void mostrarCategorias(int y=8, int pag=0, int cantPag=0){
 
 void mostrarServicios(int y=8){
 
+}
+*/
+
+Fecha cargarFecha(Interfaz &interfaz){
+    Fecha fecha;
+    time_t rawtime;
+    struct tm timeinfo;
+    time (&rawtime);
+    timeinfo = *(localtime (&rawtime));
+    int diaActual = timeinfo.tm_mday;
+    int mesActual = timeinfo.tm_mon + 1;
+    int anioActual = timeinfo.tm_year + 1900;
+    int valor;
+    bool fechaValida;
+    // TODO
+    interfaz.siguienteLinea();
+    do{
+        interfaz.borrarLineaActual(false);
+        cout<<"Anio: ";
+        cin>>valor;
+    }while(valor>=1900&&valor<=anioActual);
+    fecha.setAnio(valor);
+    interfaz.siguienteLinea();
+    do{
+        fechaValida = false;
+        interfaz.borrarLineaActual(false);
+        cout<<"Mes: ";
+        cin>>valor;
+        if(anioActual==fecha.getAnio()){
+            if(valor>=1&&valor<=mesActual){
+                fechaValida=true;
+            }
+        }
+        else{
+            if(valor>=1&&valor<=12){
+                fechaValida=true;
+            }
+        }
+    }while(!fechaValida);
+    fecha.setMes(valor);
+
+    ////////
+    interfaz.siguienteLinea();
+    do{
+        fechaValida = false;
+        interfaz.borrarLineaActual(false);
+        cout<<"Dia: ";
+        cin>>valor;
+        // Si el año y el mes son los actuales valida contra la fecha de hoy
+        if(anioActual==fecha.getAnio()&&mesActual==fecha.getMes()){
+            if(valor>=1&&valor<=diaActual){
+                fechaValida=true;
+            }
+        }
+        // Sino valida por mes y calcula el bisiesto en caso de ser necesario
+        else{
+            switch(fecha.getMes()){
+                // Meses de 31 dias
+                case 1:
+                    if(valor>=1&&valor<=31){
+                        fechaValida=true;
+                    }
+                    break;
+                case 3:
+                    if(valor>=1&&valor<=31){
+                        fechaValida=true;
+                    }
+                    break;
+                case 5:
+                    if(valor>=1&&valor<=31){
+                        fechaValida=true;
+                    }
+                    break;
+                case 7:
+                    if(valor>=1&&valor<=31){
+                        fechaValida=true;
+                    }
+                    break;
+                case 8:
+                    if(valor>=1&&valor<=31){
+                        fechaValida=true;
+                    }
+                    break;
+                case 10:
+                    if(valor>=1&&valor<=31){
+                        fechaValida=true;
+                    }
+                    break;
+                case 12:
+                    if(valor>=1&&valor<=31){
+                        fechaValida=true;
+                    }
+                    break;
+                // Meses de 30 dias
+                case 4:
+                    if(valor>=1&&valor<=30){
+                        fechaValida=true;
+                    }
+                    break;
+                case 6:
+                    if(valor>=1&&valor<=30){
+                        fechaValida=true;
+                    }
+                    break;
+                case 9:
+                    if(valor>=1&&valor<=30){
+                        fechaValida=true;
+                    }
+                    break;
+                case 11:
+                    if(valor>=1&&valor<=30){
+                        fechaValida=true;
+                    }
+                    break;
+                // Febrero
+                case 2:
+                    if((fecha.getAnio()%4==0&&fecha.getAnio()%100!=0)||fecha.getAnio()%400==0){ // es bisiesto
+                        if(valor>=1&&valor<=29){
+                            fechaValida=true;
+                        }
+                    }
+                    else{
+                        if(valor>=1&&valor<=28){ // NO es bisiesto
+                            fechaValida=true;
+                        }
+                    }
+                    break;
+            }
+        }
+    }while(!fechaValida);
+    fecha.setDia(valor);
+    return fecha;
 }
 
 void importar(int opcion){

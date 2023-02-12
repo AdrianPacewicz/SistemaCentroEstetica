@@ -3,7 +3,7 @@
 #include "rlutil.h"
 #include "Windows.h"
 
-using namespace std;
+
 
 int Interfaz::getAlto(){
     setAlto(rlutil::trows());
@@ -123,6 +123,26 @@ void Interfaz::borrarLinea(int y, bool bordes=false){
         for(int i = 1; i <= ancho; i++){
             cout << " ";
         }
+    }
+}
+
+// Metodo que borra el texto de toda la linea actual en la pantalla y posiciona el cursor al principio de la misma
+void Interfaz::borrarLineaActual(bool bordes=false){
+    int ancho;
+    ancho = rlutil::tcols();
+    if(!bordes){
+        rlutil::locate(3,filaActual);
+        for(int i = 3; i < ancho-1; i++){
+            cout << " ";
+        }
+        rlutil::locate(5,filaActual);
+    }
+    else{
+        rlutil::locate(1,filaActual);
+        for(int i = 1; i <= ancho; i++){
+            cout << " ";
+        }
+        rlutil::locate(5,filaActual);
     }
 }
 

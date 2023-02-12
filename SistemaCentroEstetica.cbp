@@ -48,7 +48,6 @@
 		<Unit filename="include/GastosGeneralesArchivo.h" />
 		<Unit filename="include/Interfaz.h" />
 		<Unit filename="include/Menu.h" />
-		<Unit filename="include/Menus.h" />
 		<Unit filename="include/PagoEmpleado.h" />
 		<Unit filename="include/PagosEmpleadosArchivo.h" />
 		<Unit filename="include/Persona.h" />
@@ -75,7 +74,6 @@
 		<Unit filename="src/GastosGeneralesArchivo.cpp" />
 		<Unit filename="src/Interfaz.cpp" />
 		<Unit filename="src/Menu.cpp" />
-		<Unit filename="src/Menus.cpp" />
 		<Unit filename="src/PagoEmpleado.cpp" />
 		<Unit filename="src/PagosEmpleadosArchivo.cpp" />
 		<Unit filename="src/Persona.cpp" />

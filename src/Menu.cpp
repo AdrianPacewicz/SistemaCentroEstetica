@@ -89,6 +89,7 @@ void Menu::nuevaTransaccion(){
 
     void Menu::nuevaVenta(){
         bool continuarCargando=false;
+        string msj = "";
         VentasArchivo archivo;
         Venta venta;
         venta.setEstado(true);
@@ -96,16 +97,27 @@ void Menu::nuevaTransaccion(){
             venta.setId(archivo.getCantidad()+1);
             system("cls");
             interfaz.setFilaActual(8);
-            interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
-
+            interfaz.dibujarMarco(CIAN);
             interfaz.cambiarTitulo("FIRULI 3000 - NUEVA VENTA");
-            rlutil::locate(1,interfaz.getFilaActual());
-            venta.cargar();
-            archivo.guardar(venta);
-            int opc=2;
+            interfaz.siguienteLinea();
+            if(venta.cargar(interfaz)){
+                archivo.guardar(venta);
+                interfaz.siguienteLinea();
+                rlutil::setColor(VERDECLARO);
+                cout << "Venta cargada con exito.";
+            }
+            else {
+                interfaz.siguienteLinea();
+                rlutil::setColor(ROJO);
+                cout << "Error al cargar la venta.";
+            }
+            interfaz.siguienteLinea();
+            rlutil::setColor(AMARILLO);
+            cout << "Desea cargar una nueva venta? [1] Si || [0] No)";
+            rlutil::setColor(BLANCO);
+            int opc = 2;
             do{
-                cout<<"  Desea cargar una nueva venta? (1=SI - 0=NO): ";
-                cin>>opc;
+                opc = interfaz.pedirOpcionNumerica();
             } while(opc!=1&&opc!=0);
             continuarCargando=opc;
         } while(continuarCargando);
@@ -264,7 +276,7 @@ void Menu::nuevaTransaccion(){
 
                 do {
                     system("cls");
-                    interfaz.dibujarMarco(rlutil::CYAN);
+                    interfaz.dibujarMarco(CIAN);
                     interfaz.setFilaActual(7);
                     interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE CATEGORIAS");
                     interfaz.siguienteLinea();
@@ -435,7 +447,7 @@ void Menu::nuevaTransaccion(){
 
                 do {
                     system("cls");
-                    interfaz.dibujarMarco(rlutil::CYAN);
+                    interfaz.dibujarMarco(CIAN);
                     interfaz.setFilaActual(7);
                     interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE CLIENTES");
                     interfaz.siguienteLinea();
@@ -658,7 +670,7 @@ void Menu::nuevaTransaccion(){
 
                 do {
                     system("cls");
-                    interfaz.dibujarMarco(rlutil::CYAN);
+                    interfaz.dibujarMarco(CIAN);
                     interfaz.setFilaActual(7);
                     interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE EMPLEADOS");
                     interfaz.siguienteLinea();
@@ -847,7 +859,7 @@ void Menu::nuevaTransaccion(){
 
                 do {
                     system("cls");
-                    interfaz.dibujarMarco(rlutil::CYAN);
+                    interfaz.dibujarMarco(CIAN);
                     interfaz.setFilaActual(7);
                     interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE PROVEEDORES");
                     interfaz.siguienteLinea();
@@ -1070,7 +1082,7 @@ void Menu::nuevaTransaccion(){
 
                 do {
                     system("cls");
-                    interfaz.dibujarMarco(rlutil::CYAN);
+                    interfaz.dibujarMarco(CIAN);
                     interfaz.setFilaActual(7);
                     interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE SERVICIOS");
                     interfaz.siguienteLinea();
