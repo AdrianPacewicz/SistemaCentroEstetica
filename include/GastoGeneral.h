@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Transaccion.h"
+#include "Interfaz.h"
 using namespace std;
 
 class GastoGeneral: public Transaccion
@@ -13,7 +14,7 @@ class GastoGeneral: public Transaccion
     public:
         string getDetalle();
         void setDetalle(string _detalle);
-        void cargar();
+        bool cargar(Interfaz &interfaz);
         string toString();
 };
 

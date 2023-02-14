@@ -109,7 +109,6 @@ bool VentasArchivo::importarCSV(){
     vector<vector<string>> contenido;
     vector<string> fila;
     string registro, campo;
-
     fstream file (nomArchivo, ios::in);
     if(file.is_open())
     {
@@ -120,6 +119,7 @@ bool VentasArchivo::importarCSV(){
 
             while(getline(str, campo, ';'))
                 fila.push_back(campo);
+            fila.push_back(""); // Agregado para no tener problemas con las observaciones en blanco
             contenido.push_back(fila);
         }
     }
@@ -129,18 +129,16 @@ bool VentasArchivo::importarCSV(){
         return false;
     }
 
-
     cantRegistros = contenido.size();
 
     if (!eliminarArchivoDAT()){
         cout<<"Error al eliminar el archivo .DAT!"<<endl;
         return false;
     }
-
+    Fecha f;
     for(int i=0;i<cantRegistros;i++)
     {
         if (i!=0){
-            Fecha f;
             for(int j=0;j<cantCampos;j++)
             {
                 switch(j)

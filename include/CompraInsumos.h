@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Transaccion.h"
+#include "Interfaz.h"
 using namespace std;
 
 class CompraInsumos: public Transaccion
@@ -22,7 +23,7 @@ class CompraInsumos: public Transaccion
         void setDetalle(string _detalle);
         void setCantidad(int _cant);
         void setPrecioU(float _precioU);
-        void cargar();
+        bool cargar(Interfaz &interfaz);
         string toString();
 };
 

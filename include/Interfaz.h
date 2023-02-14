@@ -15,6 +15,24 @@ public:
     void setAncho(int a);
     void setFilaActual(int f);
 
+    enum {
+	NEGRO,
+	AZULOSCURO,
+	VERDEOSCURO,
+	CIAN,
+	ROJOOSCURO,
+	FUCSIAOSCURO,
+	MARRON,
+	GRISCLARO,
+	GRISOSCURO,
+	AZUL,
+	VERDECLARO,
+	CELESTE,
+	ROJO,
+	FUCSIA,
+	AMARILLO,
+	BLANCO
+    };
 
     void maximizarVentana();
     void dibujarRectangulo(int x, int y, int alto, int ancho, int color);
@@ -28,6 +46,7 @@ public:
     void borrarLineaActual(bool bordes);
     void limpiarPantalla(int desde, int hasta, bool bordes);
     void cambiarTitulo(std::string texto);
+    void mostrar(string texto, int color);
     void mostrarTextoCentrado(std::string texto, int y);
     void cambiarMensaje(std::string texto, int color);
     char pedirOpcion();

@@ -103,18 +103,14 @@ void Menu::nuevaTransaccion(){
             if(venta.cargar(interfaz)){
                 archivo.guardar(venta);
                 interfaz.siguienteLinea();
-                rlutil::setColor(VERDECLARO);
-                cout << "Venta cargada con exito.";
+                interfaz.mostrar("Venta cargada con exito.",VERDECLARO);
             }
             else {
                 interfaz.siguienteLinea();
-                rlutil::setColor(ROJO);
-                cout << "Error al cargar la venta.";
+                interfaz.mostrar("Error al cargar la venta.",ROJO);
             }
             interfaz.siguienteLinea();
-            rlutil::setColor(AMARILLO);
-            cout << "Desea cargar una nueva venta? [1] Si || [0] No)";
-            rlutil::setColor(BLANCO);
+            interfaz.mostrar("Desea cargar una nueva venta? [1] Si || [0] No",AMARILLO);
             int opc = 2;
             do{
                 opc = interfaz.pedirOpcionNumerica();
@@ -126,49 +122,63 @@ void Menu::nuevaTransaccion(){
     void Menu::nuevoGastoGeneral(){
         bool continuarCargando=false;
         GastosGeneralesArchivo archivo;
-        GastoGeneral obj;
-        obj.setEstado(true);
+        GastoGeneral gastogeneral;
+        gastogeneral.setEstado(true);
         do {
-            obj.setId(archivo.getCantidad()+1);
+            gastogeneral.setId(archivo.getCantidad()+1);
             system("cls");
             interfaz.setFilaActual(8);
-            interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
-
-            interfaz.cambiarTitulo("FIRULI 3000 - NUEVO GASTO GENERAL");
-            rlutil::locate(1,interfaz.getFilaActual());
-            obj.cargar();
-            archivo.guardar(obj);
-            int opc=2;
+            interfaz.dibujarMarco(CIAN);
+            interfaz.cambiarTitulo("FIRULI 3000 - NUEVA GASTO GENERAL");
+            interfaz.siguienteLinea();
+            if(gastogeneral.cargar(interfaz)){
+                archivo.guardar(gastogeneral);
+                interfaz.siguienteLinea();
+                interfaz.mostrar("Gasto cargado con exito.",VERDECLARO);
+            }
+            else {
+                interfaz.siguienteLinea();
+                interfaz.mostrar("Error al cargar el gasto.",ROJO);
+            }
+            interfaz.siguienteLinea();
+            interfaz.mostrar("Desea cargar un nuevo gasto? [1] Si || [0] No",AMARILLO);
+            int opc = 2;
             do{
-                cout<<"  Desea cargar un nuevo gasto? (1=SI - 0=NO): ";
-                cin>>opc;
+                opc = interfaz.pedirOpcionNumerica();
             } while(opc!=1&&opc!=0);
             continuarCargando=opc;
         } while(continuarCargando);
     }
 
     void Menu::nuevaCompraInsumos(){
-            bool continuarCargando=false;
-            ComprasInsumosArchivo archivo;
-            CompraInsumos obj;
-            obj.setEstado(true);
-            do {
-                obj.setId(archivo.getCantidad()+1);
-                system("cls");
-                interfaz.setFilaActual(8);
-                interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
-
-                interfaz.cambiarTitulo("FIRULI 3000 - NUEVA COMPRA DE INSUMOS");
-                rlutil::locate(1,interfaz.getFilaActual());
-                obj.cargar();
-                archivo.guardar(obj);
-                int opc=2;
-                do{
-                    cout<<"  Desea cargar una nueva compra de insumos? (1=SI - 0=NO): ";
-                    cin>>opc;
-                } while(opc!=1&&opc!=0);
-                continuarCargando=opc;
-            } while(continuarCargando);
+        bool continuarCargando=false;
+        ComprasInsumosArchivo archivo;
+        CompraInsumos compraInsumo;
+        compraInsumo.setEstado(true);
+        do {
+            compraInsumo.setId(archivo.getCantidad()+1);
+            system("cls");
+            interfaz.setFilaActual(8);
+            interfaz.dibujarMarco(CIAN);
+            interfaz.cambiarTitulo("FIRULI 3000 - NUEVA COMPRA DE INSUMOS");
+            interfaz.siguienteLinea();
+            if(compraInsumo.cargar(interfaz)){
+                archivo.guardar(compraInsumo);
+                interfaz.siguienteLinea();
+                interfaz.mostrar("Compra cargada con exito.",VERDECLARO);
+            }
+            else {
+                interfaz.siguienteLinea();
+                interfaz.mostrar("Error al cargar la compra.",ROJO);
+            }
+            interfaz.siguienteLinea();
+            interfaz.mostrar("Desea cargar una nueva compra de insumos? [1] Si || [0] No",AMARILLO);
+            int opc = 2;
+            do{
+                opc = interfaz.pedirOpcionNumerica();
+            } while(opc!=1&&opc!=0);
+            continuarCargando=opc;
+        } while(continuarCargando);
     }
 
     void Menu::nuevoPagoEmpleado(){

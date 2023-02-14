@@ -2,6 +2,7 @@
 #include <cstring>
 #include "GastoGeneral.h"
 #include "rlutil.h"
+#include "Funciones.h"
 
 string GastoGeneral::getDetalle(){
     string d = detalle;
@@ -12,9 +13,7 @@ void GastoGeneral::setDetalle(string _detalle){
     strcpy(detalle,_detalle.c_str());
 }
 
-void GastoGeneral::cargar(){
-    Fecha f;
-
+bool GastoGeneral::cargar(Interfaz &interfaz){
     /*
     int id;
     Fecha fecha;
@@ -22,32 +21,29 @@ void GastoGeneral::cargar(){
     bool estado;
     char detalle[100];
     */
+    string valor;
 
-    int valor;
-    float importe;
-    string det;
-    // TODO: Validaciones
-    cout<<"  Anio: ";
-    cin>>valor;
-    f.setAnio(valor);
-    cout<<"  Mes: ";
-    cin>>valor;
-    f.setMes(valor);
-    cout<<"  Dia: ";
-    cin>>valor;
-    f.setDia(valor);
-    setFecha(f);
-    cout<<"  Importe: ";
-    cin>>importe;
-    setImporte(importe);
-    cout<<"  Detalle: ";
-    cin.ignore();
-    getline(cin, det);
-    setDetalle(det);
-    cout<<"  Cargado con exito."<<endl;
-    rlutil::anykey();
+    setFecha(cargarFecha(interfaz));
+
+    // Pedir el importe del gasto
+    interfaz.siguienteLinea();
+    interfaz.mostrar("Ingrese el importe del gasto: ",interfaz.AMARILLO);
+    getline(cin, valor);
+    setImporte(stof(valor));
+
+    // Pedir detalle (obligatorio) del gasto
+    interfaz.siguienteLinea();
+    do {
+        interfaz.borrarLineaActual(false);
+        interfaz.mostrar("Ingrese un detalle: ",interfaz.AMARILLO);
+        getline(cin, valor);
+    } while (valor == "");
+    setDetalle(valor);
+    return true;
 }
 
 string GastoGeneral::toString(){
-
+    string gasto;
+    gasto = fecha.toString() + " - $ " + to_string(importe) + " - " + detalle;
+    return gasto;
 }

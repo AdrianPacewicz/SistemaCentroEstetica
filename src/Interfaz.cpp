@@ -171,6 +171,13 @@ void Interfaz::cambiarTitulo(string texto){
     rlutil::setColor(rlutil::WHITE);
 }
 
+// Metodo que recibe texto y lo muestra por pantalla del color indicado
+void Interfaz::mostrar(string texto, int color){
+    rlutil::setColor(color);
+    cout << texto;
+    rlutil::setColor(15);
+}
+
 // Metodo que recibe texto y la fila y lo muestra centrado
 void Interfaz::mostrarTextoCentrado(string texto, int y){
     int ancho, centro;
@@ -201,7 +208,7 @@ char Interfaz::pedirOpcion(){
 
 int Interfaz::pedirOpcionNumerica(){
     int op;
-    cambiarMensaje("Seleccione una opcion", rlutil::YELLOW);
+    cambiarMensaje("Seleccione una opcion", AMARILLO);
     op = rlutil::getkey();
     if (op>=48 && op<=57){
         return op-48;

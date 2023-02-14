@@ -36,7 +36,7 @@ void CompraInsumos::setPrecioU(float _precioU){
     precioUnitario = _precioU;
 }
 
-void CompraInsumos::cargar(){
+bool CompraInsumos::cargar(Interfaz &interfaz){
     Fecha f;
 
     /*

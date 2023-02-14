@@ -3,6 +3,9 @@
 #include "Venta.h"
 #include "rlutil.h"
 #include "Funciones.h"
+#include "EmpleadosArchivo.h"
+#include "ClientesArchivo.h"
+#include "ServiciosArchivo.h"
 
 int Venta::getEmpleado(){
     return nEmpleado;
@@ -38,57 +41,88 @@ void Venta::setObs(string _observacion){
 }
 
 bool Venta::cargar(Interfaz &interfaz){
+    string valor;
+    EmpleadosArchivo empleados;
+    ClientesArchivo clientes;
+    ServiciosArchivo servicios;
+    int indice;
+    bool existe = false;
 
-    int valor;
-    float importe;
-    string obs;
-    interfaz.siguienteLinea();
     setFecha(cargarFecha(interfaz));
-    /*
-    do{}
-    while(valor>);
-    cout<<"Anio: ";
-    cin>>valor;
-    fecha.setAnio(valor);
-    interfaz.siguienteLinea();
 
-    // TODO: Validaciones
+    interfaz.siguienteLinea();
+    interfaz.mostrar("Ingrese el DNI del empleado: ",interfaz.AMARILLO);
+    getline(cin, valor);
 
+    // Validación para verificar si el empleado existe
+    indice = empleados.buscar(stoi(valor));
+    if (indice >= 0){
+        existe = true;
+    }
 
+    if(!existe){
+        interfaz.siguienteLinea();
+        interfaz.siguienteLinea();
+        interfaz.mostrar("El empleado ingresado no existe.",interfaz.ROJO);
+        return false;
+    }
+    nEmpleado = stoi(valor);
 
-    cout<<"Mes: ";
+    interfaz.siguienteLinea();
+    existe = false;
+    interfaz.mostrar("Ingrese el DNI del cliente (opcional): ",interfaz.AMARILLO);
+    getline(cin, valor);
+
+    // Validación para verificar si el cliente existe
+    if (valor != ""){
+        indice = clientes.buscar(stoi(valor));
+        if (indice >= 0){
+            existe = true;
+        }
+
+        if(!existe){
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+            interfaz.mostrar("El cliente ingresado no existe.",interfaz.ROJO);
+            return false;
+        }
+        nCliente = stoi(valor);
+    }
+    else {
+        nCliente = 0;
+    }
+
+    interfaz.siguienteLinea();
+    existe = false;
+    interfaz.mostrar("Ingrese el ID del servicio: ",interfaz.AMARILLO);
+    getline(cin, valor);
+
+    // Validación para verificar si el servicio existe
+    indice = servicios.buscar(stoi(valor));
+    if (indice >= 0){
+        existe = true;
+    }
+
+    if(!existe){
+        interfaz.siguienteLinea();
+        interfaz.siguienteLinea();
+        interfaz.mostrar("El servicio ingresado no existe.",interfaz.ROJO);
+        return false;
+    }
+    nServicio = stoi(valor);
+
+    // Pedir el monto de la venta
+    interfaz.siguienteLinea();
+    interfaz.mostrar("Ingrese el monto de la venta: ",interfaz.AMARILLO);
     cin>>valor;
-    fecha.setMes(valor);
-    interfaz.siguienteLinea();
-    cout<<"Dia: ";
-    cin>>valor;
-    fecha.setDia(valor);
-    setFecha(fecha);
-    */
-    interfaz.siguienteLinea();
-    cout<<"Empleado: ";
-    cin>>valor;
-    setEmpleado(valor);
-    interfaz.siguienteLinea();
-    cout<<"Servicio: ";
-    cin>>valor;
-    setServicio(valor);
-    interfaz.siguienteLinea();
-    cout<<"Cliente: ";
-    cin>>valor;
-    setCliente(valor);
-    interfaz.siguienteLinea();
-    cout<<"Importe: ";
-    cin>>importe;
-    setImporte(importe);
-    interfaz.siguienteLinea();
-    cout<<"Observacion: ";
+    setImporte(stof(valor));
     cin.ignore();
-    getline(cin, obs);
-    setObs(obs);
+
+    // Pedir observacion de la venta
     interfaz.siguienteLinea();
-    cout<<"Cargado con exito."<<endl;
-    rlutil::anykey();
+    interfaz.mostrar("Ingrese una observacion (opcional): ",interfaz.AMARILLO);
+    getline(cin, valor);
+    setObs(valor);
     return true;
 }
 

@@ -120,6 +120,7 @@ bool PagosEmpleadosArchivo::importarCSV(){
 
             while(getline(str, campo, ';'))
                 fila.push_back(campo);
+            fila.push_back(""); // Agregado para no tener problemas con los 'detalles' en blanco
             contenido.push_back(fila);
         }
     }
