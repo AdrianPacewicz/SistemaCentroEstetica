@@ -16,7 +16,7 @@ int CompraInsumos::getCantidad(){
     return cantidad;
 }
 
-float CompraInsumos::getPrecioU(){
+double CompraInsumos::getPrecioU(){
     return precioUnitario;
 }
 
@@ -32,27 +32,115 @@ void CompraInsumos::setCantidad(int _cant){
     cantidad = _cant;
 }
 
-void CompraInsumos::setPrecioU(float _precioU){
+void CompraInsumos::setPrecioU(double _precioU){
     precioUnitario = _precioU;
 }
 
 bool CompraInsumos::cargar(Interfaz &interfaz){
+    /*
+    string valor;
+    EmpleadosArchivo empleados;
+    ClientesArchivo clientes;
+    ServiciosArchivo servicios;
+    int indice;
+    bool existe = false;
+
+    setFecha(cargarFecha(interfaz));
+
+    interfaz.siguienteLinea();
+    interfaz.mostrar("Ingrese el DNI del empleado: ",interfaz.AMARILLO);
+    getline(cin, valor);
+
+    // Validación para verificar si el empleado existe
+    indice = empleados.buscar(stoi(valor));
+    if (indice >= 0){
+        existe = true;
+    }
+
+    if(!existe){
+        interfaz.siguienteLinea();
+        interfaz.siguienteLinea();
+        interfaz.mostrar("El empleado ingresado no existe.",interfaz.ROJO);
+        return false;
+    }
+    nEmpleado = stoi(valor);
+
+    interfaz.siguienteLinea();
+    existe = false;
+    interfaz.mostrar("Ingrese el DNI del cliente (opcional): ",interfaz.AMARILLO);
+    getline(cin, valor);
+
+    // Validación para verificar si el cliente existe
+    if (valor != ""){
+        indice = clientes.buscar(stoi(valor));
+        if (indice >= 0){
+            existe = true;
+        }
+
+        if(!existe){
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+            interfaz.mostrar("El cliente ingresado no existe.",interfaz.ROJO);
+            return false;
+        }
+        nCliente = stoi(valor);
+    }
+    else {
+        nCliente = 0;
+    }
+
+    interfaz.siguienteLinea();
+    existe = false;
+    interfaz.mostrar("Ingrese el ID del servicio: ",interfaz.AMARILLO);
+    getline(cin, valor);
+
+    // Validación para verificar si el servicio existe
+    indice = servicios.buscar(stoi(valor));
+    if (indice >= 0){
+        existe = true;
+    }
+
+    if(!existe){
+        interfaz.siguienteLinea();
+        interfaz.siguienteLinea();
+        interfaz.mostrar("El servicio ingresado no existe.",interfaz.ROJO);
+        return false;
+    }
+    nServicio = stoi(valor);
+
+    // Pedir el monto de la venta
+    interfaz.siguienteLinea();
+    interfaz.mostrar("Ingrese el monto de la venta: ",interfaz.AMARILLO);
+    cin>>valor;
+    setImporte(stod(valor));
+    cin.ignore();
+
+    // Pedir observacion de la venta
+    interfaz.siguienteLinea();
+    interfaz.mostrar("Ingrese una observacion (opcional): ",interfaz.AMARILLO);
+    getline(cin, valor);
+    setObs(valor);
+    return true;
+*/
+
+
+
     Fecha f;
 
     /*
     int id;
     Fecha fecha;
-    float importe;
+    double importe;
     bool estado;
 
     int cuilProveedor;
     char detalle[100];
     int cantidad;
-    float precioUnitario;
+    double precioUnitario;
     */
 
     int valor;
-    float importe;
+    double importe;
     string det;
     // TODO: Validaciones
     cout<<"  Anio: ";
@@ -85,6 +173,6 @@ bool CompraInsumos::cargar(Interfaz &interfaz){
 }
 string CompraInsumos::toString(){
     string compraInsumos;
-    compraInsumos = to_string(id) + "\t" + fecha.toString() + " " + to_string(cuilProveedor) + "\t - " + detalle + "\t- " + to_string(cantidad) + "\t" + to_string(precioUnitario) + "\t" + to_string(importe);
+    compraInsumos = to_string(id) + "\t" + fecha.toString() + " " + to_string(cuilProveedor) + "\t - " + detalle + "\t- " + to_string(cantidad) + "\t $ " + to_string_decimales(precioUnitario) + "\t $ " + to_string_decimales(importe);
     return compraInsumos;
 }

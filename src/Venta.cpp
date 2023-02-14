@@ -6,6 +6,7 @@
 #include "EmpleadosArchivo.h"
 #include "ClientesArchivo.h"
 #include "ServiciosArchivo.h"
+#include <iomanip>
 
 int Venta::getEmpleado(){
     return nEmpleado;
@@ -114,9 +115,8 @@ bool Venta::cargar(Interfaz &interfaz){
     // Pedir el monto de la venta
     interfaz.siguienteLinea();
     interfaz.mostrar("Ingrese el monto de la venta: ",interfaz.AMARILLO);
-    cin>>valor;
-    setImporte(stof(valor));
-    cin.ignore();
+    getline(cin, valor);
+    setImporte(stod(valor));
 
     // Pedir observacion de la venta
     interfaz.siguienteLinea();
@@ -128,6 +128,6 @@ bool Venta::cargar(Interfaz &interfaz){
 
 string Venta::toString(){
     string venta;
-    venta = fecha.toString() + " - Empleado: " + to_string(nEmpleado) + " - Servicio: " + to_string(nServicio) + " - $ " + to_string(importe);
+    venta = fecha.toString() + " - Empleado: " + to_string(nEmpleado) + " - Servicio: " + to_string(nServicio) + " - $ " + to_string_decimales(importe);
     return venta;
 }

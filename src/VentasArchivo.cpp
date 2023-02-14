@@ -5,6 +5,7 @@
 #include <sstream>  // stringstream importar CSV
 #include <stdio.h>  // remove .dat
 #include <sys/stat.h> // stat verificar que existe archivo antes de eliminar
+#include <iomanip>
 
 Venta VentasArchivo::leer(int nroRegistro)
 {
@@ -146,7 +147,7 @@ bool VentasArchivo::importarCSV(){
                     /*
                     int id;
                     Fecha fecha;
-                    float importe;
+                    double importe;
                     bool estado;
 
                     int nEmpleado;
@@ -168,7 +169,7 @@ bool VentasArchivo::importarCSV(){
                         venta.setFecha(f);
                         break;
                     case 4:
-                        venta.setImporte(stof(contenido[i][j]));
+                        venta.setImporte(stod(contenido[i][j]));
                         break;
                     case 5:
                         venta.setEstado(stoi(contenido[i][j]));
@@ -215,7 +216,7 @@ bool VentasArchivo::exportarCSV(){
         /*
         int id;
         Fecha fecha;
-        float importe;
+        double importe;
         bool estado;
 
         int nEmpleado;
@@ -227,7 +228,7 @@ bool VentasArchivo::exportarCSV(){
                     << vec[i].getFecha().getAnio() << ";"
                     << vec[i].getFecha().getMes() << ";"
                     << vec[i].getFecha().getDia()  << ";"
-                    << vec[i].getImporte() << ";"
+                    << fixed << setprecision(2) << vec[i].getImporte() << ";"
                     << vec[i].getEstado() << ";"
                     << vec[i].getEmpleado() << ";"
                     << vec[i].getCliente() << ";"

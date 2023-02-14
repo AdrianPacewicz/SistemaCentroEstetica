@@ -1,18 +1,19 @@
 #ifndef EMPLEADO_H
 #define EMPLEADO_H
 #include "Persona.h"
+#include "Funciones.h"
 
 class Empleado: public Persona
 {
     private:
-        float porcentajeComision;
-        float sueldoFijo;
+        double porcentajeComision;
+        double sueldoFijo;
 
     public:
-        float getPComision();
-        float getSueldoF();
-        void setPComision(float _PCom);
-        void setSueldoF(float _SueldoF);
+        double getPComision();
+        double getSueldoF();
+        void setPComision(double _PCom);
+        void setSueldoF(double _SueldoF);
         void cargar();
         string toString();
 };

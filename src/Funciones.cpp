@@ -10,6 +10,7 @@
 #include "ServiciosArchivo.h"
 #include "VentasArchivo.h"
 #include <ctime>
+#include <sstream>
 
 /*
 void mostrarEmpleados(int y=8, int pag=0, int cantPag=0){
@@ -62,6 +63,15 @@ void mostrarServicios(int y=8){
 
 }
 */
+
+string to_string_decimales(double d)
+{
+    ostringstream ss;
+    ss.precision(2);
+    ss << fixed << d;
+    return ss.str();
+}
+
 
 Fecha cargarFecha(Interfaz &interfaz){
     Fecha fecha;

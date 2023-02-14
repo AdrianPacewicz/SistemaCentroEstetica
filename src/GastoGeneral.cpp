@@ -17,7 +17,7 @@ bool GastoGeneral::cargar(Interfaz &interfaz){
     /*
     int id;
     Fecha fecha;
-    float importe;
+    double importe;
     bool estado;
     char detalle[100];
     */
@@ -29,7 +29,7 @@ bool GastoGeneral::cargar(Interfaz &interfaz){
     interfaz.siguienteLinea();
     interfaz.mostrar("Ingrese el importe del gasto: ",interfaz.AMARILLO);
     getline(cin, valor);
-    setImporte(stof(valor));
+    setImporte(stod(valor));
 
     // Pedir detalle (obligatorio) del gasto
     interfaz.siguienteLinea();
@@ -44,6 +44,6 @@ bool GastoGeneral::cargar(Interfaz &interfaz){
 
 string GastoGeneral::toString(){
     string gasto;
-    gasto = fecha.toString() + " - $ " + to_string(importe) + " - " + detalle;
+    gasto = fecha.toString() + " - $ " + to_string_decimales(importe) + " - " + detalle;
     return gasto;
 }

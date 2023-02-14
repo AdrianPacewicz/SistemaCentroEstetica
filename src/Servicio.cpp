@@ -13,7 +13,7 @@ string Servicio::getNombre(){
     return n;
 }
 
-float Servicio::getValor(){
+double Servicio::getValor(){
     return valor;
 }
 
@@ -33,7 +33,7 @@ void Servicio::setNombre(string _nombre){
     strcpy(nombre,_nombre.c_str());
 }
 
-void Servicio::setValor(float _valor){
+void Servicio::setValor(double _valor){
     valor= _valor;
 }
 
@@ -51,7 +51,7 @@ bool Servicio::cargar(){
     /*
     int codigo;
     char nombre[50];
-    float valor;
+    double valor;
     int codCategoria;
     bool estado;
     */
@@ -62,7 +62,7 @@ bool Servicio::cargar(){
     setNombre(cadena);
     cout<<"  Valor servicio: ";
     getline(cin, cadena);
-    setValor(stof(cadena));
+    setValor(stod(cadena));
     do
     {
         cout<<"  Codigo categoria: ";
@@ -85,6 +85,6 @@ bool Servicio::cargar(){
 
 string Servicio::toString(){
     string servicio;
-    servicio = to_string(codigo) + "\t|\t" + nombre + "\t|\t" + to_string(valor) + "\t|\t" + to_string(codCategoria);
+    servicio = to_string(codigo) + "\t|\t" + nombre + "\t|\t" + to_string_decimales(valor) + "\t|\t" + to_string(codCategoria);
     return servicio;
 }

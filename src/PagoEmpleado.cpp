@@ -26,7 +26,7 @@ void PagoEmpleado::cargar(){
     /*
     int id;
     Fecha fecha;
-    float importe;
+    double importe;
     bool estado;
 
     int idEmpleado;
@@ -34,7 +34,7 @@ void PagoEmpleado::cargar(){
     */
 
     int valor;
-    float importe;
+    double importe;
     string det;
     // TODO: Validaciones
     cout<<"  Anio: ";
@@ -62,5 +62,5 @@ void PagoEmpleado::cargar(){
 }
 
 string PagoEmpleado::toString(){
-
+    // acordarse de to_string_decimales
 }

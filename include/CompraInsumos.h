@@ -4,6 +4,8 @@
 #include <string>
 #include "Transaccion.h"
 #include "Interfaz.h"
+#include "Funciones.h"
+
 using namespace std;
 
 class CompraInsumos: public Transaccion
@@ -12,17 +14,17 @@ class CompraInsumos: public Transaccion
         int cuilProveedor;
         char detalle[100];
         int cantidad;
-        float precioUnitario;
+        double precioUnitario;
 
     public:
         int getProv();
         string getDetalle();
         int getCantidad();
-        float getPrecioU();
+        double getPrecioU();
         void setProv(int _prov);
         void setDetalle(string _detalle);
         void setCantidad(int _cant);
-        void setPrecioU(float _precioU);
+        void setPrecioU(double _precioU);
         bool cargar(Interfaz &interfaz);
         string toString();
 };

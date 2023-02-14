@@ -5,6 +5,7 @@
 #include <sstream>  // stringstream importar CSV
 #include <stdio.h>  // remove .dat
 #include <sys/stat.h> // stat verificar que existe archivo antes de eliminar
+#include <iomanip>
 
 CompraInsumos ComprasInsumosArchivo::leer(int nroRegistro)
 {
@@ -151,12 +152,12 @@ bool ComprasInsumosArchivo::importarCSV(){
                         anio
                         mes
                         dia
-                    float importe;
+                    double importe;
                     bool estado;
                     int cuilProveedor;
                     char detalle[100];
                     int cantidad;
-                    float precioUnitario;
+                    double precioUnitario;
                     */
                     case 0:
                         compraInsumos.setId(stoi(contenido[i][j]));
@@ -172,7 +173,7 @@ bool ComprasInsumosArchivo::importarCSV(){
                         compraInsumos.setFecha(f);
                         break;
                     case 4:
-                        compraInsumos.setImporte(stof(contenido[i][j]));
+                        compraInsumos.setImporte(stod(contenido[i][j]));
                         break;
                     case 5:
                         compraInsumos.setEstado(stoi(contenido[i][j]));
@@ -187,7 +188,7 @@ bool ComprasInsumosArchivo::importarCSV(){
                         compraInsumos.setCantidad(stoi(contenido[i][j]));
                         break;
                     case 9:
-                        compraInsumos.setPrecioU(stof(contenido[i][j]));
+                        compraInsumos.setPrecioU(stod(contenido[i][j]));
                         break;
                 }
             }
@@ -220,7 +221,7 @@ bool ComprasInsumosArchivo::exportarCSV(){
                     << vecCompraInsumos[i].getFecha().getAnio() << ";"
                     << vecCompraInsumos[i].getFecha().getMes() << ";"
                     << vecCompraInsumos[i].getFecha().getDia()  << ";"
-                    << vecCompraInsumos[i].getImporte() << ";"
+                    << fixed << setprecision(2) << vecCompraInsumos[i].getImporte() << ";"
                     << vecCompraInsumos[i].getEstado() << ";"
                     << vecCompraInsumos[i].getProv() << ";"
                     << vecCompraInsumos[i].getDetalle() << ";"

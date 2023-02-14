@@ -703,8 +703,8 @@ void Menu::nuevaTransaccion(){
                         bool estado;
 
                         Atributos de empleado:
-                        float PorcentajeComision;
-                        float SueldoFijo;
+                        double PorcentajeComision;
+                        double SueldoFijo;
                         */
                         int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
                         int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
@@ -1109,7 +1109,7 @@ void Menu::nuevaTransaccion(){
                         Atributos de servicio:
                         int codigo;
                         char nombre[50];
-                        float valor;
+                        double valor;
                         int codCategoria;
                         bool estado;
                         */
@@ -1218,7 +1218,7 @@ void Menu::nuevaTransaccion(){
                     /*
                     int codigo;
                     char nombre[50];
-                    float valor;
+                    double valor;
                     int codCategoria;
                     bool estado;
                     */
@@ -1231,7 +1231,7 @@ void Menu::nuevaTransaccion(){
                     cout<<"Valor servicio: ";
                     getline(cin, cadena);
                     if(cadena!=""){
-                       obj.setValor(stof(cadena));
+                       obj.setValor(stod(cadena));
                     }
                     interfaz.siguienteLinea();
                     cout<<"Codigo categoria: ";
@@ -1360,30 +1360,30 @@ void Menu::nuevaTransaccion(){
                         pos_dni = archivo.buscar(_dni);
                         interfaz.siguienteLinea();
 
-                    if(archivo.buscar(_dni) == -1){
-                        interfaz.siguienteLinea();
-                        interfaz.siguienteLinea();
-                        cout<<"El DNI ingresado no se encuentra registrado";
-                        interfaz.siguienteLinea();}
-
-                    else{
-                        interfaz.siguienteLinea();
-                        interfaz.siguienteLinea();
-                        cout<<"Nombre\t|\tApellido|\tTelefono|\tEmail";
-                        interfaz.siguienteLinea();
-                        if(archivo.leer(pos_dni).getEstado()){
+                        if(archivo.buscar(_dni) == -1){
+                            interfaz.siguienteLinea();
+                            interfaz.siguienteLinea();
+                            cout<<"El DNI ingresado no se encuentra registrado";
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            interfaz.siguienteLinea();
+                            interfaz.siguienteLinea();
+                            cout<<"Nombre\t|\tApellido|\tTelefono|\tEmail";
+                            interfaz.siguienteLinea();
+                            if(archivo.leer(pos_dni).getEstado()){
                                 cout<< archivo.leer(pos_dni).getNombre() << "\t|";
                                 cout<< archivo.leer(pos_dni).getApellido()<< "\t|";
                                 cout<< archivo.leer(pos_dni).getTelefono()<< "\t|";
                                 cout<< archivo.leer(pos_dni).getEmail();
                                 interfaz.siguienteLinea();
                             }
-                    }
+                        }
                     }
 
-                        interfaz.siguienteLinea();
-                        cout << "[0] Volver";
-                        opc = interfaz.pedirOpcion();
+                    interfaz.siguienteLinea();
+                    cout << "[0] Volver";
+                    opc = interfaz.pedirOpcion();
 
 
                 } while (opc != '0');

@@ -5,6 +5,7 @@
 #include <sstream>  // stringstream importar CSV
 #include <stdio.h>  // remove .dat
 #include <sys/stat.h> // stat verificar que existe archivo antes de eliminar
+#include <iomanip>
 
 Empleado EmpleadosArchivo::leer(int nroRegistro)
 {
@@ -152,8 +153,8 @@ bool EmpleadosArchivo::importarCSV(){
                     char email[50];
                     bool estado;
 
-                    float PorcentajeComision;
-                    float SueldoFijo;
+                    double PorcentajeComision;
+                    double SueldoFijo;
                     */
                     case 0:
                         empleado.setDni(stoi(contenido[i][j]));
@@ -174,10 +175,10 @@ bool EmpleadosArchivo::importarCSV(){
                         empleado.setEstado(stoi(contenido[i][j]));
                         break;
                     case 6:
-                        empleado.setPComision(stof(contenido[i][j]));
+                        empleado.setPComision(stod(contenido[i][j]));
                         break;
                     case 7:
-                        empleado.setSueldoF(stof(contenido[i][j]));
+                        empleado.setSueldoF(stod(contenido[i][j]));
                         break;
                 }
             }
@@ -214,8 +215,8 @@ bool EmpleadosArchivo::exportarCSV(){
         char email[50];
         bool estado;
 
-        float PorcentajeComision;
-        float SueldoFijo;
+        double PorcentajeComision;
+        double SueldoFijo;
         */
         archivoCSV  << vec[i].getDni() << ";"
                     << vec[i].getNombre() << ";"
@@ -223,8 +224,8 @@ bool EmpleadosArchivo::exportarCSV(){
                     << vec[i].getTelefono()  << ";"
                     << vec[i].getEmail() << ";"
                     << vec[i].getEstado() << ";"
-                    << vec[i].getPComision() << ";"
-                    << vec[i].getSueldoF() << endl;
+                    << fixed << setprecision(2) << vec[i].getPComision() << ";"
+                    << fixed << setprecision(2) << vec[i].getSueldoF() << endl;
     }
     archivoCSV.close();
     delete vec;

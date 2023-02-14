@@ -7,17 +7,17 @@ class Transaccion
     protected:
         int id;
         Fecha fecha;
-        float importe;
+        double importe;
         bool estado;
 
     public:
         int getId();
         Fecha getFecha();
-        float getImporte();
+        double getImporte();
         bool getEstado();
         void setId(int _id);
         void setFecha(Fecha _fecha);
-        void setImporte(float _importe);
+        void setImporte(double _importe);
         void setEstado(bool _est);
         void cargar();
         string toString();

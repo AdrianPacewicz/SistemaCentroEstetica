@@ -9,7 +9,7 @@ Fecha Transaccion::getFecha(){
     return fecha;
 }
 
-float Transaccion::getImporte(){
+double Transaccion::getImporte(){
     return importe;
 }
 
@@ -25,7 +25,7 @@ void Transaccion::setFecha(Fecha _fecha){
     fecha=_fecha;
 }
 
-void Transaccion::setImporte(float _importe){
+void Transaccion::setImporte(double _importe){
     importe = _importe;
 }
 

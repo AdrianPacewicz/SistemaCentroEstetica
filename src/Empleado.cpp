@@ -2,19 +2,19 @@
 #include "Empleado.h"
 #include "rlutil.h"
 
-float Empleado::getPComision(){
+double Empleado::getPComision(){
     return porcentajeComision;
 }
 
-float Empleado::getSueldoF(){
+double Empleado::getSueldoF(){
     return sueldoFijo;
 }
 
-void Empleado::setPComision(float _PCom){
+void Empleado::setPComision(double _PCom){
     porcentajeComision=_PCom;
 }
 
-void Empleado::setSueldoF(float _SueldoF){
+void Empleado::setSueldoF(double _SueldoF){
     sueldoFijo=_SueldoF;
 }
 
@@ -22,16 +22,16 @@ void Empleado::cargar(){
     string cadena;
     Persona::cargar ();
     /*
-        float porcentajeComision;
-        float sueldoFijo;
+        double porcentajeComision;
+        double sueldoFijo;
     */
     // TODO: Validaciones
     cout<<"  Porcentaje Comision: ";
     getline(cin, cadena);
-    setPComision(stof(cadena));
+    setPComision(stod(cadena));
     cout<<"  Sueldo fijo: ";
     getline(cin, cadena);
-    setSueldoF(stof(cadena));
+    setSueldoF(stod(cadena));
 
     cout<<"  Cargado con exito."<<endl;
     rlutil::anykey();
@@ -39,6 +39,6 @@ void Empleado::cargar(){
 
 string Empleado::toString(){
     string empleado;
-    empleado = Persona::toString()+"\t|\t"+to_string(porcentajeComision)+"%\t|\t"+to_string(sueldoFijo);
+    empleado = Persona::toString()+"\t|\t"+to_string_decimales(porcentajeComision)+"%\t|\t"+to_string_decimales(sueldoFijo);
     return empleado;
 }

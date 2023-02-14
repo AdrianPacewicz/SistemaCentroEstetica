@@ -5,6 +5,7 @@
 #include <sstream>  // stringstream importar CSV
 #include <stdio.h>  // remove .dat
 #include <sys/stat.h> // stat verificar que existe archivo antes de eliminar
+#include <iomanip>
 
 Servicio ServiciosArchivo::leer(int nroRegistro)
 {
@@ -147,7 +148,7 @@ bool ServiciosArchivo::importarCSV(){
                     /*
                     int codigo;
                     char nombre[50];
-                    float valor;
+                    double valor;
                     int codCategoria;
                     bool estado;
                     */
@@ -158,7 +159,7 @@ bool ServiciosArchivo::importarCSV(){
                         servicio.setNombre(contenido[i][j]);
                         break;
                     case 2:
-                        servicio.setValor(stof(contenido[i][j]));
+                        servicio.setValor(stod(contenido[i][j]));
                         break;
                     case 3:
                         servicio.setCodCategoria(stoi(contenido[i][j]));
@@ -196,13 +197,13 @@ bool ServiciosArchivo::exportarCSV(){
         /*
         int codigo;
         char nombre[50];
-        float valor;
+        double valor;
         int codCategoria;
         bool estado;
         */
         archivoCSV  << vec[i].getCodigo() << ";"
                     << vec[i].getNombre() << ";"
-                    << vec[i].getValor() << ";"
+                    << fixed << setprecision(2) << vec[i].getValor() << ";"
                     << vec[i].getCodCategoria()  << ";"
                     << vec[i].getEstado() << endl;
     }
