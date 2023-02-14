@@ -1248,14 +1248,152 @@ void Menu::nuevaTransaccion(){
             }
 
     void Menu::consultas(){
-        // TODO: Pensar consultas a agregar y programarlas
+
+        char opc;
+    do{
+        system("cls");
+        interfaz.dibujarMarco(rlutil::CYAN);
+        interfaz.cambiarTitulo("FIRULI 3000 - NUEVA CONSULTA");
+        rlutil::locate(5,8);
+        cout<<"[1] - Consultar clientes";
+        rlutil::locate(5,9);
+        cout<<"[2] - Consultar ventas";
+        rlutil::locate(5,10);
+        cout<<"[3] - Consultar servicios";
+        rlutil::locate(5,11);
+        cout<<"[4] - Consultar empleados";
+        rlutil::locate(5,13);
+        cout<<"[5] - Consultar proveedor";
+        rlutil::locate(5,14);
+        cout<<"[0] - Volver";
+        opc = interfaz.pedirOpcion();
+        // Pregunta por la opcion elegida y se dirige a la funcion correspondiente
+        switch(opc)
+        {
+            case '1':
+                nuevaConsCliente();
+                break;
+            case '2':
+                nuevaConsVenta();
+                break;
+            case '3':
+                nuevaConsServicio();
+                break;
+            case '4':
+                nuevaConsEmpleado();
+                break;
+            case '5':
+                nuevaConsProveed();
+                break;
+        }
     }
+    while(opc != '0');
+    }
+        void Menu::nuevaConsCliente(){
+             char opc;
+    do{
+        system("cls");
+        interfaz.dibujarMarco(rlutil::CYAN);
+        interfaz.cambiarTitulo("FIRULI 3000 - CONSULTAS CLIENTE");
+        rlutil::locate(5,8);
+        cout<<"[1] - Consultar por DNI";
+        rlutil::locate(5,9);
+        cout<<"[2] - Consultar por telefono";
+        rlutil::locate(5,10);
+        cout<<"[3] - Consultar por Apellido";
+        rlutil::locate(5,11);
+
+        cout<<"[0] - Volver";
+        opc = interfaz.pedirOpcion();
+        // Pregunta por la opcion elegida y se dirige a la funcion correspondiente
+        switch(opc)
+        {
+            case '1':
+                consultaPorDNI();
+                break;
+            case '2':
+                consultaPorTEL();
+                break;
+            case '3':
+                consultaPorApellido();
+                break;
+        }
+    }
+    while(opc != '0');
+        }
+            void Menu::consultaPorDNI(){
+                ClientesArchivo archivo;
+                int cantidadRegistros = archivo.getCantidad();
+                Cliente *vec = new Cliente[cantidadRegistros];
+                if(vec==NULL) return;
+                int _dni, pos_dni;
+                char opc;
+
+                do {
+                    system("cls");
+                    interfaz.dibujarMarco(CIAN);
+                    interfaz.setFilaActual(7);
+                    interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR POR DNI");
+                    interfaz.siguienteLinea();
+                    if (cantidadRegistros==0){
+                        rlutil::setColor(ROJO);
+                        cout<<"Aun no se registraron clientes para consultar.";
+                        interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                        opc = '0';
+                        rlutil::setColor(BLANCO);
+                        rlutil::anykey();
+                    }
+                    else
+                    {
+                        cout << "Ingrese el DNI a consultar: ";
+                        cin >> _dni;
+                        pos_dni = archivo.buscar(_dni);
+                        interfaz.siguienteLinea();
+
+                    if(archivo.buscar(_dni) == -1){
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout<<"El DNI ingresado no se encuentra registrado";
+                        interfaz.siguienteLinea();}
+
+                    else{
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout<<"Nombre\t|\tApellido|\tTelefono|\tEmail";
+                        interfaz.siguienteLinea();
+                        if(archivo.leer(pos_dni).getEstado()){
+                                cout<< archivo.leer(pos_dni).getNombre() << "\t|";
+                                cout<< archivo.leer(pos_dni).getApellido()<< "\t|";
+                                cout<< archivo.leer(pos_dni).getTelefono()<< "\t|";
+                                cout<< archivo.leer(pos_dni).getEmail();
+                                interfaz.siguienteLinea();
+                            }
+                    }
+                    }
+
+                        interfaz.siguienteLinea();
+                        cout << "[0] Volver";
+                        opc = interfaz.pedirOpcion();
+
+
+                } while (opc != '0');
+                delete []vec;
+            }
+            void Menu::consultaPorTEL(){}
+            void Menu::consultaPorApellido(){}
+        void Menu::nuevaConsVenta(){
+            // TODO
+        }
+        void Menu::nuevaConsServicio(){
+            // TODO
+        }
         void Menu::nuevaConsEmpleado(){
             // TODO
         }
-        void Menu::nuevaConsCliente(){
+        void Menu::nuevaConsProveed(){
             // TODO
         }
+
     void Menu::reportes(){
         // TODO
     }

@@ -80,8 +80,18 @@ public:
             void cambiarEstadoServicio();
             void modificarServicio();
     void consultas();
-        void nuevaConsEmpleado();
         void nuevaConsCliente();
+            void consultaPorDNI();
+            void consultaPorTEL();
+            void consultaPorApellido();
+        void nuevaConsVenta();
+            void consultaPorRangoF();
+            void consultaPorCliente();
+            void consultaPorServicio();
+            void consultaPorEmpleado();
+        void nuevaConsServicio();
+        void nuevaConsEmpleado();
+        void nuevaConsProveed();
 
     void reportes();
     void backupRestauracionDeArchivos();
