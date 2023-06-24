@@ -154,7 +154,7 @@ bool ComprasInsumosArchivo::importarCSV(){
                         dia
                     double importe;
                     bool estado;
-                    int cuilProveedor;
+                    char cuilProveedor[50];
                     char detalle[100];
                     int cantidad;
                     double precioUnitario;
@@ -179,7 +179,7 @@ bool ComprasInsumosArchivo::importarCSV(){
                         compraInsumos.setEstado(stoi(contenido[i][j]));
                         break;
                     case 6:
-                        compraInsumos.setProv(stoi(contenido[i][j]));
+                        compraInsumos.setProv(contenido[i][j]);
                         break;
                     case 7:
                         compraInsumos.setDetalle(contenido[i][j]);

@@ -11,7 +11,7 @@ void Cliente::cargar(){
     char email[50];
     bool estado;
     */
-    Persona::cargar ();
+    Persona::cargar();
     cout<<"  Cargado con exito."<<endl;
     rlutil::anykey();
 }

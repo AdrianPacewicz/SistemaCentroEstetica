@@ -11,17 +11,17 @@ using namespace std;
 class CompraInsumos: public Transaccion
 {
     private:
-        int cuilProveedor;
+        char cuilProveedor[50];
         char detalle[100];
         int cantidad;
         double precioUnitario;
 
     public:
-        int getProv();
+        string getProv();
         string getDetalle();
         int getCantidad();
         double getPrecioU();
-        void setProv(int _prov);
+        void setProv(string _prov);
         void setDetalle(string _detalle);
         void setCantidad(int _cant);
         void setPrecioU(double _precioU);

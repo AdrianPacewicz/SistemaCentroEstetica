@@ -16,6 +16,7 @@ class Empleado: public Persona
         void setSueldoF(double _SueldoF);
         void cargar();
         string toString();
+        double calcularSueldo(int anio, int mes);
 };
 
 #endif // EMPLEADO_H

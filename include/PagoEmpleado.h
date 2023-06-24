@@ -3,6 +3,8 @@
 
 #include <string>
 #include "Transaccion.h"
+#include "Interfaz.h"
+#include "Funciones.h"
 using namespace std;
 
 class PagoEmpleado: public Transaccion
@@ -16,7 +18,7 @@ class PagoEmpleado: public Transaccion
         string getDetalle();
         void setIdE(int _idE);
         void setDetalle(string _detalle);
-        void cargar();
+        bool cargar(Interfaz &interfaz);
         string toString();
 };
 
