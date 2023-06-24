@@ -81,10 +81,15 @@ public:
             void modificarServicio();
     void consultas();
         void nuevaConsCliente();
+            void listarClientesXApellido();
+            void listarClientesXNombre();
             void consultaPorDNI();
             void consultaPorTEL();
             void consultaPorApellido();
         void nuevaConsVenta();
+            void listarVentasXFecha();
+            void listarVentasXEmpleado();
+            void listarVentasXCategoria();
             void consultaPorRangoF();
             void consultaPorCliente();
             void consultaPorServicio();

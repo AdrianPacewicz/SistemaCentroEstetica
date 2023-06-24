@@ -283,7 +283,7 @@ void Menu::cargaDeDatos(){
         do{
             system("cls");
             interfaz.setFilaActual(7);
-            interfaz.dibujarMarco(rlutil::CYAN);
+            interfaz.dibujarMarco(CIAN);
             interfaz.cambiarTitulo("FIRULI 3000 - CATEGORIAS");
             interfaz.siguienteLinea();
             cout<<"[1] - Listar";
@@ -470,7 +470,7 @@ void Menu::cargaDeDatos(){
         do{
             system("cls");
             interfaz.setFilaActual(7);
-            interfaz.dibujarMarco(rlutil::CYAN);
+            interfaz.dibujarMarco(CIAN);
             interfaz.cambiarTitulo("FIRULI 3000 - CLIENTES");
             interfaz.siguienteLinea();
             cout<<"[1] - Listar";
@@ -704,7 +704,7 @@ void Menu::cargaDeDatos(){
         do{
             system("cls");
             interfaz.setFilaActual(7);
-            interfaz.dibujarMarco(rlutil::CYAN);
+            interfaz.dibujarMarco(CIAN);
             interfaz.cambiarTitulo("FIRULI 3000 - EMPLEADOS");
             interfaz.siguienteLinea();
             cout<<"[1] - Listar";
@@ -910,7 +910,7 @@ void Menu::cargaDeDatos(){
         do{
             system("cls");
             interfaz.setFilaActual(7);
-            interfaz.dibujarMarco(rlutil::CYAN);
+            interfaz.dibujarMarco(CIAN);
             interfaz.cambiarTitulo("FIRULI 3000 - PROVEEDORES");
             interfaz.siguienteLinea();
             cout<<"[1] - Listar";
@@ -1145,7 +1145,7 @@ void Menu::cargaDeDatos(){
         do{
             system("cls");
             interfaz.setFilaActual(7);
-            interfaz.dibujarMarco(rlutil::CYAN);
+            interfaz.dibujarMarco(CIAN);
             interfaz.cambiarTitulo("FIRULI 3000 - SERVICIOS");
             interfaz.siguienteLinea();
             cout<<"[1] - Listar";
@@ -1399,34 +1399,226 @@ void Menu::consultas(){
         char opc;
         do{
             system("cls");
-            interfaz.dibujarMarco(rlutil::CYAN);
+            interfaz.setFilaActual(7);
+            interfaz.dibujarMarco(CIAN);
             interfaz.cambiarTitulo("FIRULI 3000 - CONSULTAS CLIENTE");
-            rlutil::locate(5,8);
-            cout<<"[1] - Consultar por DNI";
-            rlutil::locate(5,9);
-            cout<<"[2] - Consultar por telefono";
-            rlutil::locate(5,10);
-            cout<<"[3] - Consultar por Apellido";
-            rlutil::locate(5,11);
-
+            interfaz.siguienteLinea();
+            cout<<"[1] - Listado por apellido";
+            interfaz.siguienteLinea();
+            cout<<"[2] - Listado por nombre";
+            interfaz.siguienteLinea();
+            cout<<"[3] - Consultar por DNI";
+            interfaz.siguienteLinea();
+            cout<<"[4] - Consultar por telefono";
+            interfaz.siguienteLinea();
+            cout<<"[5] - Consultar por Apellido";
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
             cout<<"[0] - Volver";
             opc = interfaz.pedirOpcion();
             // Pregunta por la opcion elegida y se dirige a la funcion correspondiente
             switch(opc)
             {
                 case '1':
-                    consultaPorDNI();
+                    listarClientesXApellido();
                     break;
                 case '2':
-                    consultaPorTEL();
+                    listarClientesXNombre();
                     break;
                 case '3':
+                    consultaPorDNI();
+                    break;
+                case '4':
+                    consultaPorTEL();
+                    break;
+                case '5':
                     consultaPorApellido();
                     break;
             }
         }
         while(opc != '0');
     }
+        /*
+        • Listado de clientes
+            o Ordenados por apellido
+            o Ordenados por nombre
+        */
+        void Menu::listarClientesXApellido(){
+            ClientesArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Cliente *vec = new Cliente[cantidadRegistros];
+            Cliente clienteAux;
+            if(vec==NULL) return;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+            archivo.leerTodos(vec, cantidadRegistros);
+
+            // Ordenamiento con método burbuja
+            string cadena1, cadena2;
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+                        cadena1 = vec[j].getApellido()+vec[j].getNombre();
+                        cadena2 = vec[j+1].getApellido()+vec[j+1].getNombre();
+                        if(cadena1 > cadena2){
+                            clienteAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=clienteAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE CLIENTES POR APELLIDO");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(14) << "DNI";
+                    cout << left << setw(30) << "Nombre y Apellido";
+                    cout << left << setw(15) << "Telefono";
+                    cout << left << setw(25) << "e-mail";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        if(vec[i].getEstado()){
+                            cout << left << setw(14) << vec[i].getDni();
+                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
+                            cout << left << setw(30) << n;
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(25) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(14) << vec[i].getDni();
+                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
+                            cout << left << setw(30) << n;
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(25) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
+        }
+        void Menu::listarClientesXNombre(){
+            ClientesArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Cliente *vec = new Cliente[cantidadRegistros];
+            Cliente clienteAux;
+            if(vec==NULL) return;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+            archivo.leerTodos(vec, cantidadRegistros);
+
+            // Ordenamiento con método burbuja
+            string cadena1, cadena2;
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+                        cadena1 = vec[j].getNombre()+vec[j].getApellido();
+                        cadena2 = vec[j+1].getNombre()+vec[j+1].getApellido();
+                        if(cadena1 > cadena2){
+                            clienteAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=clienteAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE CLIENTES POR NOMBRE");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(14) << "DNI";
+                    cout << left << setw(30) << "Nombre y Apellido";
+                    cout << left << setw(15) << "Telefono";
+                    cout << left << setw(25) << "e-mail";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        if(vec[i].getEstado()){
+                            cout << left << setw(14) << vec[i].getDni();
+                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
+                            cout << left << setw(30) << n;
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(25) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(14) << vec[i].getDni();
+                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
+                            cout << left << setw(30) << n;
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(25) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
+        }
         void Menu::consultaPorDNI(){
             ClientesArchivo archivo;
             int cantidadRegistros = archivo.getCantidad();
@@ -1634,19 +1826,155 @@ void Menu::consultas(){
         }
     void Menu::nuevaConsVenta(){
         // TODO
+        /*
+        o Ordenadas por fechas
+        o Ordenadas por empleado que lo realizó
+        o Ordenadas por categoría
+        o Por rango de fechas
+        o Por cliente
+        o Por servicio
+        o Por empleado
+        */
     }
+        void Menu::listarVentasXFecha(){
+            VentasArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Venta *vec = new Venta[cantidadRegistros];
+            Venta ventaAux;
+            if(vec==NULL) return;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+            archivo.leerTodos(vec, cantidadRegistros);
+
+            // Ordenamiento con método burbuja
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+                        /*
+
+                        SEGUIR ACÁ ADRI
+
+                        if(vec[j+1].getFecha().getAnio() < vec[j].getFecha().getAnio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio() && vec[j+1].getFecha().getMes() < vec[j].getFecha().getMes() ){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if()
+                        */
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE CLIENTES POR APELLIDO");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(14) << "DNI";
+                    cout << left << setw(30) << "Nombre y Apellido";
+                    cout << left << setw(15) << "Telefono";
+                    cout << left << setw(25) << "e-mail";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        if(vec[i].getEstado()){
+                            /*
+                            cout << left << setw(14) << vec[i].getDni();
+                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
+                            cout << left << setw(30) << n;
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(25) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                            */
+                        }
+                        else{
+                            /*
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(14) << vec[i].getDni();
+                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
+                            cout << left << setw(30) << n;
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(25) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                            */
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
+        }
+        void Menu::listarVentasXEmpleado(){
+
+        }
+        void Menu::listarVentasXCategoria(){
+
+        }
     void Menu::nuevaConsServicio(){
         // TODO
+        /*
+        o Por categoría
+        o Por nombre
+        o Por código
+        */
     }
     void Menu::nuevaConsEmpleado(){
         // TODO
+        /*
+        o Por DNI
+        o Por Apellido
+        */
     }
     void Menu::nuevaConsProveed(){
         // TODO
+        /*
+        o Por razón social
+        o Por CUIT/CUIL
+        */
     }
 
 void Menu::reportes(){
     // TODO
+    /*
+    • Balance diario.
+    • Balance mensual
+    • Balance anual
+    • Recaudación por empleado
+    • Recaudación por categoría
+    • Sueldos a pagar
+    */
 }
 
 void Menu::backupRestauracionDeArchivos(){
