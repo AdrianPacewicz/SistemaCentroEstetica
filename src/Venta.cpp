@@ -49,7 +49,7 @@ bool Venta::cargar(Interfaz &interfaz){
     int indice;
     bool existe = false;
 
-    setFecha(cargarFecha(interfaz));
+    setFecha(cargarFechaHoyOMenor(interfaz));
 
     interfaz.siguienteLinea();
     interfaz.mostrar("Ingrese el DNI del empleado: ",interfaz.AMARILLO);

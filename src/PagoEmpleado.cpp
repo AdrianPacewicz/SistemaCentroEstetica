@@ -61,7 +61,7 @@ bool PagoEmpleado::cargar(Interfaz &interfaz){
     interfaz.siguienteLinea();
     interfaz.mostrar("Fecha del pago (correspondiente al mes trabajado) ",interfaz.AMARILLO);
     // Pedir fecha
-    setFecha(cargarFecha(interfaz));
+    setFecha(cargarFechaHoyOMenor(interfaz));
 
     double saldo = empleado.calcularSueldo(getFecha().getAnio(),getFecha().getMes());
     if (saldo == -1){

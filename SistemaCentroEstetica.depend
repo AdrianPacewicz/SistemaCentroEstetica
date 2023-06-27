@@ -728,7 +728,7 @@
 1676334949 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\interfaz.h
 	<string>
 
-1687647744 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\menu.h
+1687833914 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\menu.h
 	<iostream>
 	<fstream>
 	"Interfaz.h"
@@ -744,7 +744,7 @@
 	"ProveedoresArchivo.h"
 	"ServiciosArchivo.h"
 
-1676343891 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\funciones.h
+1687833914 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\funciones.h
 	"Fecha.h"
 	"Interfaz.h"
 
@@ -765,7 +765,7 @@
 1676343059 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\transaccion.h
 	"Fecha.h"
 
-1674604519 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\fecha.h
+1687833914 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\fecha.h
 	<string>
 
 1674604519 e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\include\gastosgeneralesarchivo.h
@@ -853,7 +853,7 @@
 	<stdio.h>
 	<sys/stat.h>
 
-1676429815 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\comprainsumos.cpp
+1687833914 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\comprainsumos.cpp
 	<iostream>
 	<cstring>
 	"CompraInsumos.h"
@@ -887,11 +887,11 @@
 	<sys/stat.h>
 	<iomanip>
 
-1674604519 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\fecha.cpp
+1687833914 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\fecha.cpp
 	"Fecha.h"
 	<ctime>
 
-1676343783 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\funciones.cpp
+1687833915 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\funciones.cpp
 	"Funciones.h"
 	"rlutil.h"
 	"CategoriasArchivo.h"
@@ -906,7 +906,7 @@
 	<ctime>
 	<sstream>
 
-1676344917 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\gastogeneral.cpp
+1687833914 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\gastogeneral.cpp
 	<iostream>
 	<cstring>
 	"GastoGeneral.h"
@@ -929,7 +929,7 @@
 	"rlutil.h"
 	"Windows.h"
 
-1687635836 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\menu.cpp
+1687834894 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\menu.cpp
 	"Menu.h"
 	"rlutil.h"
 	"Funciones.h"
@@ -948,7 +948,7 @@
 	"PagosEmpleadosArchivo.h"
 	"ClientesArchivo.h"
 
-1676430961 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\pagoempleado.cpp
+1687833914 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\pagoempleado.cpp
 	<iostream>
 	<cstring>
 	"PagoEmpleado.h"
@@ -1007,7 +1007,7 @@
 	<iostream>
 	"Transaccion.h"
 
-1676344762 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\venta.cpp
+1687833914 source:e:\my drive\personal\facultad\utn\utn - 2do cuatri\laboratorio ii\proyectolabo2\sistemacentroestetica\src\venta.cpp
 	<iostream>
 	<cstring>
 	"Venta.h"

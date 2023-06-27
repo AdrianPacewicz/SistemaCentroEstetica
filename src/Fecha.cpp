@@ -44,6 +44,36 @@ Fecha::Fecha(){
     _anio = timeinfo.tm_year + 1900;
 }
 
+bool Fecha::esMayorOIgual(Fecha f){
+    bool mayorOIgual = false;
+    if(getAnio() > f.getAnio())
+        mayorOIgual = true;
+    else if (getAnio() == f.getAnio()){
+        if(getMes() > f.getMes())
+            mayorOIgual = true;
+        else if (getMes() == f.getMes()){
+            if(getDia() >= f.getDia())
+                mayorOIgual = true;
+        }
+    }
+    return mayorOIgual;
+}
+
+bool Fecha::esMenorOIgual(Fecha f){
+    bool menorOIgual = false;
+    if(getAnio() < f.getAnio())
+        menorOIgual = true;
+    else if (getAnio() == f.getAnio()){
+        if(getMes() < f.getMes())
+            menorOIgual = true;
+        else if (getMes() == f.getMes()){
+            if(getDia() <= f.getDia())
+                menorOIgual = true;
+        }
+    }
+    return menorOIgual;
+}
+
 string Fecha::toString(){
     string fecha;
     fecha = to_string(_dia) + "/" + to_string(_mes) + "/" + to_string(_anio);

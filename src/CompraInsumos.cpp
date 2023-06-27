@@ -55,7 +55,7 @@ bool CompraInsumos::cargar(Interfaz &interfaz){
     bool existe = false;
 
     // Pedir fecha
-    setFecha(cargarFecha(interfaz));
+    setFecha(cargarFechaHoyOMenor(interfaz));
 
     // Pedir cuil del proveedor
     interfaz.siguienteLinea();

@@ -23,7 +23,7 @@ bool GastoGeneral::cargar(Interfaz &interfaz){
     */
     string valor;
 
-    setFecha(cargarFecha(interfaz));
+    setFecha(cargarFechaHoyOMenor(interfaz));
 
     // Pedir el importe del gasto
     interfaz.siguienteLinea();

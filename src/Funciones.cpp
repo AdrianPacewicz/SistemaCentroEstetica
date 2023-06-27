@@ -72,8 +72,7 @@ string to_string_decimales(double d)
     return ss.str();
 }
 
-
-Fecha cargarFecha(Interfaz &interfaz){
+Fecha cargarFechaHoyOMenor(Interfaz &interfaz){
     Fecha fecha;
     time_t rawtime;
     struct tm timeinfo;
@@ -202,6 +201,119 @@ Fecha cargarFecha(Interfaz &interfaz){
                     }
                     break;
             }
+        }
+    }while(!fechaValida);
+    fecha.setDia(stoi(valor));
+    return fecha;
+}
+
+Fecha cargarFecha(Interfaz &interfaz){
+    Fecha fecha;
+    string valor;
+    bool fechaValida;
+    // ANIO
+    interfaz.siguienteLinea();
+    do{
+        fechaValida = false;
+        interfaz.borrarLineaActual(false);
+        interfaz.mostrar("Anio: ",interfaz.AMARILLO);
+        getline(cin, valor);
+        if (stoi(valor)>=1900&&stoi(valor)<=3000){
+            fechaValida = true;
+        }
+    }while(!fechaValida);
+    fecha.setAnio(stoi(valor));
+    // MES
+    interfaz.siguienteLinea();
+    do{
+        fechaValida = false;
+        interfaz.borrarLineaActual(false);
+        interfaz.mostrar("Mes: ",interfaz.AMARILLO);
+        getline(cin, valor);
+        if(stoi(valor)>=1&&stoi(valor)<=12){
+                fechaValida=true;
+        }
+    }while(!fechaValida);
+    fecha.setMes(stoi(valor));
+    // DIA
+    interfaz.siguienteLinea();
+    do{
+        fechaValida = false;
+        interfaz.borrarLineaActual(false);
+        interfaz.mostrar("Dia: ",interfaz.AMARILLO);
+        getline(cin, valor);
+        // Si el año y el mes son los actuales valida contra la fecha de hoy
+        switch(fecha.getMes()){
+            // Meses de 31 dias
+            case 1:
+                if(stoi(valor)>=1&&stoi(valor)<=31){
+                    fechaValida=true;
+                }
+                break;
+            case 3:
+                if(stoi(valor)>=1&&stoi(valor)<=31){
+                    fechaValida=true;
+                }
+                break;
+            case 5:
+                if(stoi(valor)>=1&&stoi(valor)<=31){
+                    fechaValida=true;
+                }
+                break;
+            case 7:
+                if(stoi(valor)>=1&&stoi(valor)<=31){
+                    fechaValida=true;
+                }
+                break;
+            case 8:
+                if(stoi(valor)>=1&&stoi(valor)<=31){
+                    fechaValida=true;
+                }
+                break;
+            case 10:
+                if(stoi(valor)>=1&&stoi(valor)<=31){
+                    fechaValida=true;
+                }
+                break;
+            case 12:
+                if(stoi(valor)>=1&&stoi(valor)<=31){
+                    fechaValida=true;
+                }
+                break;
+            // Meses de 30 dias
+            case 4:
+                if(stoi(valor)>=1&&stoi(valor)<=30){
+                    fechaValida=true;
+                }
+                break;
+            case 6:
+                if(stoi(valor)>=1&&stoi(valor)<=30){
+                    fechaValida=true;
+                }
+                break;
+            case 9:
+                if(stoi(valor)>=1&&stoi(valor)<=30){
+                    fechaValida=true;
+                }
+                break;
+            case 11:
+                if(stoi(valor)>=1&&stoi(valor)<=30){
+                    fechaValida=true;
+                }
+                break;
+            // Febrero
+            case 2:
+                if((fecha.getAnio()%4==0&&fecha.getAnio()%100!=0)||fecha.getAnio()%400==0){ // es bisiesto
+                    if(stoi(valor)>=1&&stoi(valor)<=29){
+                        fechaValida=true;
+                    }
+                }
+                else{
+                    if(stoi(valor)>=1&&stoi(valor)<=28){ // NO es bisiesto
+                        fechaValida=true;
+                    }
+                }
+                break;
         }
     }while(!fechaValida);
     fecha.setDia(stoi(valor));

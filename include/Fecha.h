@@ -16,6 +16,8 @@ class Fecha{
         void setAnio(int anio);
              Fecha(int dia, int mes, int anio);
              Fecha();
+        bool esMayorOIgual(Fecha f);
+        bool esMenorOIgual(Fecha f);
         string toString();
 };
 #endif // FECHA_H

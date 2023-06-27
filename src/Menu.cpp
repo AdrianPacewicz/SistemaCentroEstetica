@@ -1426,13 +1426,13 @@ void Menu::consultas(){
                     listarClientesXNombre();
                     break;
                 case '3':
-                    consultaPorDNI();
+                    consultaClientePorDNI();
                     break;
                 case '4':
-                    consultaPorTEL();
+                    consultaClientePorTEL();
                     break;
                 case '5':
-                    consultaPorApellido();
+                    consultaClientePorApellido();
                     break;
             }
         }
@@ -1619,7 +1619,7 @@ void Menu::consultas(){
             } while (opc != '0');
             delete []vec;
         }
-        void Menu::consultaPorDNI(){
+        void Menu::consultaClientePorDNI(){
             ClientesArchivo archivo;
             int cantidadRegistros = archivo.getCantidad();
             Cliente *vec = new Cliente[cantidadRegistros];
@@ -1631,7 +1631,7 @@ void Menu::consultas(){
                 system("cls");
                 interfaz.dibujarMarco(CIAN);
                 interfaz.setFilaActual(7);
-                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR POR DNI");
+                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR CLIENTE POR DNI");
                 interfaz.siguienteLinea();
                 if (cantidadRegistros==0){
                     rlutil::setColor(ROJO);
@@ -1677,7 +1677,7 @@ void Menu::consultas(){
             } while (opc != '0');
             delete []vec;
         }
-        void Menu::consultaPorTEL(){
+        void Menu::consultaClientePorTEL(){
         // TODO: Mejora: comparar pasando todo a mayus para que encuentre incluso si se escribe en mayus/minus
             ClientesArchivo archivo;
             int cantidadRegistros = archivo.getCantidad();
@@ -1692,7 +1692,7 @@ void Menu::consultas(){
                 system("cls");
                 interfaz.dibujarMarco(CIAN);
                 interfaz.setFilaActual(7);
-                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR POR TELEFONO");
+                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR CLIENTE POR TELEFONO");
                 interfaz.siguienteLinea();
                 if (cantidadRegistros==0){
                     rlutil::setColor(ROJO);
@@ -1751,7 +1751,7 @@ void Menu::consultas(){
             } while (opc != '0');
             delete []vec;
         }
-        void Menu::consultaPorApellido(){
+        void Menu::consultaClientePorApellido(){
             ClientesArchivo archivo;
             int cantidadRegistros = archivo.getCantidad();
             Cliente *vec = new Cliente[cantidadRegistros];
@@ -1765,7 +1765,7 @@ void Menu::consultas(){
                 system("cls");
                 interfaz.dibujarMarco(CIAN);
                 interfaz.setFilaActual(7);
-                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR POR APELLIDO");
+                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR CLIENTE POR APELLIDO");
                 interfaz.siguienteLinea();
                 if (cantidadRegistros==0){
                     rlutil::setColor(ROJO);
@@ -1835,6 +1835,57 @@ void Menu::consultas(){
         o Por servicio
         o Por empleado
         */
+        char opc;
+        do{
+            system("cls");
+            interfaz.setFilaActual(7);
+            interfaz.dibujarMarco(CIAN);
+            interfaz.cambiarTitulo("FIRULI 3000 - CONSULTAS VENTAS");
+            interfaz.siguienteLinea();
+            cout<<"[1] - Listado por fecha";
+            interfaz.siguienteLinea();
+            cout<<"[2] - Listado por empleado";
+            interfaz.siguienteLinea();
+            cout<<"[3] - Listado por categoria";
+            interfaz.siguienteLinea();
+            cout<<"[4] - Consultar por rango de fechas";
+            interfaz.siguienteLinea();
+            cout<<"[5] - Consultar por Cliente";
+            interfaz.siguienteLinea();
+            cout<<"[6] - Consultar por Servicio";
+            interfaz.siguienteLinea();
+            cout<<"[7] - Consultar por Empleado";
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+            cout<<"[0] - Volver";
+            opc = interfaz.pedirOpcion();
+            // Pregunta por la opcion elegida y se dirige a la funcion correspondiente
+            switch(opc)
+            {
+                case '1':
+                    listarVentasXFecha();
+                    break;
+                case '2':
+                    listarVentasXEmpleado();
+                    break;
+                case '3':
+                    listarVentasXCategoria();
+                    break;
+                case '4':
+                    consultaVentasPorRangoF();
+                    break;
+                case '5':
+                    consultaVentasPorCliente();
+                    break;
+                case '6':
+                    consultaVentasPorServicio();
+                    break;
+                case '7':
+                    consultaVentasPorEmpleado();
+                    break;
+            }
+        }
+        while(opc != '0');
     }
         void Menu::listarVentasXFecha(){
             VentasArchivo archivo;
@@ -1848,26 +1899,45 @@ void Menu::consultas(){
             char opc;
             archivo.leerTodos(vec, cantidadRegistros);
 
-            // Ordenamiento con método burbuja
+            // Ordenamiento con método burbuja (por año/mes/dia/empleado/servicio)
             if (cantidadRegistros>1){
                 for (int i=0; i<cantidadRegistros; i++){
                     for (int j=0; j<cantidadRegistros - 1; j++){
-                        /*
-
-                        SEGUIR ACÁ ADRI
-
                         if(vec[j+1].getFecha().getAnio() < vec[j].getFecha().getAnio()){
                             ventaAux = vec[j];
                             vec[j]=vec[j+1];
                             vec[j+1]=ventaAux;
                         }
-                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio() && vec[j+1].getFecha().getMes() < vec[j].getFecha().getMes() ){
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() < vec[j].getFecha().getMes()){
                             ventaAux = vec[j];
                             vec[j]=vec[j+1];
                             vec[j+1]=ventaAux;
                         }
-                        else if()
-                        */
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() < vec[j].getFecha().getDia()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() == vec[j].getFecha().getDia()
+                                && vec[j+1].getEmpleado() < vec[j].getEmpleado()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() == vec[j].getFecha().getDia()
+                                && vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getServicio() < vec[j].getServicio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
                     }
                 }
             }
@@ -1876,7 +1946,7 @@ void Menu::consultas(){
                 system("cls");
                 interfaz.dibujarMarco(CIAN);
                 interfaz.setFilaActual(7);
-                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE CLIENTES POR APELLIDO");
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE VENTAS POR FECHA");
                 interfaz.siguienteLinea();
                 if (cantidadRegistros==0){
                     rlutil::setColor(ROJO);
@@ -1892,33 +1962,30 @@ void Menu::consultas(){
                     cout<<"Pagina " << paginaActual << " de " << totalPaginas;
                     interfaz.siguienteLinea();
                     interfaz.siguienteLinea();
-                    cout << left << setw(14) << "DNI";
-                    cout << left << setw(30) << "Nombre y Apellido";
-                    cout << left << setw(15) << "Telefono";
-                    cout << left << setw(25) << "e-mail";
+                    cout << left << setw(14) << "Fecha";
+                    cout << left << setw(15) << "Id Empleado";
+                    cout << left << setw(15) << "Id Servicio";
+                    cout << left << setw(15) << "Cliente";
+                    cout << right << setw(15) << "Importe";
                     interfaz.siguienteLinea();
                     for (int i = indiceInicial; i < indiceFinal; i++) {
                         if(vec[i].getEstado()){
-                            /*
-                            cout << left << setw(14) << vec[i].getDni();
-                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
-                            cout << left << setw(30) << n;
-                            cout << left << setw(15) << vec[i].getTelefono();
-                            cout << left << setw(25) << vec[i].getEmail();
+                            cout << left << setw(14) << vec[i].getFecha().toString();
+                            cout << left << setw(15) << vec[i].getEmpleado();
+                            cout << left << setw(15) << vec[i].getServicio();
+                            cout << left << setw(15) << vec[i].getCliente();
+                            cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
                             interfaz.siguienteLinea();
-                            */
                         }
                         else{
-                            /*
                             rlutil::setColor(ROJO);
-                            cout << left << setw(14) << vec[i].getDni();
-                            string n = vec[i].getNombre() + " " + vec[i].getApellido();
-                            cout << left << setw(30) << n;
-                            cout << left << setw(15) << vec[i].getTelefono();
-                            cout << left << setw(25) << vec[i].getEmail();
+                            cout << left << setw(14) << vec[i].getFecha().toString();
+                            cout << left << setw(15) << vec[i].getEmpleado();
+                            cout << left << setw(15) << vec[i].getServicio();
+                            cout << left << setw(15) << vec[i].getCliente();
+                            cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
                             interfaz.siguienteLinea();
                             rlutil::setColor(BLANCO);
-                            */
                         }
                     }
                     interfaz.siguienteLinea();
@@ -1937,11 +2004,500 @@ void Menu::consultas(){
             delete []vec;
         }
         void Menu::listarVentasXEmpleado(){
+            VentasArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Venta *vec = new Venta[cantidadRegistros];
+            Venta ventaAux;
+            if(vec==NULL) return;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+            archivo.leerTodos(vec, cantidadRegistros);
 
+            // Ordenamiento con método burbuja (por empleado/año/mes/dia)
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+                        if(vec[j+1].getEmpleado() < vec[j].getEmpleado()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getFecha().getAnio() < vec[j].getFecha().getAnio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() < vec[j].getFecha().getMes()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() < vec[j].getFecha().getDia()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE VENTAS POR EMPLEADO");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(14) << "Fecha";
+                    cout << left << setw(15) << "Id Empleado";
+                    cout << left << setw(15) << "Id Servicio";
+                    cout << right << setw(15) << "Importe";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        if(vec[i].getEstado()){
+                            cout << left << setw(14) << vec[i].getFecha().toString();
+                            cout << left << setw(15) << vec[i].getEmpleado();
+                            cout << left << setw(15) << vec[i].getServicio();
+                            cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(14) << vec[i].getFecha().toString();
+                            cout << left << setw(15) << vec[i].getEmpleado();
+                            cout << left << setw(15) << vec[i].getServicio();
+                            cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
         }
         void Menu::listarVentasXCategoria(){
+            ServiciosArchivo serviciosArchivo;
+            Servicio servicioSiguiente, servicioActual;
+            CategoriasArchivo categoriasArchivo;
+            Categoria categoria;
+            int idCategoriaAnterior=-1;
 
+            VentasArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Venta *vec = new Venta[cantidadRegistros];
+            Venta ventaAux;
+            if(vec==NULL) return;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+            archivo.leerTodos(vec, cantidadRegistros);
+
+            // Ordenamiento con método burbuja (por categoria/empleado/año/mes/dia)
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+
+                        // con el id_servicio busco el indice y con el indice traigo el servicio
+                        servicioActual = serviciosArchivo.leer(serviciosArchivo.buscar(vec[j].getServicio()));
+                        servicioSiguiente = serviciosArchivo.leer(serviciosArchivo.buscar(vec[j+1].getServicio()));
+
+                        if(servicioSiguiente.getCodCategoria() < servicioActual.getCodCategoria()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(servicioSiguiente.getCodCategoria() == servicioActual.getCodCategoria()
+                                && vec[j+1].getEmpleado() < vec[j].getEmpleado()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(servicioSiguiente.getCodCategoria() == servicioActual.getCodCategoria()
+                                && vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getFecha().getAnio() < vec[j].getFecha().getAnio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(servicioSiguiente.getCodCategoria() == servicioActual.getCodCategoria()
+                                && vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() < vec[j].getFecha().getMes()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(servicioSiguiente.getCodCategoria() == servicioActual.getCodCategoria()
+                                && vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() < vec[j].getFecha().getDia()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE VENTAS POR CATEGORIA");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(14) << "Fecha";
+                    cout << left << setw(20) << "Categoria";
+                    cout << left << setw(15) << "Id Empleado";
+                    cout << left << setw(15) << "Id Servicio";
+                    cout << right << setw(15) << "Importe";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        // Leo el servicio para buscar su categoria
+                        servicioActual = serviciosArchivo.leer(serviciosArchivo.buscar(vec[i].getServicio()));
+                        // Si la categoria es diferente a la que tenía de antes leo la categoria nueva
+                        if(idCategoriaAnterior!=servicioActual.getCodCategoria()){
+                            categoria = categoriasArchivo.leer(categoriasArchivo.buscar(servicioActual.getCodCategoria()));
+                            idCategoriaAnterior = categoria.getCodigo();
+                        }
+
+                        if(vec[i].getEstado()){
+                            cout << left << setw(14) << vec[i].getFecha().toString();
+                            cout << left << setw(20) << categoria.getNombre();
+                            cout << left << setw(15) << vec[i].getEmpleado();
+                            cout << left << setw(15) << vec[i].getServicio();
+                            cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(14) << vec[i].getFecha().toString();
+                            cout << left << setw(20) << categoria.getNombre();
+                            cout << left << setw(15) << vec[i].getEmpleado();
+                            cout << left << setw(15) << vec[i].getServicio();
+                            cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
         }
+        void Menu::consultaVentasPorRangoF(){
+            VentasArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Venta *vec = new Venta[cantidadRegistros];
+            if(vec==NULL) return;
+            archivo.leerTodos(vec, cantidadRegistros);
+            Venta ventaAux;
+            Fecha fechaDesde, fechaHasta;
+            int _cantCoincidencias = 0;
+            char opc;
+
+            // Ordenamiento con método burbuja (por año/mes/dia/empleado/servicio)
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+                        if(vec[j+1].getFecha().getAnio() < vec[j].getFecha().getAnio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() < vec[j].getFecha().getMes()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() < vec[j].getFecha().getDia()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() == vec[j].getFecha().getDia()
+                                && vec[j+1].getEmpleado() < vec[j].getEmpleado()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() == vec[j].getFecha().getDia()
+                                && vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getServicio() < vec[j].getServicio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - CONSULTA DE VENTAS POR RANGO DE FECHAS");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"Aun no se registraron ventas para consultar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else
+                {
+                    cout << "Ingrese la fecha DESDE a consultar: ";
+                    fechaDesde = cargarFecha(interfaz);
+                    interfaz.siguienteLinea();
+                    cout << "Ingrese la fecha HASTA a consultar: ";
+                    fechaHasta = cargarFecha(interfaz);
+                    interfaz.siguienteLinea();
+                    _cantCoincidencias = 0;
+                    for(int i=0; i<cantidadRegistros; i++){
+                        if(vec[i].getEstado()
+                        && vec[i].getFecha().esMayorOIgual(fechaDesde)
+                        && vec[i].getFecha().esMenorOIgual(fechaHasta)){
+                            _cantCoincidencias++;
+                        }
+                    }
+                    if(_cantCoincidencias == 0){
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "No existen ventas en el rango de fechas ingresado";
+                        interfaz.siguienteLinea();
+                    }
+                    else{
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "Cantidad de coincidencias: " << _cantCoincidencias;
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << left << setw(14) << "Fecha";
+                        cout << left << setw(15) << "Id Empleado";
+                        cout << left << setw(15) << "Id Servicio";
+                        cout << right << setw(15) << "Importe";
+                        interfaz.siguienteLinea();
+                        for(int i=0; i<cantidadRegistros; i++){
+                            if(vec[i].getEstado()
+                            && vec[i].getFecha().esMayorOIgual(fechaDesde)
+                            && vec[i].getFecha().esMenorOIgual(fechaHasta)){
+                                cout << left << setw(14) << vec[i].getFecha().toString();
+                                cout << left << setw(15) << vec[i].getEmpleado();
+                                cout << left << setw(15) << vec[i].getServicio();
+                                cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
+                                interfaz.siguienteLinea();
+                            }
+                        }
+                        interfaz.siguienteLinea();
+                    }
+                }
+
+                interfaz.siguienteLinea();
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+            } while (opc != '0');
+            delete []vec;
+        }
+        void Menu::consultaVentasPorCliente(){
+            VentasArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            ClientesArchivo clientesArchivo;
+            Venta *vec = new Venta[cantidadRegistros];
+            if(vec==NULL) return;
+            archivo.leerTodos(vec, cantidadRegistros);
+            Venta ventaAux;
+            int _dni, pos_dni;
+            int _cantCoincidencias = 0;
+            char opc;
+
+            // Ordenamiento con método burbuja (por año/mes/dia/empleado/servicio)
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+                        if(vec[j+1].getFecha().getAnio() < vec[j].getFecha().getAnio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() < vec[j].getFecha().getMes()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() < vec[j].getFecha().getDia()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() == vec[j].getFecha().getDia()
+                                && vec[j+1].getEmpleado() < vec[j].getEmpleado()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                        else if(vec[j+1].getFecha().getAnio() == vec[j].getFecha().getAnio()
+                                && vec[j+1].getFecha().getMes() == vec[j].getFecha().getMes()
+                                && vec[j+1].getFecha().getDia() == vec[j].getFecha().getDia()
+                                && vec[j+1].getEmpleado() == vec[j].getEmpleado()
+                                && vec[j+1].getServicio() < vec[j].getServicio()){
+                            ventaAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=ventaAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - CONSULTA DE VENTAS POR CLIENTE");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"Aun no se registraron ventas para consultar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else
+                {
+                    cout << "Ingrese el DNI a consultar: ";
+                    cin >> _dni;
+                    pos_dni = clientesArchivo.buscar(_dni);
+                    interfaz.siguienteLinea();
+
+                    if(pos_dni == -1){
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout<<"El DNI ingresado no se encuentra registrado";
+                        interfaz.siguienteLinea();
+                    }
+                    else{
+
+                        _cantCoincidencias = 0;
+                        for(int i=0; i<cantidadRegistros; i++){
+                            if(vec[i].getEstado()
+                            && vec[i].getCliente() == _dni)
+                                _cantCoincidencias++;
+                        }
+                        if(_cantCoincidencias == 0){
+                            interfaz.siguienteLinea();
+                            interfaz.siguienteLinea();
+                            cout << "No existen ventas para el cliente ingresado.";
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            interfaz.siguienteLinea();
+                            interfaz.siguienteLinea();
+                            cout << "Cantidad de coincidencias: " << _cantCoincidencias;
+                            interfaz.siguienteLinea();
+                            interfaz.siguienteLinea();
+                            cout << left << setw(14) << "Fecha";
+                            cout << left << setw(15) << "Id Empleado";
+                            cout << left << setw(15) << "Id Servicio";
+                            cout << left << setw(15) << "Cliente";
+                            cout << right << setw(15) << "Importe";
+                            interfaz.siguienteLinea();
+                            for(int i=0; i<cantidadRegistros; i++){
+                                if(vec[i].getEstado()
+                                && vec[i].getCliente() == _dni){
+                                    cout << left << setw(14) << vec[i].getFecha().toString();
+                                    cout << left << setw(15) << vec[i].getEmpleado();
+                                    cout << left << setw(15) << vec[i].getServicio();
+                                    cout << left << setw(15) << vec[i].getCliente();
+                                    cout << right << setw(15) << to_string_decimales(vec[i].getImporte());
+                                    interfaz.siguienteLinea();
+                                }
+                            }
+                            interfaz.siguienteLinea();
+                        }
+                    }
+                }
+
+                interfaz.siguienteLinea();
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+            } while (opc != '0');
+            delete []vec;
+        }
+        void Menu::consultaVentasPorServicio(){}
+        void Menu::consultaVentasPorEmpleado(){}
     void Menu::nuevaConsServicio(){
         // TODO
         /*
