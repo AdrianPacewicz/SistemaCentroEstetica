@@ -217,6 +217,7 @@ Fecha cargarFecha(Interfaz &interfaz){
         fechaValida = false;
         interfaz.borrarLineaActual(false);
         interfaz.mostrar("Anio: ",interfaz.AMARILLO);
+
         getline(cin, valor);
         if (stoi(valor)>=1900&&stoi(valor)<=3000){
             fechaValida = true;

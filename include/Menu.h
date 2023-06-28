@@ -79,6 +79,7 @@ public:
             void nuevoServicio();
             void cambiarEstadoServicio();
             void modificarServicio();
+
     void consultas();
         void nuevaConsCliente();
             void listarClientesXApellido();
@@ -95,14 +96,25 @@ public:
             void consultaVentasPorServicio();
             void consultaVentasPorEmpleado();
         void nuevaConsServicio();
+            void listarServiciosXCategoria();
+            void consultaServiciosPorCategoria();
+            void consultaServiciosPorNombre();
+            void consultaServiciosPorCodigo();
         void nuevaConsEmpleado();
+            void listarEmpleadosXDNI();
+            void consultarEmpleadosXDNI();
+            void consultarEmpleadosXApellido();
         void nuevaConsProveed();
+            void listarProveedoresXRazSoc();
+            void listarProveedoresXCUIL();
+            void consultarProveedoresXRazSoc();
+            void consultarProveedoresXCUIL();
 
     void reportes();
+
     void backupRestauracionDeArchivos();
         void menuImportarExportar(int opcion);
-            //void ExportarCategorias();
-            //void ImportarCategorias();
+
     bool salirDelSistema();
 
 };
