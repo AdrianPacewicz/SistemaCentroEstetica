@@ -55,16 +55,18 @@ bool Venta::cargar(Interfaz &interfaz){
     interfaz.mostrar("Ingrese el DNI del empleado: ",interfaz.AMARILLO);
     getline(cin, valor);
 
-    // Validación para verificar si el empleado existe
+    // Validación para verificar si el empleado existe y esta activo
     indice = empleados.buscar(stoi(valor));
     if (indice >= 0){
-        existe = true;
+        if(empleados.leer(indice).getEstado()){
+            existe = true;
+        }
     }
 
     if(!existe){
         interfaz.siguienteLinea();
         interfaz.siguienteLinea();
-        interfaz.mostrar("El empleado ingresado no existe.",interfaz.ROJO);
+        interfaz.mostrar("El empleado ingresado no existe o esta inactivo.",interfaz.ROJO);
         return false;
     }
     nEmpleado = stoi(valor);
@@ -74,17 +76,19 @@ bool Venta::cargar(Interfaz &interfaz){
     interfaz.mostrar("Ingrese el DNI del cliente (opcional): ",interfaz.AMARILLO);
     getline(cin, valor);
 
-    // Validación para verificar si el cliente existe
+    // Validación para verificar si el cliente existe o esta activo
     if (valor != ""){
         indice = clientes.buscar(stoi(valor));
         if (indice >= 0){
-            existe = true;
+            if(clientes.leer(indice).getEstado()){
+                    existe = true;
+                }
         }
 
         if(!existe){
             interfaz.siguienteLinea();
             interfaz.siguienteLinea();
-            interfaz.mostrar("El cliente ingresado no existe.",interfaz.ROJO);
+            interfaz.mostrar("El cliente ingresado no existe o esta inactivo.",interfaz.ROJO);
             return false;
         }
         nCliente = stoi(valor);
@@ -98,16 +102,18 @@ bool Venta::cargar(Interfaz &interfaz){
     interfaz.mostrar("Ingrese el ID del servicio: ",interfaz.AMARILLO);
     getline(cin, valor);
 
-    // Validación para verificar si el servicio existe
+    // Validación para verificar si el servicio existe o esta activo
     indice = servicios.buscar(stoi(valor));
     if (indice >= 0){
-        existe = true;
+        if(servicios.leer(indice).getEstado()){
+            existe = true;
+        }
     }
 
     if(!existe){
         interfaz.siguienteLinea();
         interfaz.siguienteLinea();
-        interfaz.mostrar("El servicio ingresado no existe.",interfaz.ROJO);
+        interfaz.mostrar("El servicio ingresado no existe o esta inactivo.",interfaz.ROJO);
         return false;
     }
     nServicio = stoi(valor);

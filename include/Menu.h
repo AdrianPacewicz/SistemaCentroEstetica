@@ -109,6 +109,17 @@ public:
             void listarProveedoresXCUIL();
             void consultarProveedoresXRazSoc();
             void consultarProveedoresXCUIL();
+        void nuevaConsCategorias();
+            void listarCategoriasXNombre();
+        void nuevaConsInsumos();
+            void listarInsumoXFecha();
+            void listarInsumoXProveedor();
+        void nuevaConsPagoEmpleados();
+            void listarPagoEmpleadoXFecha();
+            void listarPagoEmpleadoXEmpl();
+        void nuevaConsGastosGrales();
+            void listarGastoXFecha();
+            void listarGastoXID();
 
     void reportes();
         void balanceDiario();
