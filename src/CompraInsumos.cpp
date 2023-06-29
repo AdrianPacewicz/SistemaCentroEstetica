@@ -64,9 +64,12 @@ bool CompraInsumos::cargar(Interfaz &interfaz){
 
     // Validación para verificar si el proveedor existeo esta activo
     indice = proveedores.buscar(valor);
-    if(proveedores.leer(indice).getEstado()){
+     if (indice >= 0){
+       if(proveedores.leer(indice).getEstado()){
             existe = true;
         }
+    }
+
 
     if(!existe){
         interfaz.siguienteLinea();
