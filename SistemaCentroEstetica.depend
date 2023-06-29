@@ -1028,3 +1028,306 @@
 	<sys/stat.h>
 	<iomanip>
 
+1687649087 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\main.cpp
+	"rlutil.h"
+	"Interfaz.h"
+	"Menu.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1687649312 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\interfaz.h
+	<string>
+
+1688051985 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\menu.h
+	<iostream>
+	<fstream>
+	"Interfaz.h"
+	"rlutil.h"
+	"Funciones.h"
+	"CategoriasArchivo.h"
+	"VentasArchivo.h"
+	"GastosGeneralesArchivo.h"
+	"ComprasInsumosArchivo.h"
+	"PagosEmpleadosArchivo.h"
+	"ClientesArchivo.h"
+	"EmpleadosArchivo.h"
+	"ProveedoresArchivo.h"
+	"ServiciosArchivo.h"
+
+1687904843 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\funciones.h
+	"Fecha.h"
+	"Interfaz.h"
+
+1687904843 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\fecha.h
+	<string>
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\categoriasarchivo.h
+	"Categoria.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\categoria.h
+	<string>
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\ventasarchivo.h
+	"Venta.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\venta.h
+	"Transaccion.h"
+	<string>
+	"Interfaz.h"
+
+1687649312 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\transaccion.h
+	"Fecha.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\gastosgeneralesarchivo.h
+	"GastoGeneral.h"
+
+1687649312 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\gastogeneral.h
+	<string>
+	"Transaccion.h"
+	"Interfaz.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\comprasinsumosarchivo.h
+	"CompraInsumos.h"
+
+1687649312 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\comprainsumos.h
+	<string>
+	"Transaccion.h"
+	"Interfaz.h"
+	"Funciones.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\pagosempleadosarchivo.h
+	"PagoEmpleado.h"
+	<string>
+
+1687649312 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\pagoempleado.h
+	<string>
+	"Transaccion.h"
+	"Interfaz.h"
+	"Funciones.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\clientesarchivo.h
+	"Cliente.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\cliente.h
+	"Persona.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\persona.h
+	<string>
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\empleadosarchivo.h
+	"Empleado.h"
+
+1687649312 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\empleado.h
+	"Persona.h"
+	"Funciones.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\proveedoresarchivo.h
+	"Proveedor.h"
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\proveedor.h
+	<string>
+
+1687649087 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\serviciosarchivo.h
+	"Servicio.h"
+
+1687649312 c:\users\joha\desktop\proyecto - final\sistemacentroestetica\include\servicio.h
+	<string>
+	"Funciones.h"
+
+1687649087 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\categoria.cpp
+	<iostream>
+	<cstring>
+	"Categoria.h"
+	"rlutil.h"
+
+1687649087 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\categoriasarchivo.cpp
+	"CategoriasArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\cliente.cpp
+	<iostream>
+	"Cliente.h"
+	"rlutil.h"
+
+1687649087 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\clientesarchivo.cpp
+	"ClientesArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+
+1687904843 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\comprainsumos.cpp
+	<iostream>
+	<cstring>
+	"CompraInsumos.h"
+	"rlutil.h"
+	"ProveedoresArchivo.h"
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\comprasinsumosarchivo.cpp
+	"ComprasInsumosArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+	<iomanip>
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\empleado.cpp
+	<iostream>
+	"Empleado.h"
+	"rlutil.h"
+	"VentasArchivo.h"
+	"PagosEmpleadosArchivo.h"
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\empleadosarchivo.cpp
+	"EmpleadosArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+	<iomanip>
+
+1687904843 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\fecha.cpp
+	"Fecha.h"
+	<ctime>
+
+1687994493 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\funciones.cpp
+	"Funciones.h"
+	"rlutil.h"
+	"CategoriasArchivo.h"
+	"ClientesArchivo.h"
+	"ComprasInsumosArchivo.h"
+	"EmpleadosArchivo.h"
+	"GastosGeneralesArchivo.h"
+	"PagosEmpleadosArchivo.h"
+	"ProveedoresArchivo.h"
+	"ServiciosArchivo.h"
+	"VentasArchivo.h"
+	<ctime>
+	<sstream>
+
+1687904843 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\gastogeneral.cpp
+	<iostream>
+	<cstring>
+	"GastoGeneral.h"
+	"rlutil.h"
+	"Funciones.h"
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\gastosgeneralesarchivo.cpp
+	"GastosGeneralesArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+	<iomanip>
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\interfaz.cpp
+	"Interfaz.h"
+	<iostream>
+	"rlutil.h"
+	"Windows.h"
+
+1687904843 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\pagoempleado.cpp
+	<iostream>
+	<cstring>
+	"PagoEmpleado.h"
+	"rlutil.h"
+	"EmpleadosArchivo.h"
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\pagosempleadosarchivo.cpp
+	"PagosEmpleadosArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+	<iomanip>
+
+1687649087 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\persona.cpp
+	<iostream>
+	<cstring>
+	"Persona.h"
+
+1687649087 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\proveedor.cpp
+	<iostream>
+	<cstring>
+	"Proveedor.h"
+	"CategoriasArchivo.h"
+	"rlutil.h"
+
+1687649087 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\proveedoresarchivo.cpp
+	"ProveedoresArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\servicio.cpp
+	<iostream>
+	<cstring>
+	"Servicio.h"
+	"CategoriasArchivo.h"
+	"rlutil.h"
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\serviciosarchivo.cpp
+	"ServiciosArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+	<iomanip>
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\transaccion.cpp
+	<iostream>
+	"Transaccion.h"
+
+1687649312 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\ventasarchivo.cpp
+	"VentasArchivo.h"
+	<iostream>
+	<fstream>
+	<vector>
+	<sstream>
+	<stdio.h>
+	<sys/stat.h>
+	<iomanip>
+
+1688052114 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\venta.cpp
+	<iostream>
+	<cstring>
+	"Venta.h"
+	"rlutil.h"
+	"Funciones.h"
+	"EmpleadosArchivo.h"
+	"ClientesArchivo.h"
+	"ServiciosArchivo.h"
+	<iomanip>
+

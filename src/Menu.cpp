@@ -1330,7 +1330,15 @@ void Menu::consultas(){
         cout<<"[4] - Consultar empleados";
         rlutil::locate(5,12);
         cout<<"[5] - Consultar proveedor";
+        rlutil::locate(5,13);
+        cout<<"[6] - Consultar categorias";
         rlutil::locate(5,14);
+        cout<<"[7] - Consultar compras insumos";
+        rlutil::locate(5,15);
+        cout<<"[8] - Consultar pagos a empleados";
+        rlutil::locate(5,16);
+        cout<<"[9] - Consultar gastos generales";
+        rlutil::locate(5,19);
         cout<<"[0] - Volver";
         opc = interfaz.pedirOpcion();
         // Pregunta por la opcion elegida y se dirige a la funcion correspondiente
@@ -1350,6 +1358,18 @@ void Menu::consultas(){
                 break;
             case '5':
                 nuevaConsProveed();
+                break;
+            case '6':
+                nuevaConsCategorias();
+                break;
+            case '7':
+                nuevaConsInsumos();
+                break;
+            case '8':
+                nuevaConsPagoEmpleados();
+                break;
+            case '9':
+                nuevaConsGastosGrales();
                 break;
         }
     }
@@ -1613,13 +1633,16 @@ void Menu::consultas(){
                     else{
                         interfaz.siguienteLinea();
                         interfaz.siguienteLinea();
-                        cout<<"Nombre\t|\tApellido|\tTelefono|\tEmail";
+                        cout << left << setw(15) << "NOMBRE";
+                        cout << left << setw(15) << "APELLIDO";
+                        cout << right << setw(15) << "TELEFONO";
+                        cout << right << setw(20) << "EMAIL";
                         interfaz.siguienteLinea();
                         if(archivo.leer(pos_dni).getEstado()){
-                            cout<< archivo.leer(pos_dni).getNombre() << "\t|";
-                            cout<< archivo.leer(pos_dni).getApellido()<< "\t|";
-                            cout<< archivo.leer(pos_dni).getTelefono()<< "\t|";
-                            cout<< archivo.leer(pos_dni).getEmail();
+                            cout << left << setw(15) << archivo.leer(pos_dni).getNombre();
+                            cout << left << setw(15) << archivo.leer(pos_dni).getApellido();
+                            cout << right << setw(15) << archivo.leer(pos_dni).getTelefono();
+                            cout << right << setw(20) << archivo.leer(pos_dni).getEmail();
                             interfaz.siguienteLinea();
                         }
                     }
@@ -3208,10 +3231,235 @@ void Menu::consultas(){
         }
         while(opc != '0');
     }
-        /// TODO
-        void Menu::listarEmpleadosXDNI(){}
-        void Menu::consultarEmpleadosXDNI(){}
-        void Menu::consultarEmpleadosXApellido(){}
+        void Menu::listarEmpleadosXDNI(){
+            // Cargo vector de empleados
+            EmpleadosArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Empleado *vec = new Empleado[cantidadRegistros];
+            if(vec==NULL) return;
+            archivo.leerTodos(vec,cantidadRegistros);
+
+            // Variables de la consulta
+            Empleado empleadoAux;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadRegistros + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+
+           // Ordenamiento con método burbuja
+            int dni1, dni2;
+            if (cantidadRegistros>1){
+                for (int i=0; i<cantidadRegistros; i++){
+                    for (int j=0; j<cantidadRegistros - 1; j++){
+                        dni1 = vec[j].getDni();
+                        dni2 = vec[j+1].getDni();
+                        if(dni1 > dni2){
+                            empleadoAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=empleadoAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE EMPLEADOS POR DNI");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadRegistros);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(15) << "DNI";
+                    cout << left << setw(20) << "NOMBRE";
+                    cout << left << setw(20) << "APELLIDO";
+                    cout << right << setw(15) << "TELEFONO";
+                    cout << right << setw(20) << "EMAIL";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        if(vec[i].getEstado()){
+                            cout << left << setw(15) << vec[i].getDni();
+                            cout << left << setw(20) << vec[i].getNombre();
+                            cout << left << setw(20) << vec[i].getApellido();
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(20) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(15) << vec[i].getDni();
+                            cout << left << setw(20) << vec[i].getNombre();
+                            cout << left << setw(20) << vec[i].getApellido();
+                            cout << left << setw(15) << vec[i].getTelefono();
+                            cout << left << setw(20) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
+        }
+        void Menu::consultarEmpleadosXDNI(){
+            EmpleadosArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Empleado *vec = new Empleado[cantidadRegistros];
+            if(vec==NULL) return;
+            int _dni, pos_dni;
+            char opc;
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR EMPLEADO POR DNI");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"Aun no se registraron empleados para consultar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else
+                {
+                    cout << "Ingrese el DNI a consultar: ";
+                    cin >> _dni;
+                    cin.ignore();
+                    pos_dni = archivo.buscar(_dni);
+                    interfaz.siguienteLinea();
+
+                    if(archivo.buscar(_dni) == -1){
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout<<"El DNI ingresado no se encuentra registrado";
+                        interfaz.siguienteLinea();
+                    }
+                    else{
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << left << setw(15) << "DNI";
+                        cout << left << setw(15) << "NOMBRE";
+                        cout << left << setw(15) << "APELLIDO";
+                        cout << right << setw(15) << "TELEFONO";
+                        cout << right << setw(20) << "EMAIL";
+                        interfaz.siguienteLinea();
+                        if(archivo.leer(pos_dni).getEstado()){
+                            cout << left << setw(15) << archivo.leer(pos_dni).getDni();
+                            cout << left << setw(15) << archivo.leer(pos_dni).getNombre();
+                            cout << left << setw(15) << archivo.leer(pos_dni).getApellido();
+                            cout << right << setw(15) << archivo.leer(pos_dni).getTelefono();
+                            cout << right << setw(20) << archivo.leer(pos_dni).getEmail();
+                            interfaz.siguienteLinea();
+                        }
+                    }
+                }
+
+                interfaz.siguienteLinea();
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+
+            } while (opc != '0');
+            delete []vec;
+        }
+        void Menu::consultarEmpleadosXApellido(){
+            EmpleadosArchivo archivo;
+            int cantidadRegistros = archivo.getCantidad();
+            Empleado *vec = new Empleado[cantidadRegistros];
+            if(vec==NULL) return;
+            archivo.leerTodos(vec, cantidadRegistros);
+            string _apellido;
+            int _cantCoincidencias = 0;
+            char opc;
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - BUSCAR EMPLEADO POR APELLIDO");
+                interfaz.siguienteLinea();
+                if (cantidadRegistros==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"Aun no se registraron empleados para consultar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else
+                {
+                    cout << "Ingrese el APELLIDO a consultar: ";
+                    getline(cin, _apellido);
+                    interfaz.siguienteLinea();
+                    _cantCoincidencias = 0;
+                    for(int i=0; i<cantidadRegistros; i++){
+                        if(vec[i].getEstado() && vec[i].getApellido() == _apellido)
+                            _cantCoincidencias++;
+                    }
+                    if(_cantCoincidencias == 0){
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "El APELLIDO ingresado no se encuentra registrado";
+                        interfaz.siguienteLinea();
+                    }
+                    else{
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "Cantidad de coincidencias: " << _cantCoincidencias;
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << left << setw(14) << "DNI";
+                        cout << left << setw(30) << "Nombre y Apellido";
+                        cout << left << setw(15) << "Telefono";
+                        cout << left << setw(25) << "e-mail";
+                        interfaz.siguienteLinea();
+                        for(int i=0; i<cantidadRegistros; i++){
+                            if(vec[i].getEstado() && vec[i].getApellido() == _apellido){
+                                cout << left << setw(14) << vec[i].getDni();
+                                string n = vec[i].getNombre() + " " + vec[i].getApellido();
+                                cout << left << setw(30) << n;
+                                cout << left << setw(15) << vec[i].getTelefono();
+                                cout << left << setw(25) << vec[i].getEmail();
+                                interfaz.siguienteLinea();
+                            }
+                        }
+                        interfaz.siguienteLinea();
+                    }
+                }
+
+                interfaz.siguienteLinea();
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+
+            } while (opc != '0');
+            delete []vec;
+        }
     void Menu::nuevaConsProveed(){
         char opc;
         do{
