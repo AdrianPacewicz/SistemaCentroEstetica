@@ -5134,13 +5134,13 @@ void Menu::reportes(){
                         }
 
                     }
+
+                    cout << left << setw(15) << vecCategoria[i].getNombre();
+                    cout << left << setw(25) << to_string_decimales(recaudadoCategoria);
+
+                    interfaz.siguienteLinea();
+                    recaudadoCategoria=0;
                 }
-
-                cout << left << setw(15) << vecCategoria[i].getNombre();
-                cout << left << setw(25) << to_string_decimales(recaudadoCategoria);
-
-                interfaz.siguienteLinea();
-                recaudadoCategoria=0;
             }
 
             interfaz.siguienteLinea();
