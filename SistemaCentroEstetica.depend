@@ -1175,7 +1175,7 @@
 	<stdio.h>
 	<sys/stat.h>
 
-1687904843 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\comprainsumos.cpp
+1688055345 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\comprainsumos.cpp
 	<iostream>
 	<cstring>
 	"CompraInsumos.h"
@@ -1329,5 +1329,11 @@
 	"EmpleadosArchivo.h"
 	"ClientesArchivo.h"
 	"ServiciosArchivo.h"
+	<iomanip>
+
+1688054518 source:c:\users\joha\desktop\proyecto - final\sistemacentroestetica\src\menu.cpp
+	"Menu.h"
+	"rlutil.h"
+	"Funciones.h"
 	<iomanip>
 

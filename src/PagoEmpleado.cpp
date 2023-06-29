@@ -46,14 +46,16 @@ bool PagoEmpleado::cargar(Interfaz &interfaz){
     // Validación para verificar si el empleado existe
     indice = empleados.buscar(stoi(valor));
     if (indice >= 0){
-        existe = true;
-        empleado = empleados.leer(indice);
+        if(empleados.leer(indice).getEstado()){
+            existe = true;
+            empleado = empleados.leer(indice);
+        }
     }
 
     if(!existe){
         interfaz.siguienteLinea();
         interfaz.siguienteLinea();
-        interfaz.mostrar("El empleado ingresado no existe.",interfaz.ROJO);
+        interfaz.mostrar("El empleado ingresado no existe o esta inactivo.",interfaz.ROJO);
         return false;
     }
     setIdE(stoi(valor));

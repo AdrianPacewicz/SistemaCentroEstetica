@@ -62,16 +62,16 @@ bool CompraInsumos::cargar(Interfaz &interfaz){
     interfaz.mostrar("Ingrese el CUIL del proveedor: ",interfaz.AMARILLO);
     getline(cin, valor);
 
-    // Validación para verificar si el proveedor existe
+    // Validación para verificar si el proveedor existeo esta activo
     indice = proveedores.buscar(valor);
-    if (indice >= 0){
-        existe = true;
-    }
+    if(proveedores.leer(indice).getEstado()){
+            existe = true;
+        }
 
     if(!existe){
         interfaz.siguienteLinea();
         interfaz.siguienteLinea();
-        interfaz.mostrar("El proveedor ingresado no existe.",interfaz.ROJO);
+        interfaz.mostrar("El proveedor ingresado no existe o esta inactivo.",interfaz.ROJO);
         return false;
     }
     setProv(valor);
