@@ -87,7 +87,6 @@ void Menu::nuevaTransaccion(){
     }
     while(opc != '0');
 }
-
     void Menu::nuevaVenta(){
         bool continuarCargando=false;
         string msj = "";
@@ -119,7 +118,6 @@ void Menu::nuevaTransaccion(){
             continuarCargando=opc;
         } while(continuarCargando);
     }
-
     void Menu::nuevoGastoGeneral(){
         bool continuarCargando=false;
         GastosGeneralesArchivo archivo;
@@ -150,7 +148,6 @@ void Menu::nuevaTransaccion(){
             continuarCargando=opc;
         } while(continuarCargando);
     }
-
     void Menu::nuevaCompraInsumos(){
         bool continuarCargando=false;
         ComprasInsumosArchivo archivo;
@@ -181,7 +178,6 @@ void Menu::nuevaTransaccion(){
             continuarCargando=opc;
         } while(continuarCargando);
     }
-
     void Menu::nuevoPagoEmpleado(){
         bool continuarCargando=false;
         PagosEmpleadosArchivo archivo;
@@ -211,30 +207,6 @@ void Menu::nuevaTransaccion(){
             } while(opc!=1&&opc!=0);
             continuarCargando=opc;
         } while(continuarCargando);
-
-        /*
-        bool continuarCargando=false;
-        PagosEmpleadosArchivo archivo;
-        PagoEmpleado obj;
-        obj.setEstado(true);
-        do {
-            obj.setId(archivo.getCantidad()+1);
-            system("cls");
-            interfaz.setFilaActual(8);
-            interfaz.dibujarRectangulo(2,2,2,interfaz.getAncho()-3,CIAN);
-
-            interfaz.cambiarTitulo("FIRULI 3000 - NUEVO PAGO EMPLEADO");
-            rlutil::locate(1,interfaz.getFilaActual());
-            obj.cargar();
-            archivo.guardar(obj);
-            int opc=2;
-            do{
-                cout<<"  Desea cargar un nuevo pago a empleado? (1=SI - 0=NO): ";
-                cin>>opc;
-            } while(opc!=1&&opc!=0);
-            continuarCargando=opc;
-        } while(continuarCargando);
-        */
     }
 
 void Menu::cargaDeDatos(){
@@ -358,20 +330,7 @@ void Menu::cargaDeDatos(){
                             rlutil::setColor(BLANCO);
                         }
                     }
-                    /*
-                    LISTAR SOLO ACTIVOS
-                    int contador = 0;
-                    contador = 0;
-                    for (int i = 0; i < cantidadRegistros; i++) {
-                        if (vec[i].getEstado()) {
-                            contador++;
-                            if (contador > (paginaActual - 1) * cantidadPorPagina && contador <= paginaActual * cantidadPorPagina) {
-                                cout << vec[i].toString();
-                                interfaz.siguienteLinea();
-                            }
-                        }
-                    }
-                    */
+
                     interfaz.siguienteLinea();
                     cout << " [1] Anterior || [2] Siguiente || [3] Activar/Desactivar || [4] Modificar || [0] Volver";
                     opc = interfaz.pedirOpcion();
@@ -1043,8 +1002,9 @@ void Menu::cargaDeDatos(){
             }
             else{
                 cout<<"  ERROR: El proveedor ya existe.";
+                rlutil::anykey();
             }
-            rlutil::anykey();
+
 }
         void Menu::cambiarEstadoProveedor(){
             ProveedoresArchivo archivo;
@@ -3290,28 +3250,1006 @@ void Menu::consultas(){
         }
         while(opc != '0');
     }
-        /// TODO
-        void Menu::listarProveedoresXRazSoc(){}
-        void Menu::listarProveedoresXCUIL(){}
-        void Menu::consultarProveedoresXRazSoc(){}
-        void Menu::consultarProveedoresXCUIL(){}
+        void Menu::listarProveedoresXRazSoc(){
+            // Cargo vector de proveedores
+            ProveedoresArchivo proveedoresArchivo;
+            int cantidadProveedores = proveedoresArchivo.getCantidad();
+            Proveedor *vec = new Proveedor[cantidadProveedores];
+            if(vec==NULL) return;
+            proveedoresArchivo.leerTodos(vec,cantidadProveedores);
+
+            // Cargo vector de categorias
+            CategoriasArchivo categoriasArchivo;
+            int cantidadCategorias = categoriasArchivo.getCantidad();
+            Categoria *vecCategorias = new Categoria[cantidadCategorias];
+            if(vecCategorias==NULL) return;
+            categoriasArchivo.leerTodos(vecCategorias,cantidadCategorias);
+
+            // Variables de la consulta
+            Proveedor proveedorAux;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadProveedores + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+
+            // Ordenamiento con método burbuja (por razon social)
+            if (cantidadProveedores>1){
+                for (int i=0; i<cantidadProveedores; i++){
+                    for (int j=0; j<cantidadProveedores - 1; j++){
+                        if(vec[j+1].getRazonS() < vec[j].getRazonS()){
+                            proveedorAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=proveedorAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE PROVEEDORES POR RAZON SOCIAL");
+                interfaz.siguienteLinea();
+                if (cantidadProveedores==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadProveedores);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(30) << "Razon Social";
+                    cout << left << setw(17) << "CUIL/CUIT";
+                    cout << left << setw(20) << "Categoria";
+                    cout << left << setw(20) << "Telefono";
+                    cout << left << setw(20) << "Email";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        if(vec[i].getEstado()){
+                            cout << left << setw(30) << vec[i].getRazonS();
+                            cout << left << setw(17) << vec[i].getCuil();
+                            cout << left << setw(20) << to_string(vec[i].getCodCategoria()) + "-" + vecCategorias[vec[i].getCodCategoria()-1].getNombre();
+                            cout << left << setw(20) << vec[i].getTelefono();
+                            cout << left << setw(20) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(30) << vec[i].getRazonS();
+                            cout << left << setw(17) << vec[i].getCuil();
+                            cout << left << setw(20) << to_string(vec[i].getCodCategoria()) + "-" + vecCategorias[vec[i].getCodCategoria()-1].getNombre();
+                            cout << left << setw(20) << vec[i].getTelefono();
+                            cout << left << setw(20) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
+            delete []vecCategorias;
+
+        }
+        void Menu::listarProveedoresXCUIL(){
+            // Cargo vector de proveedores
+            ProveedoresArchivo proveedoresArchivo;
+            int cantidadProveedores = proveedoresArchivo.getCantidad();
+            Proveedor *vec = new Proveedor[cantidadProveedores];
+            if(vec==NULL) return;
+            proveedoresArchivo.leerTodos(vec,cantidadProveedores);
+
+            // Cargo vector de categorias
+            CategoriasArchivo categoriasArchivo;
+            int cantidadCategorias = categoriasArchivo.getCantidad();
+            Categoria *vecCategorias = new Categoria[cantidadCategorias];
+            if(vecCategorias==NULL) return;
+            categoriasArchivo.leerTodos(vecCategorias,cantidadCategorias);
+
+            // Variables de la consulta
+            Proveedor proveedorAux;
+            int cantidadPorPagina = 10;
+            int totalPaginas = (cantidadProveedores + cantidadPorPagina - 1) / cantidadPorPagina;
+            int paginaActual = 1;
+            char opc;
+
+            // Ordenamiento con método burbuja (por CUIL)
+            if (cantidadProveedores>1){
+                for (int i=0; i<cantidadProveedores; i++){
+                    for (int j=0; j<cantidadProveedores - 1; j++){
+                        if(vec[j+1].getCuil() < vec[j].getCuil()){
+                            proveedorAux = vec[j];
+                            vec[j]=vec[j+1];
+                            vec[j+1]=proveedorAux;
+                        }
+                    }
+                }
+            }
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - LISTADO DE PROVEEDORES POR CUIL/CUIT");
+                interfaz.siguienteLinea();
+                if (cantidadProveedores==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"No hay registros a listar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else{
+                    int indiceInicial = (paginaActual - 1) * cantidadPorPagina;
+                    int indiceFinal = min(paginaActual * cantidadPorPagina, cantidadProveedores);
+                    cout<<"Pagina " << paginaActual << " de " << totalPaginas;
+                    interfaz.siguienteLinea();
+                    interfaz.siguienteLinea();
+                    cout << left << setw(17) << "CUIL/CUIT";
+                    cout << left << setw(30) << "Razon Social";
+                    cout << left << setw(20) << "Categoria";
+                    cout << left << setw(20) << "Telefono";
+                    cout << left << setw(20) << "Email";
+                    interfaz.siguienteLinea();
+                    for (int i = indiceInicial; i < indiceFinal; i++) {
+                        if(vec[i].getEstado()){
+                            cout << left << setw(17) << vec[i].getCuil();
+                            cout << left << setw(30) << vec[i].getRazonS();
+                            cout << left << setw(20) << to_string(vec[i].getCodCategoria()) + "-" + vecCategorias[vec[i].getCodCategoria()-1].getNombre();
+                            cout << left << setw(20) << vec[i].getTelefono();
+                            cout << left << setw(20) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                        }
+                        else{
+                            rlutil::setColor(ROJO);
+                            cout << left << setw(17) << vec[i].getCuil();
+                            cout << left << setw(30) << vec[i].getRazonS();
+                            cout << left << setw(20) << to_string(vec[i].getCodCategoria()) + "-" + vecCategorias[vec[i].getCodCategoria()-1].getNombre();
+                            cout << left << setw(20) << vec[i].getTelefono();
+                            cout << left << setw(20) << vec[i].getEmail();
+                            interfaz.siguienteLinea();
+                            rlutil::setColor(BLANCO);
+                        }
+                    }
+                    interfaz.siguienteLinea();
+                    cout << " [1] Anterior || [2] Siguiente || [0] Volver";
+                    opc = interfaz.pedirOpcion();
+                    switch (opc) {
+                        case '1':
+                            paginaActual = max(1, paginaActual - 1);
+                            break;
+                        case '2':
+                            paginaActual = min(totalPaginas, paginaActual + 1);
+                            break;
+                    }
+                }
+            } while (opc != '0');
+            delete []vec;
+            delete []vecCategorias;
+        }
+        void Menu::consultarProveedoresXRazSoc(){
+            // Cargo vector de proveedores
+            ProveedoresArchivo proveedoresArchivo;
+            int cantidadProveedores = proveedoresArchivo.getCantidad();
+            Proveedor *vec = new Proveedor[cantidadProveedores];
+            if(vec==NULL) return;
+            proveedoresArchivo.leerTodos(vec,cantidadProveedores);
+
+            // Cargo vector de categorias
+            CategoriasArchivo categoriasArchivo;
+            int cantidadCategorias = categoriasArchivo.getCantidad();
+            Categoria *vecCategorias = new Categoria[cantidadCategorias];
+            if(vecCategorias==NULL) return;
+            categoriasArchivo.leerTodos(vecCategorias,cantidadCategorias);
+
+            // Variables de la consulta
+            char opc;
+            int _cantCoincidencias = 0;
+            string _razonsocial;
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - CONSULTA DE PROVEEDORES POR RAZON SOCIAL");
+                interfaz.siguienteLinea();
+                if (cantidadProveedores==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"Aun no se registraron proveedores para consultar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else
+                {
+                    cout << "Ingrese la razon social del proveedor a consultar: ";
+                    getline(cin, _razonsocial);
+
+                    interfaz.siguienteLinea();
+
+                    _cantCoincidencias = 0;
+                    for(int i=0; i<cantidadProveedores; i++){
+                        if(vec[i].getEstado()
+                        && vec[i].getRazonS() == _razonsocial)
+                            _cantCoincidencias++;
+                    }
+                    if(_cantCoincidencias == 0){
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "No existen proveedores para la razon social ingresada.";
+                        interfaz.siguienteLinea();
+                    }
+                    else{
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "Cantidad de coincidencias: " << _cantCoincidencias;
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << left << setw(17) << "CUIL/CUIT";
+                        cout << left << setw(30) << "Razon Social";
+                        cout << left << setw(20) << "Categoria";
+                        cout << left << setw(20) << "Telefono";
+                        cout << left << setw(20) << "Email";
+                        interfaz.siguienteLinea();
+                        for(int i=0; i<cantidadProveedores; i++){
+                            if(vec[i].getEstado()
+                            && vec[i].getRazonS() == _razonsocial){
+                                cout << left << setw(17) << vec[i].getCuil();
+                                cout << left << setw(30) << vec[i].getRazonS();
+                                cout << left << setw(20) << to_string(vec[i].getCodCategoria()) + "-" + vecCategorias[vec[i].getCodCategoria()-1].getNombre();
+                                cout << left << setw(20) << vec[i].getTelefono();
+                                cout << left << setw(20) << vec[i].getEmail();
+                                interfaz.siguienteLinea();
+                            }
+                        }
+                        interfaz.siguienteLinea();
+                    }
+                }
+
+                interfaz.siguienteLinea();
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+            } while (opc != '0');
+            delete []vec;
+            delete []vecCategorias;
+        }
+        void Menu::consultarProveedoresXCUIL(){
+            // Cargo vector de proveedores
+            ProveedoresArchivo proveedoresArchivo;
+            int cantidadProveedores = proveedoresArchivo.getCantidad();
+            Proveedor *vec = new Proveedor[cantidadProveedores];
+            if(vec==NULL) return;
+            proveedoresArchivo.leerTodos(vec,cantidadProveedores);
+
+            // Cargo vector de categorias
+            CategoriasArchivo categoriasArchivo;
+            int cantidadCategorias = categoriasArchivo.getCantidad();
+            Categoria *vecCategorias = new Categoria[cantidadCategorias];
+            if(vecCategorias==NULL) return;
+            categoriasArchivo.leerTodos(vecCategorias,cantidadCategorias);
+
+            // Variables de la consulta
+            char opc;
+            int _cantCoincidencias = 0;
+            string _cuil;
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - CONSULTA DE PROVEEDORES POR CUIL/CUIT");
+                interfaz.siguienteLinea();
+                if (cantidadProveedores==0){
+                    rlutil::setColor(ROJO);
+                    cout<<"Aun no se registraron proveedores para consultar.";
+                    interfaz.cambiarMensaje("Presione una tecla para continuar.",ROJO);
+                    opc = '0';
+                    rlutil::setColor(BLANCO);
+                    rlutil::anykey();
+                }
+                else
+                {
+                    cout << "Ingrese el CUIL/CUIT del proveedor a consultar: ";
+                    getline(cin, _cuil);
+
+                    interfaz.siguienteLinea();
+
+                    _cantCoincidencias = 0;
+                    for(int i=0; i<cantidadProveedores; i++){
+                        if(vec[i].getEstado()
+                        && vec[i].getCuil() == _cuil)
+                            _cantCoincidencias++;
+                    }
+                    if(_cantCoincidencias == 0){
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "No existen proveedores para el CUIL/CUIT ingresado.";
+                        interfaz.siguienteLinea();
+                    }
+                    else{
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << "Cantidad de coincidencias: " << _cantCoincidencias;
+                        interfaz.siguienteLinea();
+                        interfaz.siguienteLinea();
+                        cout << left << setw(17) << "CUIL/CUIT";
+                        cout << left << setw(30) << "Razon Social";
+                        cout << left << setw(20) << "Categoria";
+                        cout << left << setw(20) << "Telefono";
+                        cout << left << setw(20) << "Email";
+                        interfaz.siguienteLinea();
+                        for(int i=0; i<cantidadProveedores; i++){
+                            if(vec[i].getEstado()
+                            && vec[i].getCuil() == _cuil){
+                                cout << left << setw(17) << vec[i].getCuil();
+                                cout << left << setw(30) << vec[i].getRazonS();
+                                cout << left << setw(20) << to_string(vec[i].getCodCategoria()) + "-" + vecCategorias[vec[i].getCodCategoria()-1].getNombre();
+                                cout << left << setw(20) << vec[i].getTelefono();
+                                cout << left << setw(20) << vec[i].getEmail();
+                                interfaz.siguienteLinea();
+                            }
+                        }
+                        interfaz.siguienteLinea();
+                    }
+                }
+
+                interfaz.siguienteLinea();
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+            } while (opc != '0');
+            delete []vec;
+            delete []vecCategorias;
+        }
     // TODO: Categorias
     // TODO: Compras de insumos
     // TODO: Pagos a empleados
     // TODO: Gastos generales
 
-
 void Menu::reportes(){
-    // TODO
-    /*
-    • Balance diario.
-    • Balance mensual
-    • Balance anual
-    • Recaudación por empleado
-    • Recaudación por categoría
-    • Sueldos a pagar
-    */
+    char opc;
+    do{
+        system("cls");
+        interfaz.dibujarMarco(rlutil::CYAN);
+        interfaz.cambiarTitulo("FIRULI 3000 - REPORTES");
+        rlutil::locate(5,8);
+        cout<<"[1] - Ver balance diario";
+        rlutil::locate(5,9);
+        cout<<"[2] - Ver balance mensual";
+        rlutil::locate(5,10);
+        cout<<"[3] - Ver balance Anual";
+        rlutil::locate(5,11);
+        cout<<"[4] - Recaudacion por empleado";
+        rlutil::locate(5,12);
+        cout<<"[5] - Recaudacion por categoria";
+        rlutil::locate(5,13);
+        cout<<"[6] - Sueldos a pagar";
+        rlutil::locate(5,15);
+        cout<<"[0] - Volver";
+        opc = interfaz.pedirOpcion();
+        // Pregunta por la opcion elegida y se dirige a la funcion correspondiente
+        switch(opc)
+        {
+            case '1':
+                balanceDiario();
+                break;
+            case '2':
+                balanceMensual();
+                break;
+            case '3':
+                balanceAnual();
+                break;
+            case '4':
+                recaudacionPorEmpleado();
+                break;
+            case '5':
+                recaudacionPorCategoria();
+                break;
+            case '6':
+                sueldoAPagar();
+                break;
+        }
+    }
+    while(opc != '0');
 }
+    void Menu::balanceDiario(){
+
+            VentasArchivo ventaArch;
+            Venta _venta;
+            CompraInsumos compraInsumos;
+            GastoGeneral _gastoGral;
+            GastosGeneralesArchivo gastosArch;
+            ComprasInsumosArchivo compraInsumosArch;
+            double recaudadoDia = 0, gastoGralDia = 0, gastoInsumos = 0, gananciaNeta = 0;
+            int cantVentas = 0, cantGastos = 0, cantGastoProv = 0, anio, mes, dia ;
+            Fecha fechaConsulta;
+            char opc;
+
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - BALANCE DIARIO");
+                interfaz.siguienteLinea();
+
+                cout << "INGRESAR FECHA A CONSULTAR: ";
+                fechaConsulta = cargarFecha(interfaz);
+                anio = fechaConsulta.getAnio();
+                mes = fechaConsulta.getMes();
+                dia = fechaConsulta.getDia();
+
+
+                interfaz.siguienteLinea();
+                interfaz.siguienteLinea();
+
+
+                cantVentas = ventaArch.getCantidad();
+
+                for(int i=0; i < cantVentas; i++){
+                    _venta = ventaArch.leer(i);
+                        if(_venta.getEstado() &&
+                           _venta.getFecha().getAnio() == anio &&
+                           _venta.getFecha().getMes() == mes &&
+                           _venta.getFecha().getDia() == dia){
+                           recaudadoDia += _venta.getImporte();
+                        }
+                }
+
+                cantGastos = gastosArch.getCantidad();
+
+                for(int i=0; i < cantGastos; i++){
+                     _gastoGral = gastosArch.leer(i);
+                     if(_gastoGral.getEstado() &&
+                        _gastoGral.getFecha().getAnio() == anio &&
+                        _gastoGral.getFecha().getMes() == mes &&
+                        _gastoGral.getFecha().getDia() == dia){
+                            gastoGralDia += _gastoGral.getImporte();
+                        }
+                }
+
+                cantGastoProv = compraInsumosArch.getCantidad();
+
+                for(int i=0; i < cantGastoProv; i ++){
+                    compraInsumos = compraInsumosArch.leer(i);
+                    if(compraInsumos.getEstado() &&
+                       compraInsumos.getFecha().getAnio() == anio &&
+                       compraInsumos.getFecha().getMes() == mes &&
+                       compraInsumos.getFecha().getDia() == dia){
+                        gastoInsumos += compraInsumos.getImporte();
+                       }
+                }
+
+                gananciaNeta = recaudadoDia - (gastoGralDia + gastoInsumos);
+
+                cout << left << setw(14) << "FECHA";
+                cout << left << setw(20) << "TOTAL RECAUDADO";
+                cout << left << setw(20) << "GASTOS GRALES";
+                cout << left << setw(20) << "PAGO A PROVEED";
+                cout << left << setw(20) << "GANANCIA NETA";
+
+                interfaz.siguienteLinea();
+
+                cout << left << setw(14) << fechaConsulta.toString();
+
+                if(recaudadoDia == 0){
+                    cout << left << setw(20) << "-";
+                }
+                else{
+                    cout << left << setw(20) << to_string_decimales(recaudadoDia);
+                }
+                cout << left << setw(20) << to_string_decimales(gastoGralDia);
+                cout << left << setw(20) << to_string_decimales(gastoInsumos);
+
+                if(gananciaNeta <= 0){
+                     rlutil::setColor(ROJO);
+                     cout << left << setw(20) << to_string_decimales(gananciaNeta);
+                }
+                else{
+                    rlutil::setColor(VERDECLARO);
+                    cout << left << setw(20) << to_string_decimales(gananciaNeta);
+                }
+                rlutil::setColor(BLANCO);
+
+                recaudadoDia = 0;
+                gastoGralDia = 0;
+                gastoInsumos = 0;
+
+                interfaz.siguienteLinea();
+                interfaz.siguienteLinea();
+
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+            } while (opc != '0');
+
+    }
+    void Menu::balanceMensual(){
+            VentasArchivo ventaArch;
+            Venta _venta;
+            CompraInsumos compraInsumos;
+            GastoGeneral _gastoGral;
+            GastosGeneralesArchivo gastosArch;
+            ComprasInsumosArchivo compraInsumosArch;
+            PagoEmpleado _pagoEmp;
+            PagosEmpleadosArchivo _pagoEmplArch;
+            double recaudadoMes = 0, gastoGralDia = 0, gastoInsumos = 0, gananciaNeta = 0, sueldosMes = 0;
+            int cantVentas = 0, cantGastos = 0, cantGastoProv = 0,cantSueldos= 0, anio, mes;
+            Fecha fechaConsulta;
+            char opc;
+
+            do {
+                system("cls");
+                interfaz.dibujarMarco(CIAN);
+                interfaz.setFilaActual(7);
+                interfaz.cambiarTitulo("FIRULI 3000 - BALANCE MENSUAL");
+                interfaz.siguienteLinea();
+
+                cout << "Ingrese el mes a consultar: ";
+                cin >> mes;
+                interfaz.siguienteLinea();
+                cout << "Ingrese el anio a consultar: ";
+                cin >> anio;
+
+                cin.ignore();
+
+                interfaz.siguienteLinea();
+                interfaz.siguienteLinea();
+
+                cantVentas = ventaArch.getCantidad();
+
+                for(int i=0; i < cantVentas; i++){
+                    _venta = ventaArch.leer(i);
+                    if(_venta.getEstado() &&
+                       _venta.getFecha().getAnio() == anio &&
+                       _venta.getFecha().getMes() == mes){
+                       recaudadoMes += _venta.getImporte();
+                    }
+                }
+
+                cantGastos = gastosArch.getCantidad();
+
+                for(int i=0; i < cantGastos; i++){
+                     _gastoGral = gastosArch.leer(i);
+                     if(_gastoGral.getEstado() &&
+                        _gastoGral.getFecha().getAnio() == anio &&
+                        _gastoGral.getFecha().getMes() == mes){
+                            gastoGralDia += _gastoGral.getImporte();
+                        }
+                }
+
+                cantGastoProv = compraInsumosArch.getCantidad();
+
+                for(int i=0; i < cantGastoProv; i ++){
+                    compraInsumos = compraInsumosArch.leer(i);
+                    if(compraInsumos.getEstado() &&
+                       compraInsumos.getFecha().getAnio() == anio &&
+                       compraInsumos.getFecha().getMes() == mes){
+                        gastoInsumos += compraInsumos.getImporte();
+                       }
+                }
+
+                cantSueldos = _pagoEmplArch.getCantidad();
+
+                for(int i =0; i < cantSueldos; i++){
+                    _pagoEmp = _pagoEmplArch.leer(i);
+                    if(_pagoEmp.getEstado() &&
+                       _pagoEmp.getFecha().getAnio() == anio &&
+                       _pagoEmp.getFecha().getMes() == mes){
+                        sueldosMes += _pagoEmp.getImporte();
+                    }
+                }
+
+                gananciaNeta = recaudadoMes - (gastoGralDia + gastoInsumos + sueldosMes);
+
+                cout << left << setw(14) << "MES";
+                cout << left << setw(20) << "TOTAL RECAUDADO";
+                cout << left << setw(22) << "GASTOS GRALES";
+                cout << left << setw(22) << "PAGO A PROVEED";
+                cout << left << setw(22) << "SUELDOS";
+                cout << left << setw(22) << "GANANCIA NETA";
+
+                interfaz.siguienteLinea();
+
+                cout << left << setw(14) << mes;
+                cout << left << setw(20) << to_string_decimales(recaudadoMes);
+                cout << left << setw(22) << to_string_decimales(gastoGralDia);
+                cout << left << setw(22) << to_string_decimales(gastoInsumos);
+                cout << left << setw(22) << to_string_decimales(sueldosMes);
+                cout << left << setw(22) << to_string_decimales(gananciaNeta);
+
+                recaudadoMes = 0;
+                gastoGralDia = 0;
+                gastoInsumos = 0;
+                sueldosMes = 0;
+
+                interfaz.siguienteLinea();
+                interfaz.siguienteLinea();
+                cout << "[0] Volver";
+                opc = interfaz.pedirOpcion();
+
+            } while (opc != '0');
+    }
+    void Menu::balanceAnual(){
+
+        VentasArchivo ventaArch;
+        Venta _venta;
+        CompraInsumos compraInsumos;
+        GastoGeneral _gastoGral;
+        GastosGeneralesArchivo gastosArch;
+        ComprasInsumosArchivo compraInsumosArch;
+        PagoEmpleado _pagoEmp;
+        PagosEmpleadosArchivo _pagoEmplArch;
+        double recaudadoAnio = 0, gastoGralAnio = 0, gastoInsumos = 0, gananciaNeta = 0, sueldosAnio = 0;
+        int cantVentas = 0, cantGastos = 0, cantGastoProv = 0,cantSueldos = 0, anio;
+        Fecha fechaConsulta;
+        char opc;
+
+        do {
+            system("cls");
+            interfaz.dibujarMarco(CIAN);
+            interfaz.setFilaActual(7);
+            interfaz.cambiarTitulo("FIRULI 3000 - BALANCE ANUAL");
+            interfaz.siguienteLinea();
+
+            cout << "Ingrese el anio a consultar: ";
+            cin >> anio;
+
+            cin.ignore();
+
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+
+            cantVentas = ventaArch.getCantidad();
+
+            for(int i=0; i < cantVentas; i++){
+                _venta = ventaArch.leer(i);
+                if(_venta.getEstado() && _venta.getFecha().getAnio() == anio){
+                   recaudadoAnio += _venta.getImporte();
+                }
+            }
+
+            cantGastos = gastosArch.getCantidad();
+
+            for(int i=0; i < cantGastos; i++){
+                _gastoGral = gastosArch.leer(i);
+                if(_gastoGral.getEstado() &&  _gastoGral.getFecha().getAnio() == anio){
+                    gastoGralAnio += _gastoGral.getImporte();
+                }
+            }
+
+            cantGastoProv = compraInsumosArch.getCantidad();
+
+            for(int i=0; i < cantGastoProv; i ++){
+                compraInsumos = compraInsumosArch.leer(i);
+                if(compraInsumos.getEstado() && compraInsumos.getFecha().getAnio() == anio){
+                    gastoInsumos += compraInsumos.getImporte();
+                }
+            }
+
+            cantSueldos = _pagoEmplArch.getCantidad();
+
+            for(int i =0; i < cantSueldos; i++){
+                _pagoEmp = _pagoEmplArch.leer(i);
+                if(_pagoEmp.getEstado() && _pagoEmp.getFecha().getAnio() == anio){
+                    sueldosAnio += _pagoEmp.getImporte();
+                }
+            }
+
+            gananciaNeta = recaudadoAnio - (gastoGralAnio + gastoInsumos + sueldosAnio);
+
+            cout << left << setw(14) << "ANIO";
+            cout << left << setw(20) << "TOTAL RECAUDADO";
+            cout << left << setw(22) << "GASTOS GRALES";
+            cout << left << setw(22) << "PAGO A PROVEED";
+            cout << left << setw(22) << "SUELDOS";
+            cout << left << setw(22) << "GANANCIA NETA";
+
+            interfaz.siguienteLinea();
+
+            cout << left << setw(14) << anio;
+            cout << left << setw(20) << to_string_decimales(recaudadoAnio);
+            cout << left << setw(22) << to_string_decimales(gastoGralAnio);
+            cout << left << setw(22) << to_string_decimales(gastoInsumos);
+            cout << left << setw(22) << to_string_decimales(sueldosAnio);
+            cout << left << setw(22) << to_string_decimales(gananciaNeta);
+
+            recaudadoAnio = 0;
+            gastoGralAnio = 0;
+            gastoInsumos = 0;
+            sueldosAnio = 0;
+
+            interfaz.siguienteLinea();
+            cout << "[0] Volver";
+            opc = interfaz.pedirOpcion();
+
+        } while (opc != '0');
+    }
+    void Menu::recaudacionPorEmpleado(){
+        VentasArchivo archivoVentas;
+        int cantidadRegistros = archivoVentas.getCantidad(), cantidadEmpleados;
+        Venta *vecVentas = new Venta[cantidadRegistros];
+        if(vecVentas==NULL) return;
+        archivoVentas.leerTodos(vecVentas, cantidadRegistros);
+
+        EmpleadosArchivo empleadoArch;
+        cantidadEmpleados = empleadoArch.getCantidad();
+        Empleado *vecEmpleado = new Empleado[cantidadEmpleados];
+        if(vecEmpleado == NULL) return;
+        empleadoArch.leerTodos(vecEmpleado, cantidadEmpleados);
+
+        Fecha fechaDesde, fechaHasta;
+        double recaudadoEmpleado=0;
+        char opc;
+
+
+        do {
+            system("cls");
+            interfaz.dibujarMarco(CIAN);
+            interfaz.setFilaActual(7);
+            interfaz.cambiarTitulo("FIRULI 3000 - RECAUDACION POR EMPLEADO");
+            interfaz.siguienteLinea();
+
+            cout << "Ingrese la fecha DESDE a consultar: ";
+            fechaDesde = cargarFecha(interfaz);
+            interfaz.siguienteLinea();
+            cout << "Ingrese la fecha HASTA a consultar: ";
+            fechaHasta = cargarFecha(interfaz);
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+
+
+            cout << left << setw(14) << "APELLIDO";
+            cout << left << setw(14) << "NOMBRE";
+            cout << left << setw(20) << "TOTAL RECAUDADO";
+            interfaz.siguienteLinea();
+
+            //recorro vector de empleados
+            for(int i = 0; i < cantidadEmpleados; i++){
+                //verifico que el empleado este activo
+                if(vecEmpleado[i].getEstado()){
+                    //recorro vector ventas para encontrar ventas de empleados
+                    for(int x= 0; x < cantidadRegistros; x++){
+                        if(vecVentas[x].getEmpleado() == vecEmpleado[i].getDni() &&
+                           vecVentas[x].getEstado()){
+                            if(vecVentas[x].getFecha().esMayorOIgual(fechaDesde) &&
+                                vecVentas[x].getFecha().esMenorOIgual(fechaHasta)){
+                                    recaudadoEmpleado += vecVentas[x].getImporte();
+                            }
+                        }
+                    }
+
+                    cout << left << setw(15) << vecEmpleado[i].getApellido();
+                    cout << left << setw(15) << vecEmpleado[i].getNombre();
+                    cout << left << setw(25) << to_string_decimales(recaudadoEmpleado);
+
+                    interfaz.siguienteLinea();
+                    recaudadoEmpleado=0;
+                }
+            }
+
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+
+            cout << "[0] Volver";
+            opc = interfaz.pedirOpcion();
+
+        } while (opc != '0');
+
+        delete []vecEmpleado;
+        delete []vecVentas;
+
+    }
+    void Menu::recaudacionPorCategoria(){
+        VentasArchivo archivoVentas;
+        int cantidadRegistros = archivoVentas.getCantidad(), cantidadCategorias, cantidadServicios;
+        Venta *vecVentas = new Venta[cantidadRegistros];
+        if(vecVentas==NULL) return;
+        archivoVentas.leerTodos(vecVentas, cantidadRegistros);
+
+        CategoriasArchivo categoriaArchivo;
+        cantidadCategorias = categoriaArchivo.getCantidad();
+        Categoria *vecCategoria = new Categoria[cantidadCategorias];
+        if(vecCategoria == NULL) return;
+        categoriaArchivo.leerTodos(vecCategoria, cantidadCategorias);
+
+        ServiciosArchivo servicioArchivo;
+        cantidadServicios = servicioArchivo.getCantidad();
+        Servicio *vecServicio = new Servicio[cantidadServicios];
+        if(vecServicio == NULL) return;
+        servicioArchivo.leerTodos(vecServicio, cantidadServicios);
+
+        Fecha fechaDesde, fechaHasta;
+        double recaudadoCategoria=0;
+        char opc;
+
+
+         do {
+            system("cls");
+            interfaz.dibujarMarco(CIAN);
+            interfaz.setFilaActual(7);
+            interfaz.cambiarTitulo("FIRULI 3000 - RECAUDACION POR CATEGORIA");
+            interfaz.siguienteLinea();
+
+            cout << "Ingrese la fecha DESDE a consultar: ";
+            fechaDesde = cargarFecha(interfaz);
+            interfaz.siguienteLinea();
+            cout << "Ingrese la fecha HASTA a consultar: ";
+            fechaHasta = cargarFecha(interfaz);
+            interfaz.siguienteLinea(); interfaz.siguienteLinea();
+
+
+            cout << left << setw(14) << "CATEGORIA";
+            cout << left << setw(20) << "TOTAL RECAUDADO";
+            interfaz.siguienteLinea();
+
+
+            for(int i = 0; i < cantidadCategorias; i++){
+                //verifico que la categoria este activa
+                if(vecCategoria[i].getEstado()){
+                    //recorro las ventas
+                    for(int x= 0; x < cantidadRegistros; x++){
+                        // verifico que la venta este activa y que la categoria de su servicio coincida
+                        if(vecVentas[x].getEstado() &&
+                           vecServicio[vecVentas[x].getServicio()-1].getCodCategoria() == vecCategoria[i].getCodigo()){
+                            if(vecVentas[x].getFecha().esMayorOIgual(fechaDesde) &&
+                                vecVentas[x].getFecha().esMenorOIgual(fechaHasta)){
+                                    recaudadoCategoria += vecVentas[x].getImporte();
+                            }
+                        }
+
+                    }
+                }
+
+                cout << left << setw(15) << vecCategoria[i].getNombre();
+                cout << left << setw(25) << to_string_decimales(recaudadoCategoria);
+
+                interfaz.siguienteLinea();
+                recaudadoCategoria=0;
+            }
+
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+
+            cout << "[0] Volver";
+            opc = interfaz.pedirOpcion();
+
+        } while (opc != '0');
+
+        delete []vecCategoria;
+        delete []vecVentas;
+        delete []vecServicio;
+    }
+    void Menu::sueldoAPagar(){
+        VentasArchivo archivoVentas;
+        int cantidadRegistros = archivoVentas.getCantidad(), cantidadEmpleados, cantPagos, anio,mes;
+        Venta *vecVentas = new Venta[cantidadRegistros];
+        if(vecVentas==NULL) return;
+        archivoVentas.leerTodos(vecVentas, cantidadRegistros);
+
+        EmpleadosArchivo empleadoArch;
+        cantidadEmpleados = empleadoArch.getCantidad();
+        Empleado *vecEmpleado = new Empleado[cantidadEmpleados];
+        if(vecEmpleado == NULL) return;
+        empleadoArch.leerTodos(vecEmpleado, cantidadEmpleados);
+
+        PagoEmpleado _pagoEmpleado;
+        PagosEmpleadosArchivo _pagoEmpleadoArch;
+        cantPagos = _pagoEmpleadoArch.getCantidad();
+        PagoEmpleado *vecPagos = new PagoEmpleado[cantPagos];
+        if(vecPagos==NULL) return;
+        _pagoEmpleadoArch.leerTodos(vecPagos, cantPagos);
+
+        Fecha fechaActual;
+        double sueldoEmpleado=0, recaudadoEmpleado=0;
+        char opc;
+        bool mesPagado=false;
+
+
+         do {
+            system("cls");
+            interfaz.dibujarMarco(CIAN);
+            interfaz.setFilaActual(7);
+            interfaz.cambiarTitulo("FIRULI 3000 - SUELDOS A PAGAR");
+            interfaz.siguienteLinea();
+
+            cout << "Ingrese el anio a consultar: ";
+            cin >> anio;
+            interfaz.siguienteLinea();
+
+            cout << "Ingrese el mes a consultar: ";
+            cin >> mes;
+
+            cin.ignore();
+
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+
+
+            cout << left << setw(14) << "APELLIDO";
+            cout << left << setw(14) << "NOMBRE";
+            cout << left << setw(20) << "SUELDO FIJO";
+            cout << left << setw(20) << "RECAUDADO DEL MES";
+            cout << left << setw(20) << "PORCENTAJE";
+            cout << left << setw(20) << "TOTAL A PAGAR";
+
+            interfaz.siguienteLinea();
+
+            for(int i = 0; i < cantidadEmpleados; i++){
+                for(int x= 0; x < cantidadRegistros; x++){
+                    if(vecVentas[x].getEmpleado() == vecEmpleado[i].getDni() &&
+                        vecVentas[x].getEstado()){
+                        if(vecVentas[x].getFecha().getAnio() == anio &&
+                           vecVentas[x].getFecha().getMes() == mes){
+                                recaudadoEmpleado += vecVentas[x].getImporte();
+                        }
+                    }
+                }
+
+                sueldoEmpleado = ((recaudadoEmpleado * vecEmpleado[i].getPComision()) / 100) + vecEmpleado[i].getSueldoF() ;
+
+
+                for(int z =0; z < cantPagos; z++){
+                    if(vecPagos[z].getIdE() == vecEmpleado[i].getDni() &&
+                       vecPagos[z].getEstado() &&
+                       vecPagos[z].getFecha().getAnio() == anio &&
+                       vecPagos[z].getFecha().getMes() == mes){
+                        sueldoEmpleado = sueldoEmpleado - vecPagos[z].getImporte();
+                        mesPagado = true;
+                       }
+                }
+
+
+                cout << left << setw(15) << vecEmpleado[i].getApellido();
+                cout << left << setw(15) << vecEmpleado[i].getNombre();
+                cout << left << setw(20) << to_string_decimales(vecEmpleado[i].getSueldoF());
+                cout << left << setw(20) << to_string_decimales(recaudadoEmpleado);
+                cout << left << setw(20) << vecEmpleado[i].getPComision();
+                if(sueldoEmpleado <= 0.001 && mesPagado){
+                    cout << left << setw(20) << to_string_decimales(sueldoEmpleado) << " (pagado)";
+                }
+                else{
+                    cout << left << setw(20) << to_string_decimales(sueldoEmpleado);
+                }
+
+                interfaz.siguienteLinea();
+                sueldoEmpleado=0;
+                recaudadoEmpleado=0;
+                mesPagado = false;
+            }
+
+            interfaz.siguienteLinea();
+            interfaz.siguienteLinea();
+
+            cout << "[0] Volver";
+            opc = interfaz.pedirOpcion();
+
+        } while (opc != '0');
+
+        delete []vecEmpleado;
+        delete []vecVentas;
+        delete []vecPagos;
+    }
 
 void Menu::backupRestauracionDeArchivos(){
     char opc;

@@ -111,6 +111,12 @@ public:
             void consultarProveedoresXCUIL();
 
     void reportes();
+        void balanceDiario();
+        void balanceMensual();
+        void balanceAnual();
+        void recaudacionPorEmpleado();
+        void recaudacionPorCategoria();
+        void sueldoAPagar();
 
     void backupRestauracionDeArchivos();
         void menuImportarExportar(int opcion);
