@@ -3,7 +3,7 @@
 #include "rlutil.h"
 #include "Windows.h"
 
-
+// TODO: Cambiar los caracteres usados para los marcos porque se rompió al usar "setlocale" en main
 
 int Interfaz::getAlto(){
     setAlto(rlutil::trows());
